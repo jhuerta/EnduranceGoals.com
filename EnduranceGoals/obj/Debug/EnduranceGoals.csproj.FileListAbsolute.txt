@@ -1,0 +1,10 @@
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals\bin\EnduranceGoals.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals\bin\EnduranceGoals.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals\obj\Debug\ResolveAssemblyReference.cache
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals\obj\Debug\EnduranceGoals.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals\obj\Debug\EnduranceGoals.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\bin\EnduranceGoals.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\bin\EnduranceGoals.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\obj\Debug\ResolveAssemblyReference.cache
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\obj\Debug\EnduranceGoals.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\obj\Debug\EnduranceGoals.pdb

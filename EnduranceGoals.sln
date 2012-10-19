@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnduranceGoals", "EnduranceGoals\EnduranceGoals.csproj", "{A1C7359C-B4A6-4B20-990C-4E110763C420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnduranceGoals.Tests", "EnduranceGoals.Tests\EnduranceGoals.Tests.csproj", "{15484CC6-C75F-4CA2-8900-2D152DC76027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1C7359C-B4A6-4B20-990C-4E110763C420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C7359C-B4A6-4B20-990C-4E110763C420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C7359C-B4A6-4B20-990C-4E110763C420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C7359C-B4A6-4B20-990C-4E110763C420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15484CC6-C75F-4CA2-8900-2D152DC76027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15484CC6-C75F-4CA2-8900-2D152DC76027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15484CC6-C75F-4CA2-8900-2D152DC76027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15484CC6-C75F-4CA2-8900-2D152DC76027}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

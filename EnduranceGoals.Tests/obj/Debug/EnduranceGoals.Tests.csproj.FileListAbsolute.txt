@@ -1,0 +1,16 @@
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\obj\Debug\ResolveAssemblyReference.cache
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.Tests.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.Tests.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\bin\Debug\nunit.framework.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\obj\Debug\EnduranceGoals.Tests.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\EnduranceGoals.Tests\obj\Debug\EnduranceGoals.Tests.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.Tests.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.Tests.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\Debug\nunit.framework.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\Debug\EnduranceGoals.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\obj\Debug\ResolveAssemblyReference.cache
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\obj\Debug\EnduranceGoals.Tests.dll
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\obj\Debug\EnduranceGoals.Tests.pdb
