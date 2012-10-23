@@ -1,5 +1,0 @@
-<Modules>
-  <Module PersistentId="A1C7359C-B4A6-4B20-990C-4E110763C420" ModuleId="EnduranceGoals" />
-  <Module PersistentId="A97BFC58-7BB6-4F41-AEC0-F72C3C93E79E" ModuleId="EnduranceGoals.Tests" />
-  <Module PersistentId="15484CC6-C75F-4CA2-8900-2D152DC76027" ModuleId="EnduranceGoals.Tests_1" />
-</Modules>
