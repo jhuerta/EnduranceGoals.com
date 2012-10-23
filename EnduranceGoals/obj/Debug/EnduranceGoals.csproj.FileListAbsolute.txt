@@ -8,3 +8,4 @@ D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\bin\Enduran
 D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\obj\Debug\ResolveAssemblyReference.cache
 D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\obj\Debug\EnduranceGoals.dll
 D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\obj\Debug\EnduranceGoals.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals\bin\App_Data\EnduranceGoals.sdf

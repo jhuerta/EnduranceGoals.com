@@ -14,3 +14,4 @@ D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\D
 D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\obj\Debug\ResolveAssemblyReference.cache
 D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\obj\Debug\EnduranceGoals.Tests.dll
 D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\obj\Debug\EnduranceGoals.Tests.pdb
+D:\MyStuff\Personal\WebDev\DropBox\EnduranceGoals.com\EnduranceGoals.Tests\bin\Debug\App_Data\EnduranceGoals.sdf
