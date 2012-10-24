@@ -29,6 +29,8 @@ namespace EnduranceGoals
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+
+            AppDomain.CurrentDomain.SetData("SQLServerCompactEditionUnderWebHosting", true);
         }
     }
 }
