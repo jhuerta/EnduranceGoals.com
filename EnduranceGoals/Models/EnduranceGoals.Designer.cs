@@ -11,13 +11,14 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_Cities_CountryId", "Countries", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Countries), "Cities", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.Cities))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_Venues_CityId", "Cities", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Cities), "Venues", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.Venues))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_GoalParticipants", "Goals", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Goals), "GoalParticipants", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.GoalParticipants))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_GoalParticipants_GoalId", "Goals", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Goals), "GoalParticipants", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.GoalParticipants))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_GoalParticipants_UserId", "Users", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Users), "GoalParticipants", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.GoalParticipants))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_Goals_SportId", "Sports", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Sports), "Goals", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.Goals))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_Goals_UserCreatorId", "Users", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Users), "Goals", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.Goals))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_Goals_VenueId", "Venues", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Venues), "Goals", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.Goals))]
 
 // Original file name:
-// Generation date: 24/10/2012 09:52:44
+// Generation date: 24/10/2012 20:39:08
 namespace EnduranceGoals.Models
 {
     
@@ -112,6 +113,21 @@ namespace EnduranceGoals.Models
         }
         private global::System.Data.Objects.ObjectQuery<Goals> _Goals;
         /// <summary>
+        /// There are no comments for Sports in the schema.
+        /// </summary>
+        public global::System.Data.Objects.ObjectQuery<Sports> Sports
+        {
+            get
+            {
+                if ((this._Sports == null))
+                {
+                    this._Sports = base.CreateQuery<Sports>("[Sports]");
+                }
+                return this._Sports;
+            }
+        }
+        private global::System.Data.Objects.ObjectQuery<Sports> _Sports;
+        /// <summary>
         /// There are no comments for Users in the schema.
         /// </summary>
         public global::System.Data.Objects.ObjectQuery<Users> Users
@@ -170,6 +186,13 @@ namespace EnduranceGoals.Models
             base.AddObject("Goals", goals);
         }
         /// <summary>
+        /// There are no comments for Sports in the schema.
+        /// </summary>
+        public void AddToSports(Sports sports)
+        {
+            base.AddObject("Sports", sports);
+        }
+        /// <summary>
         /// There are no comments for Users in the schema.
         /// </summary>
         public void AddToUsers(Users users)
@@ -188,7 +211,7 @@ namespace EnduranceGoals.Models
     /// There are no comments for EnduranceGoals.Model.Cities in the schema.
     /// </summary>
     /// <KeyProperties>
-    /// CityId
+    /// Id
     /// </KeyProperties>
     [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="EnduranceGoals.Model", Name="Cities")]
     [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
@@ -199,12 +222,12 @@ namespace EnduranceGoals.Models
         /// Create a new Cities object.
         /// </summary>
         /// <param name="name">Initial value of Name.</param>
-        /// <param name="cityId">Initial value of CityId.</param>
-        public static Cities CreateCities(string name, global::System.Guid cityId)
+        /// <param name="id">Initial value of Id.</param>
+        public static Cities CreateCities(string name, int id)
         {
             Cities cities = new Cities();
             cities.Name = name;
-            cities.CityId = cityId;
+            cities.Id = id;
             return cities;
         }
         /// <summary>
@@ -231,28 +254,28 @@ namespace EnduranceGoals.Models
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
         /// <summary>
-        /// There are no comments for Property CityId in the schema.
+        /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid CityId
+        public int Id
         {
             get
             {
-                return this._CityId;
+                return this._Id;
             }
             set
             {
-                this.OnCityIdChanging(value);
-                this.ReportPropertyChanging("CityId");
-                this._CityId = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("CityId");
-                this.OnCityIdChanged();
+                this.OnIdChanging(value);
+                this.ReportPropertyChanging("Id");
+                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Id");
+                this.OnIdChanged();
             }
         }
-        private global::System.Guid _CityId;
-        partial void OnCityIdChanging(global::System.Guid value);
-        partial void OnCityIdChanged();
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Countries in the schema.
         /// </summary>
@@ -316,7 +339,7 @@ namespace EnduranceGoals.Models
     /// There are no comments for EnduranceGoals.Model.Countries in the schema.
     /// </summary>
     /// <KeyProperties>
-    /// CountryId
+    /// Id
     /// </KeyProperties>
     [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="EnduranceGoals.Model", Name="Countries")]
     [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
@@ -327,12 +350,12 @@ namespace EnduranceGoals.Models
         /// Create a new Countries object.
         /// </summary>
         /// <param name="name">Initial value of Name.</param>
-        /// <param name="countryId">Initial value of CountryId.</param>
-        public static Countries CreateCountries(string name, global::System.Guid countryId)
+        /// <param name="id">Initial value of Id.</param>
+        public static Countries CreateCountries(string name, int id)
         {
             Countries countries = new Countries();
             countries.Name = name;
-            countries.CountryId = countryId;
+            countries.Id = id;
             return countries;
         }
         /// <summary>
@@ -359,28 +382,28 @@ namespace EnduranceGoals.Models
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
         /// <summary>
-        /// There are no comments for Property CountryId in the schema.
+        /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid CountryId
+        public int Id
         {
             get
             {
-                return this._CountryId;
+                return this._Id;
             }
             set
             {
-                this.OnCountryIdChanging(value);
-                this.ReportPropertyChanging("CountryId");
-                this._CountryId = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("CountryId");
-                this.OnCountryIdChanged();
+                this.OnIdChanging(value);
+                this.ReportPropertyChanging("Id");
+                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Id");
+                this.OnIdChanged();
             }
         }
-        private global::System.Guid _CountryId;
-        partial void OnCountryIdChanging(global::System.Guid value);
-        partial void OnCountryIdChanged();
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Cities in the schema.
         /// </summary>
@@ -420,7 +443,7 @@ namespace EnduranceGoals.Models
         /// </summary>
         /// <param name="userId">Initial value of UserId.</param>
         /// <param name="goalId">Initial value of GoalId.</param>
-        public static GoalParticipants CreateGoalParticipants(global::System.Guid userId, global::System.Guid goalId)
+        public static GoalParticipants CreateGoalParticipants(int userId, int goalId)
         {
             GoalParticipants goalParticipants = new GoalParticipants();
             goalParticipants.UserId = userId;
@@ -455,7 +478,7 @@ namespace EnduranceGoals.Models
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid UserId
+        public int UserId
         {
             get
             {
@@ -470,15 +493,15 @@ namespace EnduranceGoals.Models
                 this.OnUserIdChanged();
             }
         }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
+        private int _UserId;
+        partial void OnUserIdChanging(int value);
         partial void OnUserIdChanged();
         /// <summary>
         /// There are no comments for Property GoalId in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid GoalId
+        public int GoalId
         {
             get
             {
@@ -493,13 +516,13 @@ namespace EnduranceGoals.Models
                 this.OnGoalIdChanged();
             }
         }
-        private global::System.Guid _GoalId;
-        partial void OnGoalIdChanging(global::System.Guid value);
+        private int _GoalId;
+        partial void OnGoalIdChanging(int value);
         partial void OnGoalIdChanged();
         /// <summary>
         /// There are no comments for Goals in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("EnduranceGoals.Model", "FK_GoalParticipants", "Goals")]
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("EnduranceGoals.Model", "FK_GoalParticipants_GoalId", "Goals")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
@@ -507,11 +530,11 @@ namespace EnduranceGoals.Models
         {
             get
             {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants", "Goals").Value;
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants_GoalId", "Goals").Value;
             }
             set
             {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants", "Goals").Value = value;
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants_GoalId", "Goals").Value = value;
             }
         }
         /// <summary>
@@ -523,13 +546,13 @@ namespace EnduranceGoals.Models
         {
             get
             {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants", "Goals");
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants_GoalId", "Goals");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants", "Goals", value);
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Goals>("EnduranceGoals.Model.FK_GoalParticipants_GoalId", "Goals", value);
                 }
             }
         }
@@ -575,7 +598,7 @@ namespace EnduranceGoals.Models
     /// There are no comments for EnduranceGoals.Model.Goals in the schema.
     /// </summary>
     /// <KeyProperties>
-    /// GoalId
+    /// Id
     /// </KeyProperties>
     [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="EnduranceGoals.Model", Name="Goals")]
     [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
@@ -586,16 +609,16 @@ namespace EnduranceGoals.Models
         /// Create a new Goals object.
         /// </summary>
         /// <param name="date">Initial value of Date.</param>
-        /// <param name="title">Initial value of Title.</param>
+        /// <param name="name">Initial value of Name.</param>
         /// <param name="createdOn">Initial value of CreatedOn.</param>
-        /// <param name="goalId">Initial value of GoalId.</param>
-        public static Goals CreateGoals(global::System.DateTime date, string title, string createdOn, global::System.Guid goalId)
+        /// <param name="id">Initial value of Id.</param>
+        public static Goals CreateGoals(global::System.DateTime date, string name, global::System.DateTime createdOn, int id)
         {
             Goals goals = new Goals();
             goals.Date = date;
-            goals.Title = title;
+            goals.Name = name;
             goals.CreatedOn = createdOn;
-            goals.GoalId = goalId;
+            goals.Id = id;
             return goals;
         }
         /// <summary>
@@ -622,28 +645,28 @@ namespace EnduranceGoals.Models
         partial void OnDateChanging(global::System.DateTime value);
         partial void OnDateChanged();
         /// <summary>
-        /// There are no comments for Property Title in the schema.
+        /// There are no comments for Property Name in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title
+        public string Name
         {
             get
             {
-                return this._Title;
+                return this._Name;
             }
             set
             {
-                this.OnTitleChanging(value);
-                this.ReportPropertyChanging("Title");
-                this._Title = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Title");
-                this.OnTitleChanged();
+                this.OnNameChanging(value);
+                this.ReportPropertyChanging("Name");
+                this._Name = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Name");
+                this.OnNameChanged();
             }
         }
-        private string _Title;
-        partial void OnTitleChanging(string value);
-        partial void OnTitleChanged();
+        private string _Name;
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
         /// <summary>
         /// There are no comments for Property Description in the schema.
         /// </summary>
@@ -695,7 +718,7 @@ namespace EnduranceGoals.Models
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedOn
+        public global::System.DateTime CreatedOn
         {
             get
             {
@@ -705,41 +728,41 @@ namespace EnduranceGoals.Models
             {
                 this.OnCreatedOnChanging(value);
                 this.ReportPropertyChanging("CreatedOn");
-                this._CreatedOn = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this._CreatedOn = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
                 this.ReportPropertyChanged("CreatedOn");
                 this.OnCreatedOnChanged();
             }
         }
-        private string _CreatedOn;
-        partial void OnCreatedOnChanging(string value);
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
         partial void OnCreatedOnChanged();
         /// <summary>
-        /// There are no comments for Property GoalId in the schema.
+        /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid GoalId
+        public int Id
         {
             get
             {
-                return this._GoalId;
+                return this._Id;
             }
             set
             {
-                this.OnGoalIdChanging(value);
-                this.ReportPropertyChanging("GoalId");
-                this._GoalId = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("GoalId");
-                this.OnGoalIdChanged();
+                this.OnIdChanging(value);
+                this.ReportPropertyChanging("Id");
+                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Id");
+                this.OnIdChanged();
             }
         }
-        private global::System.Guid _GoalId;
-        partial void OnGoalIdChanging(global::System.Guid value);
-        partial void OnGoalIdChanged();
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for GoalParticipants in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("EnduranceGoals.Model", "FK_GoalParticipants", "GoalParticipants")]
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("EnduranceGoals.Model", "FK_GoalParticipants_GoalId", "GoalParticipants")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
@@ -747,13 +770,50 @@ namespace EnduranceGoals.Models
         {
             get
             {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<GoalParticipants>("EnduranceGoals.Model.FK_GoalParticipants", "GoalParticipants");
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<GoalParticipants>("EnduranceGoals.Model.FK_GoalParticipants_GoalId", "GoalParticipants");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<GoalParticipants>("EnduranceGoals.Model.FK_GoalParticipants", "GoalParticipants", value);
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<GoalParticipants>("EnduranceGoals.Model.FK_GoalParticipants_GoalId", "GoalParticipants", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for Sports in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("EnduranceGoals.Model", "FK_Goals_SportId", "Sports")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public Sports Sports
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Sports>("EnduranceGoals.Model.FK_Goals_SportId", "Sports").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Sports>("EnduranceGoals.Model.FK_Goals_SportId", "Sports").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for Sports in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<Sports> SportsReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Sports>("EnduranceGoals.Model.FK_Goals_SportId", "Sports");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Sports>("EnduranceGoals.Model.FK_Goals_SportId", "Sports", value);
                 }
             }
         }
@@ -833,10 +893,101 @@ namespace EnduranceGoals.Models
         }
     }
     /// <summary>
+    /// There are no comments for EnduranceGoals.Model.Sports in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="EnduranceGoals.Model", Name="Sports")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class Sports : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new Sports object.
+        /// </summary>
+        /// <param name="name">Initial value of Name.</param>
+        /// <param name="id">Initial value of Id.</param>
+        public static Sports CreateSports(string name, int id)
+        {
+            Sports sports = new Sports();
+            sports.Name = name;
+            sports.Id = id;
+            return sports;
+        }
+        /// <summary>
+        /// There are no comments for Property Name in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+            set
+            {
+                this.OnNameChanging(value);
+                this.ReportPropertyChanging("Name");
+                this._Name = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Name");
+                this.OnNameChanged();
+            }
+        }
+        private string _Name;
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this.ReportPropertyChanging("Id");
+                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Id");
+                this.OnIdChanged();
+            }
+        }
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        /// <summary>
+        /// There are no comments for Goals in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("EnduranceGoals.Model", "FK_Goals_SportId", "Goals")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<Goals> Goals
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Goals>("EnduranceGoals.Model.FK_Goals_SportId", "Goals");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Goals>("EnduranceGoals.Model.FK_Goals_SportId", "Goals", value);
+                }
+            }
+        }
+    }
+    /// <summary>
     /// There are no comments for EnduranceGoals.Model.Users in the schema.
     /// </summary>
     /// <KeyProperties>
-    /// UserId
+    /// Id
     /// </KeyProperties>
     [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="EnduranceGoals.Model", Name="Users")]
     [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
@@ -847,16 +998,22 @@ namespace EnduranceGoals.Models
         /// Create a new Users object.
         /// </summary>
         /// <param name="name">Initial value of Name.</param>
+        /// <param name="createdOn">Initial value of CreatedOn.</param>
         /// <param name="lastname">Initial value of Lastname.</param>
         /// <param name="email">Initial value of Email.</param>
-        /// <param name="userId">Initial value of UserId.</param>
-        public static Users CreateUsers(string name, string lastname, string email, global::System.Guid userId)
+        /// <param name="username">Initial value of Username.</param>
+        /// <param name="password">Initial value of Password.</param>
+        /// <param name="id">Initial value of Id.</param>
+        public static Users CreateUsers(string name, global::System.DateTime createdOn, string lastname, string email, string username, string password, int id)
         {
             Users users = new Users();
             users.Name = name;
+            users.CreatedOn = createdOn;
             users.Lastname = lastname;
             users.Email = email;
-            users.UserId = userId;
+            users.Username = username;
+            users.Password = password;
+            users.Id = id;
             return users;
         }
         /// <summary>
@@ -882,6 +1039,29 @@ namespace EnduranceGoals.Models
         private string _Name;
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
+        /// <summary>
+        /// There are no comments for Property CreatedOn in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.DateTime CreatedOn
+        {
+            get
+            {
+                return this._CreatedOn;
+            }
+            set
+            {
+                this.OnCreatedOnChanging(value);
+                this.ReportPropertyChanging("CreatedOn");
+                this._CreatedOn = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("CreatedOn");
+                this.OnCreatedOnChanged();
+            }
+        }
+        private global::System.DateTime _CreatedOn;
+        partial void OnCreatedOnChanging(global::System.DateTime value);
+        partial void OnCreatedOnChanged();
         /// <summary>
         /// There are no comments for Property Lastname in the schema.
         /// </summary>
@@ -931,7 +1111,7 @@ namespace EnduranceGoals.Models
         /// <summary>
         /// There are no comments for Property Username in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
         public string Username
         {
@@ -943,7 +1123,7 @@ namespace EnduranceGoals.Models
             {
                 this.OnUsernameChanging(value);
                 this.ReportPropertyChanging("Username");
-                this._Username = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this._Username = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
                 this.ReportPropertyChanged("Username");
                 this.OnUsernameChanged();
             }
@@ -954,7 +1134,7 @@ namespace EnduranceGoals.Models
         /// <summary>
         /// There are no comments for Property Password in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
         public string Password
         {
@@ -966,7 +1146,7 @@ namespace EnduranceGoals.Models
             {
                 this.OnPasswordChanging(value);
                 this.ReportPropertyChanging("Password");
-                this._Password = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this._Password = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
                 this.ReportPropertyChanged("Password");
                 this.OnPasswordChanged();
             }
@@ -975,28 +1155,28 @@ namespace EnduranceGoals.Models
         partial void OnPasswordChanging(string value);
         partial void OnPasswordChanged();
         /// <summary>
-        /// There are no comments for Property UserId in the schema.
+        /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid UserId
+        public int Id
         {
             get
             {
-                return this._UserId;
+                return this._Id;
             }
             set
             {
-                this.OnUserIdChanging(value);
-                this.ReportPropertyChanging("UserId");
-                this._UserId = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("UserId");
-                this.OnUserIdChanged();
+                this.OnIdChanging(value);
+                this.ReportPropertyChanging("Id");
+                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Id");
+                this.OnIdChanged();
             }
         }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
-        partial void OnUserIdChanged();
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for GoalParticipants in the schema.
         /// </summary>
@@ -1044,7 +1224,7 @@ namespace EnduranceGoals.Models
     /// There are no comments for EnduranceGoals.Model.Venues in the schema.
     /// </summary>
     /// <KeyProperties>
-    /// VenueId
+    /// Id
     /// </KeyProperties>
     [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="EnduranceGoals.Model", Name="Venues")]
     [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
@@ -1055,12 +1235,12 @@ namespace EnduranceGoals.Models
         /// Create a new Venues object.
         /// </summary>
         /// <param name="name">Initial value of Name.</param>
-        /// <param name="venueId">Initial value of VenueId.</param>
-        public static Venues CreateVenues(string name, global::System.Guid venueId)
+        /// <param name="id">Initial value of Id.</param>
+        public static Venues CreateVenues(string name, int id)
         {
             Venues venues = new Venues();
             venues.Name = name;
-            venues.VenueId = venueId;
+            venues.Id = id;
             return venues;
         }
         /// <summary>
@@ -1133,28 +1313,28 @@ namespace EnduranceGoals.Models
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
         /// <summary>
-        /// There are no comments for Property VenueId in the schema.
+        /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Guid VenueId
+        public int Id
         {
             get
             {
-                return this._VenueId;
+                return this._Id;
             }
             set
             {
-                this.OnVenueIdChanging(value);
-                this.ReportPropertyChanging("VenueId");
-                this._VenueId = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("VenueId");
-                this.OnVenueIdChanged();
+                this.OnIdChanging(value);
+                this.ReportPropertyChanging("Id");
+                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("Id");
+                this.OnIdChanged();
             }
         }
-        private global::System.Guid _VenueId;
-        partial void OnVenueIdChanging(global::System.Guid value);
-        partial void OnVenueIdChanged();
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Cities in the schema.
         /// </summary>

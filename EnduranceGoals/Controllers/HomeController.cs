@@ -34,10 +34,10 @@ namespace EnduranceGoals.Controllers
                 new
                     {
                         Users = entity.Users.Select(s => s.Username),
-                        Goals = entity.Goals.Select(s => s.GoalId),
-                        Cities = entity.Cities.Select(s => s.CityId),
-                        Countries = entity.Countries.Select(c => c.CountryId),
-                        Venues = entity.Venues.Select(v => v.VenueId)
+                        Goals = entity.Goals.Select(s => s.Id),
+                        Cities = entity.Cities.Select(s => s.Id),
+                        Countries = entity.Countries.Select(c => c.Id),
+                        Venues = entity.Venues.Select(v => v.Id)
                     }, JsonRequestBehavior.AllowGet
                 );
         }
