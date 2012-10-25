@@ -80,6 +80,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnduranceGoals.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnduranceGoalsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

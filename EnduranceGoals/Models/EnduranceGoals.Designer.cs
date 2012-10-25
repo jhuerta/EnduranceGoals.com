@@ -18,7 +18,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("EnduranceGoals.Model", "FK_Goals_VenueId", "Venues", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(EnduranceGoals.Models.Venues), "Goals", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(EnduranceGoals.Models.Goals))]
 
 // Original file name:
-// Generation date: 24/10/2012 20:39:08
+// Generation date: 25/10/2012 08:57:23
 namespace EnduranceGoals.Models
 {
     
