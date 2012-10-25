@@ -3,56 +3,44 @@ using System.Data.Objects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate.Linq;
 
 namespace EnduranceGoals.Models
 {
     
     public class EnduranceGoalsRepository
     {
-        private EnduranceGoalsEntities entities = new EnduranceGoalsEntities();
-        public IQueryable<Goals>  FindAllGoals()
+        
+        public IQueryable<Goal>  FindAllGoals()
         {
-            return entities.Goals
-                .Include("Sports")
-                .Include("Venues")
-                .Include("Users");
+            IQueryable<Goal> newList = new ObjectQuery<Goal>("", new ObjectContext(""));
+            return newList;
         }
 
-        public IQueryable<Goals> FindUpcomingGoals()
+        public IQueryable<Goal> FindUpcomingGoals()
         {
-            return entities.Goals
-                .Include("Sports")
-                .Include("Venues")
-                .Include("Users")
-                .Where(g => g.Date > DateTime.Now).OrderBy(g => g.Date);
+            IQueryable<Goal> newList = new ObjectQuery<Goal>("",new ObjectContext(""));
+            return newList;
         }
 
-        public Goals GetGoal(int id)
+        public Goal GetGoal(int id)
         {
-            return entities.Goals
-                .Include("Sports")
-                .Include("Venues")
-                .Include("Users").
-                First(g => g.Id == id);
+            return new Goal();
         }
 
-        public void AddGoal(Goals goal)
+        public void AddGoal(Goal goal)
         {
-            entities.AddToGoals(goal);
+            
         }
 
-        public void DeleteGoal(Goals goal)
+        public void DeleteGoal(Goal goal)
         {
-            foreach (var goalsParticipant in entities.GoalParticipants)
-            {
-                entities.DeleteObject(goalsParticipant);
-            }
-            entities.DeleteObject(goal);
+
         }
 
         public void Save()
         {
-            entities.SaveChanges();
+            
         }
     }
 }

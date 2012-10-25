@@ -6,22 +6,18 @@ using System.Data.Objects;
 using System.IO;
 using System.Web.Mvc;
 using EnduranceGoals.Models;
+using NHibernate;
 
 namespace EnduranceGoals.Controllers
 {
     public class EFControllerBase : Controller
     {
-        protected EnduranceGoalsEntities entity = new EnduranceGoalsEntities();
-
-
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            entity.SaveChanges();
-        }
+        protected ISession session = MvcApplication.CurrentSession;
+        
 
         public void ExecuteSql(string sql)
-        {
-            var entityConnection = (System.Data.EntityClient.EntityConnection)entity.Connection;
+        {            
+            var entityConnection = (System.Data.EntityClient.EntityConnection)session.Connection;
             DbConnection conn = entityConnection.StoreConnection;
 
             ConnectionState initialState = conn.State;
