@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.EntityClient;
-using System.Data.Objects;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using EnduranceGoals.Controllers;
 using EnduranceGoals.Models;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
@@ -16,232 +8,250 @@ using NUnit.Framework;
 
 namespace EnduranceGoals.Tests
 {
-
-
     [TestFixture]
-    internal class DBPopulateFields : NHibernateInMemoryTestFixtureBase
+    public class MSSQL_DatabaseTest : DBTestBase
     {
-        private CountryRepository countryRepository;
-        private CityRepository cityRepository;
+        private Users users;
+        private Goals goals;
+        private Sports sports;
+        private Venues venues;
+        private Cities cities;
+        private Countries countries;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetUp()
+        [SetUp]
+        public void Setup()
         {
-            InitalizeSessionFactory(
-                typeof(Country).Assembly,
-                typeof(Goal).Assembly,
-                typeof(User).Assembly,
-                typeof(Venue).Assembly,
-                typeof(Country).Assembly,
-                typeof(Sport).Assembly);
-
-                countryRepository = new CountryRepository(session);
-                cityRepository = new CityRepository(session);
+            NHibernateProfiler.Initialize();
+            RecreateDB();
+            users = new Users(session);
+            goals = new Goals(session);
+            sports = new Sports(session);
+            venues = new Venues(session);
+            cities = new Cities(session);
+            countries = new Countries(session);
         }
 
         [Test]
-        public void RepopulateDatabase()
+        public void Cannot_delete_sport_if_it_still_used_by_goal()
         {
-            Execute();
-            Assert.IsTrue(true);
-        }
-
-        public void Execute()
-        {
-            DeleteData();
-            //PopulateData();
-        }
-
-        public void PopulateData()
-        {
-            CreateCountries();
-            CreateCities();
-            //CreateVenues();
-            //CreateUsers();
-            //CreateSports();
-            //CreateGoals();
-            //CreateGoalParticipants();
-        }
-
-        public void DeleteData()
-        {
-            DeleteTable("goals");
-            DeleteTable("venues");
-            DeleteTable("cities");
-            DeleteTable("countries");
-            DeleteTable("sports");
-            DeleteTable("users");
-        }
-
-        private void DeleteTable(string tableName)
-        {
-            NHibernateProfiler.Initialize();
             using (var transation = session.BeginTransaction())
             {
-                var deleteTableQuery = string.Format("delete from {0}", tableName);
-                session.CreateQuery(deleteTableQuery).ExecuteUpdate();
-                transation.Commit();
+ 
+                var existingSport = sports.GetAll().First();
+                var goalWithExistingSport = goals.GetAllBySport(existingSport).First();
+
+                Assert.That(goalWithExistingSport.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
+                                                     {
+                                                         sports.Remove(existingSport);
+                                                         transation.Commit();
+                                                     });
+                var innerException = exception.InnerException;
+
+                Assert.That(innerException.Message.Contains("FK_Goals_SportId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
             }
             session.Clear();
         }
 
-        public void CreateCountries()
+        [Test]
+        public void Cannot_delete_user_if_it_still_used_by_goal()
         {
-            // NHibernateProfiler.Initialize();
             using (var transation = session.BeginTransaction())
             {
-                
-                var countryList = new[]
-                                      {
-                                          CreateCountry("Spain"),
-                                          CreateCountry("United Sates"),
-                                          CreateCountry("Philippines")
-                                      };
 
-                foreach (var country in countryList)
+                var existingUser = users.GetAll().First();
+                var goalWithExistingUserCreator = goals.GetAllByUserCreator(existingUser).First();
+
+                Assert.That(goalWithExistingUserCreator.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
                 {
-                    countryRepository.Add(country);
-                }
-                
-                transation.Commit();
-            }
+                    users.Remove(existingUser);
+                    transation.Commit();
+                });
+                var innerException = exception.InnerException;
 
+                Assert.That(innerException.Message.Contains("FK_Goals_UserCreatorId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
+            }
             session.Clear();
         }
-        private static Country CreateCountry(string countryName)
-        {
-            return new Country()
-                       {
-                           Name = countryName
-                       };
-        }
 
-        public void CreateCities()
+        [Test]
+        public void Cannot_delete_venue_if_it_still_used_by_goal()
         {
-            NHibernateProfiler.Initialize();
             using (var transation = session.BeginTransaction())
             {
-                var cityRepository = new CityRepository(session);
-                var cityList = new[]
-                               {
-                                   CreateCity("Madrid", "Spain"),
-                                   CreateCity("Barcelona", "Spain"),
-                                   CreateCity("Burgos", "Spain"),
-                                   CreateCity("Zaragoza", "Spain"),
-                                   CreateCity("New York", "United Sates"),
-                                   CreateCity("Kona", "United Sates"),
-                                   CreateCity("Boston", "United Sates"),
-                                   CreateCity("Camarines Sur", "Philippines"),
-                                   CreateCity("Manila", "Philippines"),
-                                   CreateCity("Baguio", "Philippines"),
-                               };
 
-                foreach (var city in cityList)
+                var existingVenue = venues.GetAll().First();
+                var goalWithExistingVenue= goals.GetAllByVenue(existingVenue).First();
+
+                Assert.That(goalWithExistingVenue.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
                 {
-                    cityRepository.Add(city);
-                }
-                transation.Commit();
+                    venues.Remove(existingVenue);
+                    transation.Commit();
+                });
+
+                var innerException = exception.InnerException;
+                Assert.That(innerException.Message.Contains("FK_Goals_VenueId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
             }
             session.Clear();
         }
 
-        private City CreateCity(string cityName, string countryName)
+        [Test]
+        public void Cannot_delete_city_if_it_still_used_by_venue()
         {
-            return new City()
+            using (var transation = session.BeginTransaction())
             {
-                Name = cityName,
-                Country = GetCountry(countryName)
-            };
+
+                var existingCity = cities.GetAll().First();
+                var venueWithExistingCity = venues.GetAllByCity(existingCity).First();
+
+                Assert.That(venueWithExistingCity.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
+                {
+                    cities.Remove(existingCity);
+                    transation.Commit();
+                });
+
+                var innerException = exception.InnerException;
+                Assert.That(innerException.Message.Contains("FK_Venues_CityId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
+            }
+            session.Clear();
         }
 
-        private Country GetCountry(string countryName)
+        [Test]
+        public void Cannot_delete_country_if_it_still_used_by_city()
         {
-            var country = countryRepository.GetByName(countryName);
-            return country;
+            using (var transation = session.BeginTransaction())
+            {
+
+                var existingCountry = countries.GetAll().First();
+                var cityWithExistingCountry = cities.GetAllByCountry(existingCountry).First();
+
+                Assert.That(cityWithExistingCountry.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
+                {
+                    countries.Remove(existingCountry);
+                    transation.Commit();
+                });
+
+                var innerException = exception.InnerException;
+                Assert.That(innerException.Message.Contains("FK_Cities_CountryId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
+            }
+            session.Clear();
         }
-    }
 
-    internal class CityRepository: ICityRepository
-    {
-        private readonly ISession session;
-
-        public CityRepository(ISession _session)
+        [Test]
+        public void Cannot_delete_user_if_the_user_is_still_the_creator_of_a_goal()
         {
-            session = _session;
+            using (var transation = session.BeginTransaction())
+            {
+
+                var uniqueCreator_NoParticipant = users.GetAll().Where(u => u.Username == "uniquecreator").Single();
+                var goalWithNoParticipantsOnlyCreator = goals.GetAllByCreator(uniqueCreator_NoParticipant).First();
+
+                Assert.That(goalWithNoParticipantsOnlyCreator.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
+                {
+                    users.Remove(uniqueCreator_NoParticipant);
+                    transation.Commit();
+                });
+
+                var innerException = exception.InnerException;
+                Assert.That(innerException.Message.Contains("FK_Goals_UserCreatorId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
+            }
+            session.Clear();
         }
 
-        public void Add(City entity)
+        [Test]
+        public void Cannot_delete_goal_if_it_still_has_participants_registered_to_it()
         {
-            session.Save(entity);
-            session.Flush();
+            //return;
+            using (var transation = session.BeginTransaction())
+            {
+
+                var existingGoal = goals.GetAll().First();
+
+                var participantWithAtLeastExistingGoal = users.GetAllByGoals(existingGoal).First();
+
+                Assert.That(participantWithAtLeastExistingGoal.Id, Is.GreaterThan(0));
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
+                {
+                    try
+                    {
+                        goals.Remove(existingGoal);
+                    }
+                    catch (Exception ex)
+                    {
+                        var msg = ex.Message;
+                        throw;
+                    }
+                    
+                });
+
+                transation.Commit();
+                var innerException = exception.InnerException;
+                Assert.That(innerException.Message.Contains("FK_GoalParticipants_GoalId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
+            }
+            session.Clear();
         }
 
-        public void Update(City entity)
+        [Test]
+        public void Cannot_delete_participant_if_the_participant_is_still_registered_to_a_goal()
         {
-            throw new NotImplementedException();
+            using (var transation = session.BeginTransaction())
+            {
+
+                var uniqueParticipantInEvent_NotCreator = users.GetAll()
+                    .Where(u => u.Username == "uniqueparticipant")
+                    .Single();
+
+                var goalWithOnlyOneParticipant = goals.GetAllByParticipant(uniqueParticipantInEvent_NotCreator).First();
+             
+                // Asserting the goal exist (it has been prepared)
+                Assert.That(goalWithOnlyOneParticipant.Id, Is.GreaterThan(0));
+
+                // Asserting creator is different from participant
+                string usernameUniqueParticipant = goalWithOnlyOneParticipant.Participants.First().Username;
+                string usernameCreator = goalWithOnlyOneParticipant.UserCreator.Username;
+                Assert.That(usernameUniqueParticipant, Is.Not.EqualTo(usernameCreator));
+
+
+                var exception = Assert.Throws<NHibernate.Exceptions.GenericADOException>(delegate
+                {
+                    try
+                    {
+                        users.Remove(uniqueParticipantInEvent_NotCreator);
+                    }
+                    catch (Exception ex)
+                    {
+                        var msg = ex.Message;
+                        throw;
+                    }
+                    
+                });
+
+                transation.Commit();
+                var innerException = exception.InnerException;
+                Assert.That(innerException.Message.Contains("FK_GoalParticipants_UserId"));
+                Assert.IsInstanceOf<System.Data.SqlClient.SqlException>(innerException);
+            }
+            session.Clear();
         }
 
-        public void Remove(City entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public City GetById(Guid entityId)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    internal interface ICityRepository : IRepository<City>{}
-
-    internal class CountryRepository : ICountryRepository
-    {
-        private readonly ISession session;
-
-        public CountryRepository(ISession _session)
-        {
-            session = _session;
-        }
-
-        public void Add(Country entity)
-        {
-            session.Save(entity);
-            session.Flush();
-        }
-
-        public void Update(Country entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Country entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Country GetById(Guid entityId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Country GetByName(string countryName)
-        {
-            return session.CreateCriteria<Country>()
-                .Add(Restrictions.Eq("Name", countryName))
-                .UniqueResult<Country>();
-        }
-    }
-
-    public interface IRepository<T>
-    {
-        void Add(T entity);
-        void Update(T entity);
-        void Remove(T entity);
-        T GetById(Guid entityId);
-    }
-
-    public interface ICountryRepository : IRepository<Country>
-    {
-        Country GetByName(string countryName);
     }
 }

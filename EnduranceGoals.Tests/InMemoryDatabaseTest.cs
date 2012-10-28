@@ -11,7 +11,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace EnduranceGoals.Tests
 {
-    public class NHibernateInMemoryTestFixtureBase
+    public class NHibernateTestFixtureBase
     {
         protected static ISessionFactory sessionFactory;
         protected static FluentConfiguration configuration;
@@ -19,6 +19,10 @@ namespace EnduranceGoals.Tests
 
         public void InitalizeSessionFactory(params Assembly[] assemblies)
         {
+            try
+            {
+
+
             if (sessionFactory != null)
                 return;
 
@@ -31,7 +35,11 @@ namespace EnduranceGoals.Tests
 
             foreach (Assembly assembly in assemblies)
             {
-                configuration.Mappings(m => m.FluentMappings.AddFromAssembly(assembly));
+                configuration.Mappings(m => m.FluentMappings
+                                                .AddFromAssembly(assembly)
+                                                .Conventions.Add(
+                                                    ForeignKey.Format(
+                                                        (p, t) => t.Name + "Id")));
             }
 
             // Use this to recreate a phisical database
@@ -40,6 +48,13 @@ namespace EnduranceGoals.Tests
             sessionFactory = configuration.BuildSessionFactory();
 
             session = sessionFactory.OpenSession();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                var innermsg = ex.InnerException.Message;
+                throw;
+            }
         }
 
         private void CreatePhisycalDatabase(FluentConfiguration fluentConfiguration)

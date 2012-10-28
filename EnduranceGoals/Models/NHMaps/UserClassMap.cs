@@ -20,9 +20,16 @@ namespace EnduranceGoals.Models.NHMaps
             Map(u => u.Username);
             Map(u => u.CreatedOn);
 
-            HasMany(u => u.Goals)
-                .Cascade.All()
+            HasManyToMany(x => x.Goals)
+                .Table("GoalParticipants")
                 .Inverse();
+                //.ParentKeyColumn("UserId")
+                //.ChildKeyColumn("GoalId")
+                //.LazyLoad()
+                //.Cascade.SaveUpdate();
+            //.Inverse()
+            //.Cascade.SaveUpdate();
+
         }
     }
 }

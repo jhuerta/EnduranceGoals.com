@@ -61,10 +61,7 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Security" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 2\\Assemblies\System.Web.Mvc.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -91,7 +88,6 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\EnduranceGoalsRepository.cs" />
     <Compile Include="Models\Goal.cs" />
-    <Compile Include="Models\GoalParticipant.cs" />
     <Compile Include="Models\NHMaps\CityClassMap.cs" />
     <Compile Include="Models\NHMaps\CountryClassMap.cs" />
     <Compile Include="Models\NHMaps\GoalClassMap.cs" />
@@ -162,9 +158,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>22164</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://EnduranceGoals.local</IISUrl>
+          <IISUrl>http://localhost/EnduranceGoals</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://EnduranceGoals.local</IISAppRootUrl>
+          <IISAppRootUrl>http://localhost/EnduranceGoals</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

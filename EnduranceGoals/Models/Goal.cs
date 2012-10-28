@@ -14,7 +14,6 @@ namespace EnduranceGoals.Models
         {
             Participants.Add(user);
         }
-
         public virtual int Id { get; protected set; }
         public virtual DateTime Date { get; set; }
         public virtual DateTime CreatedOn { get; set; }
@@ -24,6 +23,6 @@ namespace EnduranceGoals.Models
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual string Web { get; set; }
-        public virtual IList<User> Participants { get; protected set; }
+        public virtual ICollection<User> Participants { get; protected set; }
     }
 }

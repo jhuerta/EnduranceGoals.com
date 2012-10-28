@@ -10,9 +10,9 @@ USE [master]
 GO
 /****** Object:  Database [EnduranceGoals]    Script Date: 10/24/2012 20:33:56 ******/
 CREATE DATABASE [EnduranceGoals] ON  PRIMARY 
-( NAME = N'EnduranceGoals', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\EnduranceGoals.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'EnduranceGoals', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\EnduranceGoals.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'EnduranceGoals_log', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\EnduranceGoals_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'EnduranceGoals_log', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\EnduranceGoals_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 GO
 ALTER DATABASE [EnduranceGoals] SET COMPATIBILITY_LEVEL = 100
 GO
@@ -185,6 +185,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[GoalParticipants](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[SignedOnDate] [datetime] NULL,
 	[UserId] [int] NOT NULL,
 	[GoalId] [int] NOT NULL,
@@ -226,14 +227,19 @@ GO
 ALTER TABLE [dbo].[Goals] CHECK CONSTRAINT [FK_Goals_VenueId]
 GO
 /****** Object:  ForeignKey [FK_GoalParticipants_GoalId]    Script Date: 10/24/2012 20:33:57 ******/
+/* -- Removing Foreign Key for this table -- Letting the ORM take care of this constrain
 ALTER TABLE [dbo].[GoalParticipants]  WITH CHECK ADD  CONSTRAINT [FK_GoalParticipants_GoalId] FOREIGN KEY([GoalId])
 REFERENCES [dbo].[Goals] ([Id])
 GO
 ALTER TABLE [dbo].[GoalParticipants] CHECK CONSTRAINT [FK_GoalParticipants_GoalId]
 GO
+*/
+
 /****** Object:  ForeignKey [FK_GoalParticipants_UserId]    Script Date: 10/24/2012 20:33:57 ******/
+/* -- Removing Foreign Key for this table -- Letting the ORM take care of this constrain
 ALTER TABLE [dbo].[GoalParticipants]  WITH CHECK ADD  CONSTRAINT [FK_GoalParticipants_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([Id])
 GO
 ALTER TABLE [dbo].[GoalParticipants] CHECK CONSTRAINT [FK_GoalParticipants_UserId]
 GO
+*/

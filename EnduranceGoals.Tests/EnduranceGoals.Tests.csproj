@@ -52,19 +52,7 @@
     </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\jhuerta.PDC\Downloads\NHibernate.Profiler-Build-951\HibernatingRhinos.Profiler.Appender.dll</HintPath>
-    </Reference>
-    <Reference Include="HibernatingRhinos.Profiler.Appender.NHibernateLog4Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\jhuerta.PDC\Downloads\NHibernate.Profiler-Build-951\HibernatingRhinos.Profiler.Appender.NHibernateLog4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="HibernatingRhinos.Profiler.BackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\jhuerta.PDC\Downloads\NHibernate.Profiler-Build-951\HibernatingRhinos.Profiler.BackEnd.dll</HintPath>
-    </Reference>
-    <Reference Include="HibernatingRhinos.Profiler.Integration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\jhuerta.PDC\Downloads\NHibernate.Profiler-Build-951\HibernatingRhinos.Profiler.Integration.dll</HintPath>
+      <HintPath>..\libs\HibernatingRhinos.Profiler.Appender.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,16 +94,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountControllerTest.cs" />
+    <Compile Include="DBTestBase.cs" />
     <Compile Include="EFCotrollerBaseTest.cs" />
     <Compile Include="EnduranceGoalsRepositoryTest.cs" />
+    <Compile Include="Goals.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="InMemoryDatabaseTest.cs" />
+    <Compile Include="IRepositories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnduranceGoals\EnduranceGoals.csproj">

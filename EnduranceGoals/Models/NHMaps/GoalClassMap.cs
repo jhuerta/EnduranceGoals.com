@@ -15,16 +15,19 @@ namespace EnduranceGoals.Models.NHMaps
             Map(g => g.Name);
             Map(g => g.Date);
             Map(g => g.Description);
-            Map(g => g.Web);
+            Map(g => g.Web, "EventWeb");
             Map(g => g.CreatedOn);
 
             References(g => g.Venue);
             References(g => g.Sport);
-            References(g => g.UserCreator);
+            References(g => g.UserCreator, "UserCreatorId");
 
-            HasManyToMany(g => g.Participants)
-                .Cascade.All()
-                .Table("goalparticipants");
+            HasManyToMany(x => x.Participants)
+                .Table("GoalParticipants")
+                .AsSet();
+                //.ParentKeyColumn("GoalId")
+                //.ChildKeyColumn("UserId")
+                //.Inverse();
         }
     }
 

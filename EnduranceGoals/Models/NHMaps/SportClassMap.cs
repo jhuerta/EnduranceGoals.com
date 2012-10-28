@@ -10,13 +10,9 @@ namespace EnduranceGoals.Models.NHMaps
     {
         public SportClassMap()
         {
-            Table("Map");
-
+            Table("Sports");
             Id(c => c.Id);
-
             Map(c => c.Name);
-
-            HasMany(c => c.Goals).Inverse().Cascade.All();
         }
     }
 }

@@ -11,12 +11,8 @@ namespace EnduranceGoals.Models.NHMaps
         public CountryClassMap()
         {
             Table("Countries");
-
             Id(c => c.Id);
-
             Map(c => c.Name);
-
-            HasMany(c => c.Cities).Inverse().Cascade.All();
         }
     }
 }

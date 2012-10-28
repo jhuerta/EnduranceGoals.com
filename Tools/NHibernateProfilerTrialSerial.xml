@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<license id="4e49f502-f729-4afc-9d9f-9df542212be4" expiration="2012-11-26T00:00:00.0000000" type="Trial" prof="nhprof" version="2">
+  <name>Juan Huerta</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>2yQgferr8QYQ2QaCZBvnsWNTn3w=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>BJsWG9Ox1vU6xBC/FLSzkw8zMT6lVjxZCn5YfdRu9nskQRAr3hhM4jzlnWqbrqhRytojJC0g5OS5wI9jWYo88b6gqG+6aBNJlyWj4UP251przVejQUMCn0DhjymBUi87wxlyO+WIVbdP25iqH7y7jcrEB+OEBWINDXeS6q85Bnw=</SignatureValue>
+  </Signature>
+</license>
