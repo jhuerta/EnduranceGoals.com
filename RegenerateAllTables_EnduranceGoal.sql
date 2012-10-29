@@ -10,9 +10,9 @@ USE [master]
 GO
 /****** Object:  Database [EnduranceGoals]    Script Date: 10/24/2012 20:33:56 ******/
 CREATE DATABASE [EnduranceGoals] ON  PRIMARY 
-( NAME = N'EnduranceGoals', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\EnduranceGoals.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'EnduranceGoals', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\EnduranceGoals.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'EnduranceGoals_log', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\EnduranceGoals_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'EnduranceGoals_log', FILENAME = N'c:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\EnduranceGoals_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 GO
 ALTER DATABASE [EnduranceGoals] SET COMPATIBILITY_LEVEL = 100
 GO
@@ -179,17 +179,17 @@ CREATE TABLE [dbo].[Goals](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserGoals]    Script Date: 10/24/2012 20:33:57 ******/
+/****** Object:  Table [dbo].[GoalParticipants]    Script Date: 10/24/2012 20:33:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[UserGoals](
+CREATE TABLE [dbo].[GoalParticipants](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[SignedOnDate] [datetime] NULL,
 	[UserId] [int] NOT NULL,
 	[GoalId] [int] NOT NULL,
- CONSTRAINT [PK_UserGoals] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_GoalParticipants] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC,
 	[GoalId] ASC
@@ -226,18 +226,18 @@ REFERENCES [dbo].[Venues] ([Id])
 GO
 ALTER TABLE [dbo].[Goals] CHECK CONSTRAINT [FK_Goals_VenueId]
 GO
-/****** Object:  ForeignKey [FK_UserGoals_GoalId]    Script Date: 10/24/2012 20:33:57 ******/
+/****** Object:  ForeignKey [FK_GoalParticipants_GoalId]    Script Date: 10/24/2012 20:33:57 ******/
 /* -- Removing Foreign Key for this table -- Letting the ORM take care of this constrain*/
-ALTER TABLE [dbo].[UserGoals]  WITH CHECK ADD  CONSTRAINT [FK_UserGoals_GoalId] FOREIGN KEY([GoalId])
+ALTER TABLE [dbo].[GoalParticipants]  WITH CHECK ADD  CONSTRAINT [FK_GoalParticipants_GoalId] FOREIGN KEY([GoalId])
 REFERENCES [dbo].[Goals] ([Id])
 GO
-ALTER TABLE [dbo].[UserGoals] CHECK CONSTRAINT [FK_UserGoals_GoalId]
+ALTER TABLE [dbo].[GoalParticipants] CHECK CONSTRAINT [FK_GoalParticipants_GoalId]
 GO
 
-/****** Object:  ForeignKey [FK_UserGoals_UserId]    Script Date: 10/24/2012 20:33:57 ******/
+/****** Object:  ForeignKey [FK_GoalParticipants_UserId]    Script Date: 10/24/2012 20:33:57 ******/
 /* -- Removing Foreign Key for this table -- Letting the ORM take care of this constrain*/
-ALTER TABLE [dbo].[UserGoals]  WITH CHECK ADD  CONSTRAINT [FK_UserGoals_UserId] FOREIGN KEY([UserId])
+ALTER TABLE [dbo].[GoalParticipants]  WITH CHECK ADD  CONSTRAINT [FK_GoalParticipants_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([Id])
 GO
-ALTER TABLE [dbo].[UserGoals] CHECK CONSTRAINT [FK_UserGoals_UserId]
+ALTER TABLE [dbo].[GoalParticipants] CHECK CONSTRAINT [FK_GoalParticipants_UserId]
 GO
