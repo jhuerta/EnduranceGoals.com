@@ -22,12 +22,14 @@ namespace EnduranceGoals.Models.NHMaps
             References(g => g.Sport);
             References(g => g.UserCreator, "UserCreatorId");
 
-            HasManyToMany(x => x.Participants)
-                .Table("GoalParticipants")
-                .AsSet();
-                //.ParentKeyColumn("GoalId")
-                //.ChildKeyColumn("UserId")
-                //.Inverse();
+            HasManyToMany(x => x.UserGoals)
+                .Table("UserGoals")
+                .AsSet()
+                .Inverse()
+                //.Cascade.SaveUpdate()
+                .ParentKeyColumn("GoalId")
+                .ChildKeyColumn("UserId");
+            //.Inverse();
         }
     }
 

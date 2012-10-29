@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Iesi.Collections.Generic;
 
 namespace EnduranceGoals.Models
 {
@@ -7,13 +9,20 @@ namespace EnduranceGoals.Models
     {
         public Goal()
         {
-            Participants = new List<User>();
+            UserGoals = new HashedSet<UserGoal>();
         }
 
-        public virtual void AddParticipant(User user)
+        public virtual void AddParticipant(User user, DateTime signedOndate)
         {
-            Participants.Add(user);
+            this.UserGoals.Add(
+                new UserGoal
+                    {
+                        User = user,
+                        Goal = this,
+                        SignedOnDate = signedOndate
+                    });
         }
+
         public virtual int Id { get; protected set; }
         public virtual DateTime Date { get; set; }
         public virtual DateTime CreatedOn { get; set; }
@@ -23,6 +32,6 @@ namespace EnduranceGoals.Models
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual string Web { get; set; }
-        public virtual ICollection<User> Participants { get; protected set; }
+        public virtual ICollection<UserGoal> UserGoals { get; protected set; }
     }
 }
