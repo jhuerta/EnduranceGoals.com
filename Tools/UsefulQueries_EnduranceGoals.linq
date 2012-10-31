@@ -16,7 +16,19 @@ sp_rename 'Location', 'Venues'
 exec sp_rename 'Location.Location' , 'Location.City', 'COLUMN'
 
 select * from Countries
+select * from goals;
+select * from users;
+select * from venues;
+select * from sports;
+select * from cities;
+select * from Countries;
 
+-- delete from goals;
+-- delete from venues;
+-- delete from cities;
+-- delete from Countries;
+-- delete from sports;
+-- delete from users;
 
 -- Creating Countries
 INSERT into Countries (Name) VALUES ('Spain');

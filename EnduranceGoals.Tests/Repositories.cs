@@ -61,13 +61,13 @@ namespace EnduranceGoals.Tests
         }
     }
 
-    //public class GoalParticipants : Repository<GoalParticipant>, IGoalParticipantsRepository
-    //{
-    //    public GoalParticipants(ISession _session)
-    //        : base(_session)
-    //    {
-    //    }
-    //}
+    public class UserGoals : Repository<UserGoal>, IUserGoalsRepository
+    {
+        public UserGoals(ISession _session)
+            : base(_session)
+        {
+        }
+    }
     public class Goals : RepositoryWithName<Goal>, IGoalsRepository
     {
         public Goals(ISession _session)
@@ -97,8 +97,8 @@ namespace EnduranceGoals.Tests
         public IList<Goal> GetAllByParticipant(User participant)
         {
             return session.CreateCriteria(typeof (Goal))
-                .CreateCriteria("Participants")
-                .Add(Expression.Eq("Id", participant.Id))
+                .CreateCriteria("UserGoals")
+                .Add(Expression.Eq("User", participant))
                 .List<Goal>();
         }
 

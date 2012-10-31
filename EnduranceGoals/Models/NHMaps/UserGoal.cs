@@ -2,7 +2,7 @@ using System;
 
 namespace EnduranceGoals.Models
 {
-    public class GoalParticipant
+    public class UserGoal
     {
         public virtual int Id { get; set; }
         public virtual User User { get; set; }

@@ -91,8 +91,8 @@
     <Compile Include="Models\NHMaps\CityClassMap.cs" />
     <Compile Include="Models\NHMaps\CountryClassMap.cs" />
     <Compile Include="Models\NHMaps\GoalClassMap.cs" />
-    <Compile Include="Models\NHMaps\GoalParticipant.cs" />
-    <Compile Include="Models\NHMaps\GoalParticipantClassMap.cs" />
+    <Compile Include="Models\NHMaps\UserGoal.cs" />
+    <Compile Include="Models\NHMaps\UserGoalMap.cs" />
     <Compile Include="Models\NHMaps\SportClassMap.cs" />
     <Compile Include="Models\NHMaps\UserClassMap.cs" />
     <Compile Include="Models\NHMaps\VenueClassMap.cs" />

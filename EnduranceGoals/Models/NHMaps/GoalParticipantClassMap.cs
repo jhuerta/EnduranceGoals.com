@@ -6,9 +6,9 @@ using FluentNHibernate.Mapping;
 
 namespace EnduranceGoals.Models.NHMaps
 {
-    public class GoalParticipantsMap : ClassMap<GoalParticipant>
+    public class GoalParticipantClassMap : ClassMap<GoalParticipant>
     {
-        public GoalParticipantsMap()
+        public GoalParticipantClassMap()
         {
             Table("GoalParticipants");
 

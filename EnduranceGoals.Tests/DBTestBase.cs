@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EnduranceGoals.Models;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NUnit.Framework;
@@ -14,7 +15,7 @@ namespace EnduranceGoals.Tests
         private Users users;
         private Sports sports;
         private Goals goals;
-        //private GoalParticipants goalParticipants;
+        private UserGoals userGoals;
 
         public DBTestBase()
         {
@@ -45,7 +46,7 @@ namespace EnduranceGoals.Tests
             users = new Users(session);
             sports = new Sports(session);
             goals = new Goals(session);
-            //goalParticipants = new GoalParticipants(session);
+            userGoals = new UserGoals(session);
         }
 
         private void PopulateData()
@@ -56,14 +57,14 @@ namespace EnduranceGoals.Tests
             CreateUsers();
             CreateSports();
             CreateGoals();
-            CreateGoalParticipants();
+            CreateUserGoals();
         }
 
         private void DeleteAllData()
         {
             var typeList = new[]
                                {                         
-                                   //typeof(GoalParticipant),                               
+                                   typeof(UserGoal),                               
                                    typeof(Goal),                               
                                    typeof(Venue),                               
                                    typeof(City),                               
@@ -339,50 +340,49 @@ namespace EnduranceGoals.Tests
                        };
         }
 
-        private void CreateGoalParticipants()
+        private void CreateUserGoals()
         {
             using (var transation = session.BeginTransaction())
             {
-                var goalParticipatnList = new[]
+                var userGoalsList = new[]
                                               {
-                                                  CreateGoalParticipant("jhuerta", "Ironman World Championship", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "Boston Marathon", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "New York 70.3", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "San Silvestre Vallecana", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "Duatlon de Burgos", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "The North Face Baguio", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "Manila Trialon Ayala", DateTime.Now),
-                                                  CreateGoalParticipant("jhuerta", "Fort Bonifacio Run", DateTime.Now),
-                                                  CreateGoalParticipant("lfernandez", "Ironman World Championship", DateTime.Now),
-                                                  CreateGoalParticipant("ifernandez", "Boston Marathon", DateTime.Now),
-                                                  CreateGoalParticipant("shuerta", "New York 70.3", DateTime.Now),
-                                                  CreateGoalParticipant("shuerta", "San Silvestre Vallecana", DateTime.Now),
-                                                  CreateGoalParticipant("urodriguez", "Duatlon de Burgos", DateTime.Now),
-                                                  CreateGoalParticipant("hgelera", "The North Face Baguio", DateTime.Now),
-                                                  CreateGoalParticipant("hgelera", "Manila Trialon Ayala", DateTime.Now),
-                                                  CreateGoalParticipant("lfernandez", "Fort Bonifacio Run", DateTime.Now),
-                                                  CreateGoalParticipant("uniqueparticipant", "Special Event 1 Participant", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "Ironman World Championship", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "Boston Marathon", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "New York 70.3", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "San Silvestre Vallecana", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "Duatlon de Burgos", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "The North Face Baguio", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "Manila Trialon Ayala", DateTime.Now),
+                                                  CreateUserGoal("jhuerta", "Fort Bonifacio Run", DateTime.Now),
+                                                  CreateUserGoal("lfernandez", "Ironman World Championship", DateTime.Now),
+                                                  CreateUserGoal("ifernandez", "Boston Marathon", DateTime.Now),
+                                                  CreateUserGoal("shuerta", "New York 70.3", DateTime.Now),
+                                                  CreateUserGoal("shuerta", "San Silvestre Vallecana", DateTime.Now),
+                                                  CreateUserGoal("urodriguez", "Duatlon de Burgos", DateTime.Now),
+                                                  CreateUserGoal("hgelera", "The North Face Baguio", DateTime.Now),
+                                                  CreateUserGoal("hgelera", "Manila Trialon Ayala", DateTime.Now),
+                                                  CreateUserGoal("lfernandez", "Fort Bonifacio Run", DateTime.Now),
+                                                  CreateUserGoal("uniqueparticipant", "Special Event 1 Participant", DateTime.Now),
 
 
                                               };
 
-                foreach (var gp in goalParticipatnList)
+                foreach (var gp in userGoalsList)
                 {
-                    GetUser(gp.Username).AddGoal(
-                        GetGoal(gp.Goalname)
-                        );
+                    gp.User.AddGoal(
+                        gp.Goal, gp.SignedOnDate);
                 }
                 transation.Commit();
             }
             session.Clear();
         }
 
-        private GoalParticipant CreateGoalParticipant(string username, string goal, DateTime date)
+        private UserGoal CreateUserGoal(string username, string goalname, DateTime date)
         {
-            return new GoalParticipant
+            return new UserGoal
                        {
-                           Username = username,
-                           Goalname = goal,
+                           User = GetUser(username),
+                           Goal = GetGoal(goalname),
                            SignedOnDate = date
                        };
         }
@@ -398,11 +398,4 @@ namespace EnduranceGoals.Tests
         }
     }
 
-    internal class GoalParticipant  
-    {
-        public string Username { get; set; }
-        public string Goalname { get; set; }
-
-        public DateTime SignedOnDate{ get; set; }
-    }
 }
