@@ -99,14 +99,12 @@
     <Compile Include="EnduranceGoalsRepositoryTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="InMemoryDatabaseTest.cs" />
-    <Compile Include="IRepositories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Repositories.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

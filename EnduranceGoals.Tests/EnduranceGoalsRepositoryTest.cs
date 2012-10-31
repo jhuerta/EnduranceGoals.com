@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EnduranceGoals.Models;
+using EnduranceGoals.Models.Repositories;
 using NUnit.Framework;
 
 namespace EnduranceGoals.Tests

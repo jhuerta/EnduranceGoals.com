@@ -86,16 +86,34 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\EnduranceGoalsRepository.cs" />
+    <Compile Include="Models\Repositories\Cities.cs" />
+    <Compile Include="Models\Repositories\Countries.cs" />
+    <Compile Include="Models\Repositories\EnduranceGoalsRepository.cs" />
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\GoalParticipant.cs" />
     <Compile Include="Models\NHMaps\CityClassMap.cs" />
     <Compile Include="Models\NHMaps\CountryClassMap.cs" />
     <Compile Include="Models\NHMaps\GoalClassMap.cs" />
     <Compile Include="Models\NHMaps\GoalParticipantClassMap.cs" />
+    <Compile Include="Models\Repositories\GoalParticipants.cs" />
+    <Compile Include="Models\Repositories\Goals.cs" />
+    <Compile Include="Models\Repositories\ICityRepository.cs" />
+    <Compile Include="Models\Repositories\ICountryRepository.cs" />
+    <Compile Include="Models\Repositories\IGoalParticipantsRepository.cs" />
+    <Compile Include="Models\Repositories\IGoalsRepository.cs" />
+    <Compile Include="Models\Repositories\IRepositories.cs" />
+    <Compile Include="Models\Repositories\IRepository.cs" />
+    <Compile Include="Models\Repositories\ISports.cs" />
+    <Compile Include="Models\Repositories\IUsersRepository.cs" />
+    <Compile Include="Models\Repositories\IVenueRepository.cs" />
+    <Compile Include="Models\Repositories\Repositories.cs" />
     <Compile Include="Models\NHMaps\SportClassMap.cs" />
     <Compile Include="Models\NHMaps\UserClassMap.cs" />
     <Compile Include="Models\NHMaps\VenueClassMap.cs" />
+    <Compile Include="Models\Repositories\RepositoryWithName.cs" />
+    <Compile Include="Models\Repositories\Sports.cs" />
+    <Compile Include="Models\Repositories\Users.cs" />
+    <Compile Include="Models\Repositories\Venues.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Venue.cs" />
@@ -103,8 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Iesi.Collections.dll" />
-    <Content Include="NHibernate.dll" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />
@@ -139,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

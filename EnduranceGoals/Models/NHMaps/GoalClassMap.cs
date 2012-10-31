@@ -18,25 +18,18 @@ namespace EnduranceGoals.Models.NHMaps
             Map(g => g.Web, "EventWeb");
             Map(g => g.CreatedOn);
 
-            References(g => g.Venue);
-            References(g => g.Sport);
-            References(g => g.UserCreator, "UserCreatorId");
+            References(g => g.Venue)
+                .Cascade.SaveUpdate(); ;
+            References(g => g.Sport)
+                .Cascade.SaveUpdate(); ;
+            References(g => g.UserCreator, "UserCreatorId")
+                .Cascade.SaveUpdate(); ;
 
             HasMany(g => g.Participants)
                 .Table("GoalParticipants")
                 .KeyColumn("GoalId")
                 .Cascade.SaveUpdate()
                 .Inverse();
-
-
-            //HasManyToMany(x => x.GoalParticipants)
-            //    .Table("GoalParticipants")
-            //    .AsSet()
-            //    .Inverse()
-            //    //.Cascade.SaveUpdate()
-            //    .ParentKeyColumn("GoalId")
-            //    .ChildKeyColumn("UserId");
-            ////.Inverse();
         }
     }
 

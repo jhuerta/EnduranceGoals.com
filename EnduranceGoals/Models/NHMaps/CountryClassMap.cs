@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 
 namespace EnduranceGoals.Models.NHMaps
 {
@@ -13,6 +9,7 @@ namespace EnduranceGoals.Models.NHMaps
             Table("Countries");
             Id(c => c.Id);
             Map(c => c.Name);
+            HasMany(c => c.Cities);
         }
     }
 }

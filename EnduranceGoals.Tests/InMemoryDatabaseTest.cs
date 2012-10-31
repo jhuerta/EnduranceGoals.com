@@ -21,33 +21,31 @@ namespace EnduranceGoals.Tests
         {
             try
             {
+                if (sessionFactory != null)
+                    return;
 
+                //setup the normal map configuration
+                var configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EnduranceGoals.cfg.xml");
+                Configuration nhconfig = new Configuration().Configure(configFile);
 
-            if (sessionFactory != null)
-                return;
+                //setup the fluent map configuration
+                configuration = Fluently.Configure(nhconfig);
 
-            //setup the normal map configuration
-            var configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EnduranceGoals.cfg.xml");
-            Configuration nhconfig = new Configuration().Configure(configFile);
+                foreach (Assembly assembly in assemblies)
+                {
+                    configuration.Mappings(m => m.FluentMappings
+                                                    .AddFromAssembly(assembly)
+                                                    .Conventions.Add(
+                                                        ForeignKey.Format(
+                                                            (p, t) => t.Name + "Id")));
+                }
 
-            //setup the fluent map configuration
-            configuration  =Fluently.Configure(nhconfig);
+                // Use this to recreate a phisical database
+                // CreatePhisycalDatabase(configuration);
 
-            foreach (Assembly assembly in assemblies)
-            {
-                configuration.Mappings(m => m.FluentMappings
-                                                .AddFromAssembly(assembly)
-                                                .Conventions.Add(
-                                                    ForeignKey.Format(
-                                                        (p, t) => t.Name + "Id")));
-            }
+                sessionFactory = configuration.BuildSessionFactory();
 
-            // Use this to recreate a phisical database
-            // CreatePhisycalDatabase(configuration);
-
-            sessionFactory = configuration.BuildSessionFactory();
-
-            session = sessionFactory.OpenSession();
+                session = sessionFactory.OpenSession();
             }
             catch (Exception ex)
             {

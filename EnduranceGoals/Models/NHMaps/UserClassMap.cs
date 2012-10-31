@@ -25,18 +25,6 @@ namespace EnduranceGoals.Models.NHMaps
                 .Cascade.SaveUpdate()
                 .KeyColumn("UserId")
                 .Inverse();
-
-            //HasManyToMany(x => x.GoalParticipants)
-            //    .Table("GoalParticipants")
-            //    .Cascade.SaveUpdate()
-            //    .ParentKeyColumn("GoalId")
-            //    .ChildKeyColumn("UserId");
-
-            //.LazyLoad()
-            //.Cascade.SaveUpdate();
-            //.Inverse()
-            //.Cascade.SaveUpdate();
-
         }
     }
 }

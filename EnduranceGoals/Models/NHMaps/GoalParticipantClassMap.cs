@@ -13,14 +13,17 @@ namespace EnduranceGoals.Models.NHMaps
             Table("GoalParticipants");
 
             Id(c => c.Id);
+
             Map(gp => gp.SignedOnDate);
             
             References(gp => gp.User)
                 .Not.Nullable()
+                .Cascade.SaveUpdate()
                 .Column("UserId");
 
             References(gp => gp.Goal)
                 .Not.Nullable()
+                .Cascade.SaveUpdate()
                 .Column("GoalId");
         }
     }

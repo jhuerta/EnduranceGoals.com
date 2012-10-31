@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 
 namespace EnduranceGoals.Models.NHMaps
 {
@@ -16,7 +12,8 @@ namespace EnduranceGoals.Models.NHMaps
             Map(v => v.Name);
             Map(v => v.Latitude);
             Map(v => v.Longitude);
-            References(v => v.City);
+            References(v => v.City)
+                .Cascade.SaveUpdate(); ;
         }
     }
 }

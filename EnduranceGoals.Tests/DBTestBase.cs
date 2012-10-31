@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EnduranceGoals.Models;
+using EnduranceGoals.Models.Repositories;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NUnit.Framework;
 
@@ -162,6 +163,10 @@ namespace EnduranceGoals.Tests
             {
                 var venueList = new[]
                                     {
+                                        CreateVenue("Bernabeu", "Madrid", 1, 1),
+                                        CreateVenue("Calderon", "Madrid", 1, 1),
+                                        CreateVenue("Manzanares", "Madrid", 1, 1),
+                                        CreateVenue("Atocha", "Madrid", 1, 1),
                                         CreateVenue("Manila Bay", "Manila", 1, 1),
                                         CreateVenue("Fort Bonifacio", "Manila", 2, 2),
                                         CreateVenue("Parque Gwell", "Barcelona", 3, 3),
