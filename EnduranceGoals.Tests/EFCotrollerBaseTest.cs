@@ -226,7 +226,7 @@ namespace EnduranceGoals.Tests
                 Assert.That(goalWithOnlyOneParticipant.Id, Is.GreaterThan(0));
 
                 // Asserting creator is different from participant
-                string usernameUniqueParticipant = goalWithOnlyOneParticipant.UserGoals.First().User.Username;
+                string usernameUniqueParticipant = goalWithOnlyOneParticipant.Participants.First().User.Username;
                 string usernameCreator = goalWithOnlyOneParticipant.UserCreator.Username;
                 Assert.That(usernameUniqueParticipant, Is.Not.EqualTo(usernameCreator));
 

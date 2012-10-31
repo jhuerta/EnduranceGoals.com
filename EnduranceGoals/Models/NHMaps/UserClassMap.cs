@@ -20,11 +20,17 @@ namespace EnduranceGoals.Models.NHMaps
             Map(u => u.Username);
             Map(u => u.CreatedOn);
 
-            HasManyToMany(x => x.UserGoals)
-                .Table("UserGoals")
+            HasMany(u => u.Goals)
+                .Table("GoalParticipants")
                 .Cascade.SaveUpdate()
-                .ParentKeyColumn("GoalId")
-                .ChildKeyColumn("UserId");
+                .KeyColumn("UserId")
+                .Inverse();
+
+            //HasManyToMany(x => x.GoalParticipants)
+            //    .Table("GoalParticipants")
+            //    .Cascade.SaveUpdate()
+            //    .ParentKeyColumn("GoalId")
+            //    .ChildKeyColumn("UserId");
 
             //.LazyLoad()
             //.Cascade.SaveUpdate();

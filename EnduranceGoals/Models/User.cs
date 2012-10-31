@@ -13,7 +13,7 @@ namespace EnduranceGoals.Models
 
         public User()
         {
-            UserGoals = new HashedSet<UserGoal>();
+            Goals = new HashedSet<GoalParticipant>();
         }
 
         public virtual int Id { get; protected set; }
@@ -23,12 +23,12 @@ namespace EnduranceGoals.Models
         public virtual string Username { get; set; }
         public virtual string Password { get; set; }
         public virtual DateTime CreatedOn { get; set; }
-        public virtual ICollection<UserGoal> UserGoals { get; protected set; }
+        public virtual ICollection<GoalParticipant> Goals { get; protected set; }
 
         public virtual void AddGoal(Goal goal, DateTime signedOndate)
         {
-            this.UserGoals.Add(
-                new UserGoal
+            this.Goals.Add(
+                new GoalParticipant
                     {
                         User = this,
                         Goal = goal,

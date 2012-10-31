@@ -9,13 +9,13 @@ namespace EnduranceGoals.Models
     {
         public Goal()
         {
-            UserGoals = new HashedSet<UserGoal>();
+            Participants = new HashedSet<GoalParticipant>();
         }
 
         public virtual void AddParticipant(User user, DateTime signedOndate)
         {
-            this.UserGoals.Add(
-                new UserGoal
+            this.Participants.Add(
+                new GoalParticipant
                     {
                         User = user,
                         Goal = this,
@@ -32,6 +32,6 @@ namespace EnduranceGoals.Models
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual string Web { get; set; }
-        public virtual ICollection<UserGoal> UserGoals { get; protected set; }
+        public virtual ICollection<GoalParticipant> Participants { get; protected set; }
     }
 }

@@ -88,11 +88,11 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\EnduranceGoalsRepository.cs" />
     <Compile Include="Models\Goal.cs" />
+    <Compile Include="Models\GoalParticipant.cs" />
     <Compile Include="Models\NHMaps\CityClassMap.cs" />
     <Compile Include="Models\NHMaps\CountryClassMap.cs" />
     <Compile Include="Models\NHMaps\GoalClassMap.cs" />
-    <Compile Include="Models\NHMaps\UserGoal.cs" />
-    <Compile Include="Models\NHMaps\UserGoalMap.cs" />
+    <Compile Include="Models\NHMaps\GoalParticipantClassMap.cs" />
     <Compile Include="Models\NHMaps\SportClassMap.cs" />
     <Compile Include="Models\NHMaps\UserClassMap.cs" />
     <Compile Include="Models\NHMaps\VenueClassMap.cs" />
@@ -102,9 +102,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\EnduranceGoals.sdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Iesi.Collections.dll" />
     <Content Include="NHibernate.dll" />
@@ -141,6 +138,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -97,7 +97,6 @@
     <Compile Include="DBTestBase.cs" />
     <Compile Include="EFCotrollerBaseTest.cs" />
     <Compile Include="EnduranceGoalsRepositoryTest.cs" />
-    <Compile Include="Goals.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="InMemoryDatabaseTest.cs" />
     <Compile Include="IRepositories.cs" />
@@ -108,12 +107,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repositories.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EnduranceGoals\EnduranceGoals.csproj">
-      <Project>{A1C7359C-B4A6-4B20-990C-4E110763C420}</Project>
-      <Name>EnduranceGoals</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -158,6 +151,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnduranceGoals\EnduranceGoals.csproj">
+      <Project>{A1C7359C-B4A6-4B20-990C-4E110763C420}</Project>
+      <Name>EnduranceGoals</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

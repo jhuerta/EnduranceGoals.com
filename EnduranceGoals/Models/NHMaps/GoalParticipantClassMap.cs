@@ -14,7 +14,7 @@ namespace EnduranceGoals.Models.NHMaps
 
             Id(c => c.Id);
             Map(gp => gp.SignedOnDate);
-
+            
             References(gp => gp.User)
                 .Not.Nullable()
                 .Column("UserId");

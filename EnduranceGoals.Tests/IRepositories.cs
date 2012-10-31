@@ -19,7 +19,7 @@ namespace EnduranceGoals.Tests
         IList<T> GetAll();
     }
 
-    internal interface IUserGoalsRepository
+    internal interface IGoalParticipantsRepository
     {
     }
 
