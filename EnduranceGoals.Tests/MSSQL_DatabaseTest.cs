@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using EnduranceGoals.Models;
+﻿using System.Linq;
+using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models.Repositories;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
-using NHibernate.Criterion;
 using NUnit.Framework;
 
 namespace EnduranceGoals.Tests

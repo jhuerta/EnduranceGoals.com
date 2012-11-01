@@ -1,4 +1,5 @@
 ﻿using System;
+using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
 using EnduranceGoals.Models.Repositories;
 using NHibernate;
