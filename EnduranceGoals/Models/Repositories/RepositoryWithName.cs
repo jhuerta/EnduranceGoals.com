@@ -5,8 +5,7 @@ namespace EnduranceGoals.Models.Repositories
 {
     public class RepositoryWithName<Entity> : Repository<Entity>, IRepositoryWithName<Entity> where Entity : class
     {
-        public RepositoryWithName(ISession _session)
-            : base(_session)
+        public RepositoryWithName(ISession _session): base(_session)
         {
         }
 

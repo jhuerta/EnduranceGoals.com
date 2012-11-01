@@ -15,7 +15,6 @@ namespace EnduranceGoals.Tests
         private Users users;
         private Sports sports;
         private Goals goals;
-        private ISessionFactory sessionFactory;
         private ISession session;
 
         public DummyDBBuilder()
@@ -32,8 +31,7 @@ namespace EnduranceGoals.Tests
 
         private void Initialize()
         {
-            sessionFactory =  SessionFactoryBuilder.SessionFactory;
-            session = sessionFactory.OpenSession();
+            session = SessionProvider.OpenSession();
 
             countries = new Countries(session);
             cities = new Cities(session);

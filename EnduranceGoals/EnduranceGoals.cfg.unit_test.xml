@@ -12,6 +12,7 @@ for your own use before compile tests in VisualStudio.
 			Server=localhost\SQLEXPRESS;initial catalog=EnduranceGoals;Integrated Security=SSPI
 		</property>
 		<property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
-		<property name="current_session_context_class">NHibernate.Context.ManagedWebSessionContext</property>
+		<property name="current_session_context_class">NHibernate.Context.ThreadStaticSessionContext</property>
+		<property name="show_sql">true</property>
 	</session-factory>
 </hibernate-configuration>

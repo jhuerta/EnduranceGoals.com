@@ -6,6 +6,11 @@ namespace EnduranceGoals.Models
 {
     public class City
     {
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public City()
         {
             Venues = new HashedSet<Venue>();

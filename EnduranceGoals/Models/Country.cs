@@ -11,6 +11,11 @@ namespace EnduranceGoals.Models
             Cities = new HashedSet<City>();
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public virtual ICollection<City> Cities{ get; protected set; }
         public virtual int Id { get; protected set; }
         public virtual String Name { get; set; }

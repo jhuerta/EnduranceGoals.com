@@ -9,6 +9,12 @@ namespace EnduranceGoals.Models
         {
             Goals = new List<Goal>();
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public virtual void AddGoal(Goal goal)
         {
             Goals.Add(goal);

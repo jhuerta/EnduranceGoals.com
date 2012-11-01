@@ -7,7 +7,7 @@ using EnduranceGoals.Models;
 namespace EnduranceGoals.Controllers
 {
     [HandleError]
-    public class HomeController : EFControllerBase
+    public class HomeController : Controller
     {
         
 

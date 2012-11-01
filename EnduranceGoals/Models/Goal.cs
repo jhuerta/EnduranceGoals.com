@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using FluentNHibernate.Data;
 using Iesi.Collections.Generic;
 
 namespace EnduranceGoals.Models
 {
-    public class Goal
+    public class Goal 
     {
         public Goal()
         {

@@ -1,54 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using NHibernate;
-using NHibernate.Cfg;
+using HibernatingRhinos.Profiler.Appender.NHibernate;
 
 namespace EnduranceGoals
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static ISessionFactory SessionFactory;
-
-        protected static ISessionFactory CreateSessionFactory()
-        {
-            var configuration = new Configuration();
-            var configure = configuration.Configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EnduranceGoals.cfg.xml"));
-            try
-            {
-                return configure.BuildSessionFactory();
-            }
-            catch (Exception ex)
-            {
-                var innerMsg = ex.Message;
-                throw;
-            }
-            
-        }
-
-        public static ISession CurrentSession
-        {
-            get { return (ISession)HttpContext.Current.Items["current.session"]; }
-            set { HttpContext.Current.Items["current.session"] = value; }
-        }
-
-        protected void Global()
-        {
-            BeginRequest += delegate
-            {
-                CurrentSession = SessionFactory.OpenSession();
-            };
-            EndRequest += delegate
-            {
-                if (CurrentSession != null)
-                    CurrentSession.Dispose();
-            };
-        }
-
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -67,7 +24,7 @@ namespace EnduranceGoals
 
             RegisterRoutes(RouteTable.Routes);
 
-            SessionFactory = CreateSessionFactory();
+            NHibernateProfiler.Initialize();
         }
     }
 }

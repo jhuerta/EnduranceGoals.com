@@ -9,6 +9,12 @@ namespace EnduranceGoals.Models
         {
             Goals = new List<Goal>();
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public virtual IList<Goal> Goals { get; protected set; }
         public virtual int Id { get; protected set; }
         public virtual String Name { get; set; }

@@ -1,14 +1,17 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EnduranceGoals.Infrastructure;
+using EnduranceGoals.Models;
 using EnduranceGoals.Models.Repositories;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
+using NHibernate.Criterion;
 using NUnit.Framework;
 
 namespace EnduranceGoals.Tests
 {
     [TestFixture]
-    public class MSSQL_DatabaseTest
+    public class MSSQL_DatabaseTest : TestFixture
     {
         protected Users users;
         protected Goals goals;
@@ -16,7 +19,6 @@ namespace EnduranceGoals.Tests
         protected Venues venues;
         protected Cities cities;
         protected Countries countries;
-        protected ISession session;
 
         private DummyDBBuilder dummyDbBuilder;
 
@@ -32,8 +34,6 @@ namespace EnduranceGoals.Tests
             dummyDbBuilder.BuildDB();
 
             NHibernateProfiler.Initialize();
-            var _sessionFactory = SessionFactoryBuilder.SessionFactory;
-            session = _sessionFactory.OpenSession();
             
             users = new Users(session);
             goals = new Goals(session);
@@ -69,7 +69,32 @@ namespace EnduranceGoals.Tests
                     transation.Commit();
                 });
             }
-            session.Clear();
+        }
+
+        [Test]
+        public void Cannot_query_using_an_adhoc_criteria()
+        {
+            ICriteria crit = session.CreateCriteria(typeof (Sport))
+                .Add(Restrictions.Like("Name", "triathlon", MatchMode.Anywhere));
+
+            var ironmanSports = sports.GetByCriteria(crit);
+
+            Assert.That(ironmanSports.Count, Is.GreaterThan(3));
+        }
+
+        [Test]
+        public void Cannot_delete_sport_if_it_still_used_by_goal_no_using_transaction()
+        {
+
+            var existingSport = sports.GetAll().First();
+            var goalWithExistingSport = goals.GetAllBySport(existingSport).First();
+
+            Assert.That(goalWithExistingSport.Id, Is.GreaterThan(0));
+
+            Assert.Throws<ObjectDeletedException>(delegate
+                                                      {
+                                                          sports.Remove(existingSport);
+                                                      });
         }
     }
     
@@ -93,7 +118,20 @@ namespace EnduranceGoals.Tests
                                                               transation.Commit();
                                                           });
             }
-            session.Clear();
+        }
+
+        [Test]
+        public void Cannot_delete_user_if_it_created_a_goal_and_the_goal_exists_not_using_transaction()
+        {
+            var existingUser = users.GetAll().First();
+            var goalWithExistingUserCreator = goals.GetAllByUserCreator(existingUser).First();
+
+            Assert.That(goalWithExistingUserCreator.Id, Is.GreaterThan(0));
+
+            Assert.Throws<ObjectDeletedException>(delegate
+                                                      {
+                                                          users.Remove(existingUser);
+                                                      });
         }
 
         [Test]
@@ -123,7 +161,6 @@ namespace EnduranceGoals.Tests
                                                               transation.Commit();
                                                           });
             }
-            session.Clear();
         }
 
         [Test]
@@ -143,7 +180,6 @@ namespace EnduranceGoals.Tests
                     transation.Commit();
                 });
             }
-            session.Clear();
         }
     }
 
@@ -167,7 +203,6 @@ namespace EnduranceGoals.Tests
                     transation.Commit();
                 });
             }
-            session.Clear();
         }
     }
 
@@ -191,7 +226,21 @@ namespace EnduranceGoals.Tests
                     transation.Commit();
                 });
             }
-            session.Clear();
+        }
+
+        [Test]
+        public void Cannot_delete_city_if_it_still_used_by_venue_not_using_transaction()
+        {
+
+            var existingCity = cities.GetAll().First();
+            var venueWithExistingCity = venues.GetAllByCity(existingCity).First();
+
+            Assert.That(venueWithExistingCity.Id, Is.GreaterThan(0));
+
+            Assert.Throws<ObjectDeletedException>(delegate
+                                                      {
+                                                          cities.Remove(existingCity);
+                                                      });
         }
 
         [Test]
@@ -223,7 +272,21 @@ namespace EnduranceGoals.Tests
                     transation.Commit();
                 });
             }
-            session.Clear();
+        }
+
+        [Test]
+        public void Cannot_delete_country_if_it_still_used_by_city_not_using_transaction()
+        {
+            var existingCountry = countries.GetAll().First();
+
+            var cityWithExistingCountry = cities.GetAllByCountry(existingCountry).First();
+
+            Assert.That(cityWithExistingCountry.Id, Is.GreaterThan(0));
+
+            Assert.Throws<ObjectDeletedException>(delegate
+                                                      {
+                                                          countries.Remove(existingCountry);
+                                                      });
         }
 
         [Test]
@@ -257,7 +320,23 @@ namespace EnduranceGoals.Tests
                         transation.Commit();
                 });
             }
-            session.Clear();
         }
+
+       [Test]
+       public void Cannot_delete_goal_if_it_still_has_participants_registered_to_it_not_using_transaction()
+       {
+           var existingGoal = goals.GetAll().First();
+
+           var participantWithAtLeastExistingGoal = users.GetAllByGoals(existingGoal).First();
+
+           // Assert the goal has participants subscribed to it
+           Assert.That(participantWithAtLeastExistingGoal.Id, Is.GreaterThan(0));
+
+           // Assert we cant delete the goal
+           Assert.Throws<ObjectDeletedException>(delegate
+                                                     {
+                                                         goals.Remove(existingGoal);
+                                                     });
+       }
     }
 }

@@ -5,6 +5,7 @@ using System.Data.EntityClient;
 using System.Data.Objects;
 using System.IO;
 using System.Web.Mvc;
+using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
 using NHibernate;
 
@@ -12,7 +13,7 @@ namespace EnduranceGoals.Controllers
 {
     public class EFControllerBase : Controller
     {
-        protected ISession session = MvcApplication.CurrentSession;
+        protected ISession session = SessionProvider.OpenSession();
         
 
         public void ExecuteSql(string sql)
