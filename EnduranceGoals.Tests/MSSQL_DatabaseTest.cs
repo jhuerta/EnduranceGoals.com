@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace EnduranceGoals.Tests
 {
     [TestFixture]
-    public class MSSQL_DatabaseTest : DBTestBase
+    public class MSSQL_DatabaseTest
     {
         protected Users users;
         protected Goals goals;
@@ -18,18 +18,36 @@ namespace EnduranceGoals.Tests
         protected Venues venues;
         protected Cities cities;
         protected Countries countries;
+        protected ISession session;
+
+        private DummyDBBuilder dummyDbBuilder;
+
+
+        public MSSQL_DatabaseTest()
+        {
+            dummyDbBuilder = new DummyDBBuilder();
+        }
 
         [SetUp]
         public void Setup()
         {
+            dummyDbBuilder.BuildDB();
+
             NHibernateProfiler.Initialize();
-            RecreateDB();
+            var _sessionFactory = SessionFactoryBuilder.SessionFactory;
+            session = _sessionFactory.OpenSession();
+            
             users = new Users(session);
             goals = new Goals(session);
             sports = new Sports(session);
             venues = new Venues(session);
             cities = new Cities(session);
             countries = new Countries(session);
+        }
+        [TearDown]
+        public void Teardown()
+        {
+            session.Close();
         }
     }
 

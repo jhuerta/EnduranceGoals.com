@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using EnduranceGoals.Models;
 using EnduranceGoals.Models.Repositories;
-using HibernatingRhinos.Profiler.Appender.NHibernate;
+using NHibernate;
 using NUnit.Framework;
 
 namespace EnduranceGoals.Tests
 {
-    [TestFixture]
-    public class DBTestBase : NHibernateTestFixtureBase
+    public class DummyDBBuilder
     {
         private Countries countries;
         private Cities cities;
@@ -16,16 +14,16 @@ namespace EnduranceGoals.Tests
         private Users users;
         private Sports sports;
         private Goals goals;
-        private GoalParticipants GoalParticipants;
+        private ISessionFactory sessionFactory;
+        private ISession session;
 
-        public DBTestBase()
+        public DummyDBBuilder()
         {
             Initialize();
         }
 
-        public void RecreateDB()
+        public void BuildDB()
         {
-
             DeleteAllData();
             PopulateData();
             Assert.IsTrue(true);
@@ -33,13 +31,8 @@ namespace EnduranceGoals.Tests
 
         private void Initialize()
         {
-            InitalizeSessionFactory(
-                typeof (Country).Assembly,
-                typeof (Goal).Assembly,
-                typeof (User).Assembly,
-                typeof (Venue).Assembly,
-                typeof (Country).Assembly,
-                typeof (Sport).Assembly);
+            sessionFactory =  SessionFactoryBuilder.SessionFactory;
+            session = sessionFactory.OpenSession();
 
             countries = new Countries(session);
             cities = new Cities(session);
@@ -47,7 +40,6 @@ namespace EnduranceGoals.Tests
             users = new Users(session);
             sports = new Sports(session);
             goals = new Goals(session);
-            GoalParticipants = new GoalParticipants(session);
         }
 
         private void PopulateData()

@@ -10,12 +10,9 @@ using NHibernate.Cfg;
 
 namespace EnduranceGoals
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static ISessionFactory SessionFactory = CreateSessionFactory();
+        public static ISessionFactory SessionFactory;
 
         protected static ISessionFactory CreateSessionFactory()
         {
@@ -69,6 +66,8 @@ namespace EnduranceGoals
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+
+            SessionFactory = CreateSessionFactory();
         }
     }
 }
