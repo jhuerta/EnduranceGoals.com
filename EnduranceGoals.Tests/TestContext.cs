@@ -6,21 +6,19 @@ using NUnit.Framework;
 namespace EnduranceGoals.Tests
 {
     [TestFixture]
-    public class TestFixture
+    public class TestContext
     {
-        protected ISession session;
-
-        [SetUp]
+        [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            session = SessionProvider.OpenSession();
-            CallSessionContext.Bind(SessionProvider.OpenSession());
+            CurrentSessionContext.Bind(SessionProvider.OpenSession());
         }
 
-        [TearDown]
+        [TestFixtureTearDown]
         public void TestFixtureTeardown()
         {
-            var session = CallSessionContext.Unbind(SessionProvider.SessionFactory);
+            var session = CurrentSessionContext.Unbind(SessionProvider.SessionFactory);
+
             if (session != null)
             {
                 if (session.Transaction != null && session.Transaction.IsActive)
@@ -28,11 +26,11 @@ namespace EnduranceGoals.Tests
                     session.Transaction.Rollback();
                 }
                 else
+                {
                     session.Flush();
-
+                }
                 session.Close();
             }
-            session.Dispose();
         }
     }
 }

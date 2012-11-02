@@ -8,5 +8,6 @@ namespace EnduranceGoals.Models.Repositories
         IList<Goal> GetAllByUserCreator(User user);
         IList<Goal> GetAllByParticipant(User participant);
         IList<Goal> GetAllByCreator(User creator);
+        IList<Goal> FindUpcomingGoals();
     }
 }

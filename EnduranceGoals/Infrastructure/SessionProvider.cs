@@ -17,19 +17,32 @@ namespace EnduranceGoals.Infrastructure
             get { return Instance.sessionFactory; }
         }
 
-        private ISessionFactory GetSessionFactory()
-        {
-            return sessionFactory;
-        }
-
         public static SessionProvider Instance
         {
             get { return NestedSessionProvider.sessionManager; }
         }
 
+        public static ISession CurrentSession
+        {
+            get { return SessionFactory.GetCurrentSession(); }
+        }
+
+        public static ISession CurrentSessionOrNew
+        {
+            get
+            {
+                if (NHibernate.Context.CurrentSessionContext.HasBind(SessionFactory))
+                {
+                    return CurrentSession; ;
+                }
+                return OpenSession();
+
+            }
+        }
+
         public static ISession OpenSession()
         {
-            return Instance.GetSessionFactory().OpenSession();
+            return SessionFactory.OpenSession();
         }
 
         private SessionProvider()

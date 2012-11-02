@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Criterion;
 
@@ -43,6 +45,13 @@ namespace EnduranceGoals.Models.Repositories
             return session.CreateCriteria(typeof(Goal))
                 .CreateCriteria("UserCreator")
                 .Add(Expression.Eq("Id", creator.Id))
+                .List<Goal>();
+        }
+
+        public IList<Goal> FindUpcomingGoals()
+        {
+            return session.CreateCriteria(typeof (Goal))
+                .Add(Expression.Gt("Date", DateTime.Now))
                 .List<Goal>();
         }
     }

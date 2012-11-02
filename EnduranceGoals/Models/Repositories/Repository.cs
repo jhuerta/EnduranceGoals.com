@@ -22,7 +22,7 @@ namespace EnduranceGoals.Models.Repositories
      * 
      * */
 
-    public class Repository<TEntity> : IDelete<TEntity>, IRead<TEntity>, ISave<TEntity> where TEntity : class 
+    public class Repository<TEntity> : IDelete<TEntity>, IRead<TEntity>, ISave<TEntity> where TEntity : class
     {
         protected readonly ISession session;
 
@@ -31,7 +31,7 @@ namespace EnduranceGoals.Models.Repositories
             session = Session;
         }
 
-        public TEntity GetById(Guid ID)
+        public TEntity GetById(int ID)
         {
             if (!session.Transaction.IsActive)
             {
@@ -152,7 +152,7 @@ namespace EnduranceGoals.Models.Repositories
     {
         IList<TEntity> GetByQueryable(IQueryable<TEntity> queryable);
         IList<TEntity> GetByCriteria(ICriteria criteria);
-        TEntity GetById(Guid ID);
+        TEntity GetById(int ID);
         IList<TEntity> GetAll();
     }
 }

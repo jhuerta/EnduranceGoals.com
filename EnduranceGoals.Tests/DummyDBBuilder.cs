@@ -17,8 +17,9 @@ namespace EnduranceGoals.Tests
         private Goals goals;
         private ISession session;
 
-        public DummyDBBuilder()
+        public DummyDBBuilder(ISession _session)
         {
+            session = _session;
             Initialize();
         }
 
@@ -31,8 +32,6 @@ namespace EnduranceGoals.Tests
 
         private void Initialize()
         {
-            session = SessionProvider.OpenSession();
-
             countries = new Countries(session);
             cities = new Cities(session);
             venues = new Venues(session);
@@ -78,7 +77,6 @@ namespace EnduranceGoals.Tests
                 session.CreateQuery(deleteTableQuery).ExecuteUpdate();
                 transation.Commit();
             }
-            session.Clear();
         }
 
         private void CreateCountries()
@@ -101,8 +99,6 @@ namespace EnduranceGoals.Tests
                 
                 transation.Commit();
             }
-
-            session.Clear();
         }
         private static Country CreateCountry(string countryName)
         {
@@ -137,7 +133,6 @@ namespace EnduranceGoals.Tests
                 }
                 transation.Commit();
             }
-            session.Clear();
         }
         private City CreateCity(string cityName, string countryName)
         {
@@ -178,7 +173,6 @@ namespace EnduranceGoals.Tests
                 }
                 transation.Commit();
             }
-            session.Clear();
         }
         private Venue CreateVenue(string venueName, string cityName, double latitude, double longitude)
         {
@@ -215,7 +209,6 @@ namespace EnduranceGoals.Tests
                 }
                 transation.Commit();
             }
-            session.Clear();
         }
         private User CreateUser(string email, string name, string lastname, string username, string password, DateTime createdOn)
         {
@@ -261,7 +254,6 @@ namespace EnduranceGoals.Tests
                 }
                 transation.Commit();
             }
-            session.Clear();
         }
 
         private void CreateGoals()
@@ -305,6 +297,11 @@ namespace EnduranceGoals.Tests
                                                   "Fort Bonifacio",
                                                   "This event contains one participant. The participant is not the creator.",
                                                   "Half Maraton"),
+                                       CreateGoal(new DateTime(2015, 4, 1), "www.isolatedGoal.com",
+                                                  "IsolatedGoal", new DateTime(2012, 11, 1), "urodriguez",
+                                                  "Fort Bonifacio",
+                                                  "No one is taking part of this event. Can be deleted",
+                                                  "Half Maraton"),
                                        CreateGoal(new DateTime(2015, 4, 1), "www.noparticipantsOnlyCreator.com",
                                                   "Special Event No Participant Only Creator", new DateTime(2012, 11, 1),
                                                   "uniquecreator",
@@ -318,8 +315,6 @@ namespace EnduranceGoals.Tests
                 }
                 transation.Commit();
             }
-            session.Clear();
-            
         }
         private Goal CreateGoal(DateTime date, string web, string title, DateTime createdOn, string createdBy, string venueName, string description, string sport)
         {
@@ -370,7 +365,6 @@ namespace EnduranceGoals.Tests
                 }
                 transation.Commit();
             }
-            session.Clear();
         }
 
         private GoalParticipant CreateGoalParticipant(string username, string goalname, DateTime date)

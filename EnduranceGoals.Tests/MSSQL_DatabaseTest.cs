@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
 using EnduranceGoals.Models.Repositories;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
+using NHibernate.Context;
 using NHibernate.Criterion;
 using NUnit.Framework;
 
 namespace EnduranceGoals.Tests
 {
     [TestFixture]
-    public class MSSQL_DatabaseTest : TestFixture
+    public class MSSQL_DatabaseTest
     {
         protected Users users;
         protected Goals goals;
@@ -19,22 +21,26 @@ namespace EnduranceGoals.Tests
         protected Venues venues;
         protected Cities cities;
         protected Countries countries;
-
-        private DummyDBBuilder dummyDbBuilder;
-
-
-        public MSSQL_DatabaseTest()
-        {
-            dummyDbBuilder = new DummyDBBuilder();
-        }
+        protected ISession session;
 
         [SetUp]
         public void Setup()
         {
-            dummyDbBuilder.BuildDB();
-
             NHibernateProfiler.Initialize();
-            
+
+            var wholisticSession = SessionProvider.OpenSession();
+            CurrentSessionContext.Bind(wholisticSession);
+
+            // We have to pass a new session to the builder ... dont know why
+            // If passing an existing session, some entites does not eager load
+            // some properties. Why?
+
+            var dummyDbSession = SessionProvider.OpenSession();
+            var dummyDbBuilder = new DummyDBBuilder(dummyDbSession);
+            dummyDbBuilder.BuildDB();
+            dummyDbSession.Close();
+
+            session = SessionProvider.CurrentSession;
             users = new Users(session);
             goals = new Goals(session);
             sports = new Sports(session);
@@ -42,10 +48,25 @@ namespace EnduranceGoals.Tests
             cities = new Cities(session);
             countries = new Countries(session);
         }
+
         [TearDown]
-        public void Teardown()
+        public void TearDown()
         {
-            session.Close();
+            var sess = CurrentSessionContext.Unbind(SessionProvider.CurrentSession.SessionFactory);
+
+            if (sess != null)
+            {
+                if (sess.Transaction != null && sess.Transaction.IsActive)
+                {
+                    sess.Transaction.Rollback();
+                }
+                
+                // TODO This is throwing an exception: 
+                // else { session.Flush();}  
+
+                sess.Close();
+            }
+            sess.Dispose();
         }
     }
 
@@ -55,9 +76,8 @@ namespace EnduranceGoals.Tests
         [Test]
         public void Cannot_delete_sport_if_it_still_used_by_goal()
         {
-            using (var transation = session.BeginTransaction())
+            using (var transaction = session.BeginTransaction())
             {
- 
                 var existingSport = sports.GetAll().First();
                 var goalWithExistingSport = goals.GetAllBySport(existingSport).First();
 
@@ -66,7 +86,7 @@ namespace EnduranceGoals.Tests
                 Assert.Throws<ObjectDeletedException>(delegate
                 {
                     sports.Remove(existingSport);
-                    transation.Commit();
+                    transaction.Commit();
                 });
             }
         }
@@ -85,7 +105,6 @@ namespace EnduranceGoals.Tests
         [Test]
         public void Cannot_delete_sport_if_it_still_used_by_goal_no_using_transaction()
         {
-
             var existingSport = sports.GetAll().First();
             var goalWithExistingSport = goals.GetAllBySport(existingSport).First();
 
@@ -106,7 +125,6 @@ namespace EnduranceGoals.Tests
         {
             using (var transation = session.BeginTransaction())
             {
-
                 var existingUser = users.GetAll().First();
                 var goalWithExistingUserCreator = goals.GetAllByUserCreator(existingUser).First();
 
@@ -124,6 +142,7 @@ namespace EnduranceGoals.Tests
         public void Cannot_delete_user_if_it_created_a_goal_and_the_goal_exists_not_using_transaction()
         {
             var existingUser = users.GetAll().First();
+
             var goalWithExistingUserCreator = goals.GetAllByUserCreator(existingUser).First();
 
             Assert.That(goalWithExistingUserCreator.Id, Is.GreaterThan(0));
@@ -139,7 +158,6 @@ namespace EnduranceGoals.Tests
         {
             using (var transation = session.BeginTransaction())
             {
-
                 var uniqueParticipantInEvent_NotCreator = users.GetAll()
                     .Where(u => u.Username == "uniqueparticipant")
                     .Single();
@@ -231,7 +249,8 @@ namespace EnduranceGoals.Tests
         [Test]
         public void Cannot_delete_city_if_it_still_used_by_venue_not_using_transaction()
         {
-
+            using (var transation = session.BeginTransaction())
+            {
             var existingCity = cities.GetAll().First();
             var venueWithExistingCity = venues.GetAllByCity(existingCity).First();
 
@@ -240,7 +259,10 @@ namespace EnduranceGoals.Tests
             Assert.Throws<ObjectDeletedException>(delegate
                                                       {
                                                           cities.Remove(existingCity);
+                    transation.Commit();
+
                                                       });
+              }
         }
 
         [Test]
@@ -301,6 +323,50 @@ namespace EnduranceGoals.Tests
     [TestFixture]
     public class GoalRepositoryTest : MSSQL_DatabaseTest
     {
+        [Test]
+        public void DatabaseIsNotEmpty()
+        {
+            var initialCount = goals.GetAll().Count();
+            Assert.That(initialCount, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void RetrieveById()
+        {
+            var firstItem = goals.GetAll().First();
+            var firstItemById = goals.GetById(firstItem.Id);
+            Assert.That(firstItem.Name, Is.EqualTo(firstItemById.Name));
+        }
+
+        [Test]
+        public void AllGoalsRetrievedByFindUpcamingGoalsAreInTheFure()
+        {
+            var futureGoals = goals.FindUpcomingGoals();
+            foreach (var futureGoal in futureGoals)
+            {
+                Assert.That(futureGoal.Date > DateTime.Now);
+            }
+        }
+
+        [Test]
+        public void CanDeleteAndSaveAGoal()
+        {
+            var initialGoal = goals.GetByName("IsolatedGoal");
+            var randomNamber = new Random().Next();
+            initialGoal.Description = randomNamber.ToString();
+
+            // Deleting
+            goals.Remove(initialGoal);
+            var afterDeletingInitialGoal = goals.GetAll().First();
+            Assert.That(afterDeletingInitialGoal.Name, Is.Not.EqualTo(initialGoal.Name));
+
+            // Saving again
+            goals.Add(initialGoal);
+            var goalAfterSaving = goals.GetByName(initialGoal.Name);
+            Assert.That(initialGoal.Name, Is.EqualTo(goalAfterSaving.Name));
+            Assert.That(goalAfterSaving.Description, Is.EqualTo(randomNamber));
+        }
+
        [Test]
         public void Cannot_delete_goal_if_it_still_has_participants_registered_to_it()
         {

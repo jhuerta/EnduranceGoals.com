@@ -48,5 +48,44 @@ namespace EnduranceGoals.Controllers
             }).Cast<object>();
         }
 
+        public ActionResult Cities(string id)
+        {
+            Countries goals = new Countries(SessionProvider.OpenSession());
+
+            var cityList = goals.GetByName(id).Cities;
+
+            var jsonGoals = GetCityList(cityList);
+
+            return Json(jsonGoals, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Venues(string id)
+        {
+            Cities cities = new Cities(SessionProvider.OpenSession());
+
+            var venueList = cities.GetByName(id).Venues;
+
+            var jsonGoals = GetVenueList(venueList);
+
+            return Json(jsonGoals, JsonRequestBehavior.AllowGet);
+        }
+
+        private static IEnumerable<Object> GetCityList(ICollection<City> cityList)
+        {
+            return cityList.Select(city => new
+                                       {
+                                           Name = city.Name,
+                                           Countr = city.Country.Name
+                                       }).Cast<Object>();
+        }
+
+        private static IEnumerable<Object> GetVenueList(ICollection<Venue> venueList)
+        {
+            return venueList.Select(venue => new
+            {
+                Name = venue.City.Name,
+                Countr = venue.Name
+            }).Cast<Object>();
+        }
     }
 }

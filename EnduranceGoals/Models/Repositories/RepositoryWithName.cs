@@ -1,5 +1,7 @@
-﻿using NHibernate;
+﻿using System.Linq;
+using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.Util;
 
 namespace EnduranceGoals.Models.Repositories
 {
@@ -11,9 +13,8 @@ namespace EnduranceGoals.Models.Repositories
 
         public Entity GetByName(string entityName)
         {
-            return session.CreateCriteria<Entity>()
-                .Add(Restrictions.Eq("Name", entityName))
-                .UniqueResult<Entity>();
+            var criteria = session.CreateCriteria<Entity>().Add(Restrictions.Eq("Name", entityName));
+            return GetByCriteria(criteria).First();
         }
     }
 }

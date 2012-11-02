@@ -27,8 +27,8 @@ namespace EnduranceGoals.Models.NHMaps
 
             HasMany(g => g.Participants)
                 .Table("GoalParticipants")
-                .KeyColumn("GoalId")
                 .Cascade.SaveUpdate()
+                .KeyColumn("GoalId")
                 .Inverse();
         }
     }
