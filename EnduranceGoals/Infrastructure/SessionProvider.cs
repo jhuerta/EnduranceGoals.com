@@ -68,7 +68,17 @@ namespace EnduranceGoals.Infrastructure
                 }
                 else
                 {
-                    sessionFactory = configuration.BuildSessionFactory();
+                    try
+                    {
+                        sessionFactory = configuration.BuildSessionFactory();
+                    }
+                    catch (Exception es)
+                    {
+
+                        var msg = es.Message;
+                        throw;
+                    }
+                    
                     if (sessionFactory == null)
                     {
                         throw new InvalidOperationException("Call to BuildSessionFactory() returned null.");
@@ -90,10 +100,23 @@ namespace EnduranceGoals.Infrastructure
 
                 Configuration nhconfig = new Configuration().Configure(configFile);
 
-                return Fluently.Configure(nhconfig).Mappings(
-                    m => m.FluentMappings
-                             .AddFromAssemblyOf<Goal>()
-                             .Conventions.Add(ForeignKey.Format((p, t) => t.Name + "Id")));
+                FluentConfiguration configuration;
+
+                try
+                {
+                    configuration = Fluently.Configure(nhconfig).Mappings(
+                        m => m.FluentMappings
+                                 .AddFromAssemblyOf<Goal>()
+                                 .Conventions.Add(ForeignKey.Format((p, t) => t.Name + "Id")));
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                    throw;
+                }
+
+
+                return configuration;
             }
         }
 

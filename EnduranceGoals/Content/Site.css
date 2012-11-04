@@ -183,7 +183,6 @@ ul#menu li.selected a
 
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
-
 fieldset 
 {
     margin: 1em 0;
@@ -320,6 +319,10 @@ div#title
 
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
+.editor-field
+{
+    padding-left:20px;
+}
 .display-label,
 .editor-label,
 .display-field,
@@ -341,4 +344,9 @@ div#title
 .tri-state
 {
     width: 6em;
+}
+
+.editor-label,.display-label
+{
+    font-weight: bold;
 }

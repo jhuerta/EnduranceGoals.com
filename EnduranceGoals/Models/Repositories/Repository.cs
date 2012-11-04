@@ -135,11 +135,29 @@ namespace EnduranceGoals.Models.Repositories
                 session.Delete(entity);
             }
         }
+
+        public TEntity Update(TEntity entity)
+        {
+            if (!session.Transaction.IsActive)
+            {
+                using (var tx = session.BeginTransaction())
+                {
+                    session.Merge(entity);
+                    tx.Commit();
+                }
+            }
+            else
+            {
+                session.Merge(entity);
+            }
+            return entity;
+        }
     }
 
     public interface ISave<TEntity>
     {
         TEntity Add(TEntity entity);
+        TEntity Update(TEntity entity);
     }
 
     public interface IDelete<TEntity>

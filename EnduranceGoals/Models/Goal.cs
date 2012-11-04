@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FluentNHibernate.Data;
 using Iesi.Collections.Generic;
 
 namespace EnduranceGoals.Models
 {
-    public class Goal 
+    public partial class Goal 
     {
         public Goal()
         {
@@ -23,7 +24,7 @@ namespace EnduranceGoals.Models
                     });
         }
 
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get; set; }
         public virtual DateTime Date { get; set; }
         public virtual DateTime CreatedOn { get; set; }
         public virtual Sport Sport { get; set; }

@@ -8,9 +8,9 @@ for your own use before compile tests in VisualStudio.
 <hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" >
 	<session-factory name="NHibernate.Test">
 		<property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
-		<property name="connection.connection_string">
-			Server=localhost\SQLEXPRESS;initial catalog=EnduranceGoals;Integrated Security=SSPI
-		</property>
+    <property name="connection.connection_string">
+      Data Source=localhost\SQLEXPRESS;Initial Catalog=EnduranceGoals;Integrated Security=True
+    </property>
 		<property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
 		<property name="current_session_context_class">NHibernate.Context.ThreadStaticSessionContext</property>
 		<property name="show_sql">true</property>

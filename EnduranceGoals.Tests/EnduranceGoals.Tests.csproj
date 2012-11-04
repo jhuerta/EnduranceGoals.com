@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="AccountControllerTest.cs" />
     <Compile Include="DummyDBBuilder.cs" />
+    <Compile Include="GoalValidationRulesTest.cs" />
     <Compile Include="MSSQL_DatabaseTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
