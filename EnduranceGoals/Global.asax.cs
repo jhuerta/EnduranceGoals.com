@@ -1,6 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
+using EnduranceGoals.Models;
+using EnduranceGoals.Models.ViewModels;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
+using GoalViewModel = EnduranceGoals.Models.ViewModels.GoalViewModel;
 
 namespace EnduranceGoals
 {
@@ -19,9 +23,15 @@ namespace EnduranceGoals
 
         protected void Application_Start()
         {
+            // Check this: http://stackoverflow.com/questions/1807298/configuring-automapper-in-bootstrapper-violates-open-closed-principle
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+
+            Mapper.CreateMap<Goal, GoalViewModel>();
+
+            Mapper.AssertConfigurationIsValid();
 
             NHibernateProfiler.Initialize();
         }

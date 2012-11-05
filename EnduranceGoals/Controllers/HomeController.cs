@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data.Objects;
-using System.Linq;
-using System.Web.Mvc;
-using EnduranceGoals.Models;
+﻿using System.Web.Mvc;
 
 namespace EnduranceGoals.Controllers
 {
@@ -27,8 +23,6 @@ namespace EnduranceGoals.Controllers
             //firstUser.Username = new Random().Next().ToString();
 
             //var myentity = new EnduranceGoalsEntities();
-            
-            
             
 
             //return Json(

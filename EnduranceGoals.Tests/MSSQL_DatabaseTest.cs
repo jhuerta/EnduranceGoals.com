@@ -349,6 +349,7 @@ namespace EnduranceGoals.Tests
         }
 
         [Test]
+        [Ignore]
         public void CanDeleteAndSaveAGoal()
         {
             var initialGoal = goals.GetByName("IsolatedGoal");
