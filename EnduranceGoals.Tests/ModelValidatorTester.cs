@@ -17,7 +17,7 @@ namespace EnduranceGoals.Models
                                           new NameValueCollectionValueProvider(new NameValueCollection(),
                                                                                CultureInfo.InvariantCulture)
                                   };
-            var binder = new DefaultModelBinder().BindModel(new ControllerContext(), modelBinder);
+            new DefaultModelBinder().BindModel(new ControllerContext(), modelBinder);
             this.ModelState.Clear();
             this.ModelState.Merge(modelBinder.ModelState);
             return this.ModelState;

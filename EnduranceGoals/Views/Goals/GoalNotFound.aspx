@@ -7,6 +7,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Goal not found</h2>
-    <div>The goal with Id ViewData["IdNotFound"] %>  could not be found!. Check the <%= Html.ActionLink("list of goals", "upcoming", "Goals")%></div>
+    <div>The goal with Id ViewData["IdNotFound"] %>  could not be found!. Check the <%= Html.ActionLink("list of goals", "index", "Goals")%></div>
 
 </asp:Content>

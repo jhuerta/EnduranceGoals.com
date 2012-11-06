@@ -21,7 +21,7 @@
     <% using (Html.BeginForm()) { %>
         <p>
 		    <input type="submit" value="Delete" /> |
-            <%= Html.ActionLink("Back to List", "upcoming") %>
+            <%= Html.ActionLink("Back to List", "index") %>
         </p>
     <% } %>
 

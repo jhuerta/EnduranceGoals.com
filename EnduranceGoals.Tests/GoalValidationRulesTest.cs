@@ -4,6 +4,7 @@ using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
 using EnduranceGoals.Models.ViewModels;
 using NUnit.Framework;
+using GoalViewModel = EnduranceGoals.Models.ViewModels.GoalViewModel;
 
 namespace EnduranceGoals.Tests
 {
@@ -17,7 +18,7 @@ namespace EnduranceGoals.Tests
         {
             SessionProvider.OpenSession();
 
-            var model = new GoalViewModel()
+            var model = new Goal()
                             {
                                 Name = "any",
                                 Sport = new Sport(),
@@ -34,7 +35,7 @@ namespace EnduranceGoals.Tests
         public void SportIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new GoalViewModel()
+            var model = new Goal()
             {
                 Description = "any",
                 Name = "any",
@@ -53,7 +54,7 @@ namespace EnduranceGoals.Tests
         public void NameIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new GoalViewModel()
+            var model = new Goal()
             {
                 Description = "any",
                 Name = null,
@@ -72,7 +73,7 @@ namespace EnduranceGoals.Tests
         public void WebStringShouldBeLessThan25characters()
         {
             SessionProvider.OpenSession();
-            var model = new GoalViewModel()
+            var model = new Goal()
             {
                 Description = "any",
                 Name = "any",
@@ -91,7 +92,7 @@ namespace EnduranceGoals.Tests
         public void DescriptionIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new GoalViewModel()
+            var model = new Goal()
             {
                 Name = "any",
                 Sport = new Sport(),
@@ -109,7 +110,7 @@ namespace EnduranceGoals.Tests
         public void WebStringIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new GoalViewModel()
+            var model = new Goal()
             {
                 Description = "any",
                 Name = "any",
