@@ -136,6 +136,7 @@
     <Compile Include="RequestHttpModule.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VenueToCollectionResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EnduranceGoals.cfg.unit_test.xml">

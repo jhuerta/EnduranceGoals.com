@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace EnduranceGoals.Models.ViewModels
 {
@@ -11,5 +13,7 @@ namespace EnduranceGoals.Models.ViewModels
         public string Name { get; set; }
         public string Web { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string VenueId { get; set; }
+        public SelectList Venues { get; set; }
     }
 }

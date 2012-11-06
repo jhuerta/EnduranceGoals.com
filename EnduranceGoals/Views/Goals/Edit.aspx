@@ -29,6 +29,8 @@
             <%= Html.TextAreaFor(model => model.Description) %>
             <%= Html.ValidationMessageFor(model => model.Description) %>
         </div>
+        
+        
         <div class="editor-label">
             <%= Html.LabelFor(model => model.Web) %>
         </div>
@@ -37,8 +39,21 @@
             <%= Html.ValidationMessageFor(model => model.Web) %>
         </div>
         
+                <div class="editor-label">
+            Sport:
+        </div>
         <div class="editor-field">
             <%= Html.DropDownListFor(model => model.SportName,ViewData["Sports"] as SelectList) %>
+        </div>
+        
+        
+        <%--Make sure the name of the DropDownListFor is the identifier of the list of venues (to allow default value!)--%>
+       
+        <div class="editor-label">
+            Venue:
+        </div>
+        <div class="editor-field">
+            <%= Html.DropDownListFor(m => m.VenueId, Model.Venues)%>
         </div>
         
         
