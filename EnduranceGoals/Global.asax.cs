@@ -23,6 +23,10 @@ namespace EnduranceGoals
 
             RegisterRoutes(RouteTable.Routes);
 
+            AutoMapperConfiguration.Configure();
+
+            Mapper.AssertConfigurationIsValid();
+
             NHibernateProfiler.Initialize();
         }
     }
