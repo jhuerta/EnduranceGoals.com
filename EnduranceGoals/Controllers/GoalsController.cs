@@ -58,9 +58,10 @@ namespace EnduranceGoals.Controllers
         {
             var goals = new Goals(SessionProvider.CurrentSession);
             var sports = new Sports(SessionProvider.CurrentSession);
+            var venues = new Venues(SessionProvider.CurrentSession);
             var goalViewModel = new GoalViewModel();
 
-            var onlyUpdateThisFields = new[] {"Id","Name", "Web", "Description", "SportName"};
+            var onlyUpdateThisFields = new[] {"Id","Name", "Web", "Description", "SportName", "VenueId"};
 
             if (TryUpdateModel(goalViewModel, onlyUpdateThisFields))
             {
@@ -70,6 +71,7 @@ namespace EnduranceGoals.Controllers
                 goal.Web = goalViewModel.Web;
                 goal.Description = goalViewModel.Description;
                 goal.Sport = sports.GetByName(goalViewModel.SportName);
+                goal.Venue = venues.GetById(Convert.ToInt32(goalViewModel.VenueId));
 
                 goals.Update(goal);
 
