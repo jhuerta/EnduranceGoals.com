@@ -36,6 +36,12 @@
             <%= Html.TextBoxFor(model => model.Web) %>
             <%= Html.ValidationMessageFor(model => model.Web) %>
         </div>
+        
+        <div class="editor-field">
+            <%= Html.DropDownListFor(model => model.SportName,ViewData["Sports"] as SelectList) %>
+        </div>
+        
+        
         <p>
             <input type="submit" value="Save" />
         </p>

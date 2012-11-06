@@ -4,10 +4,6 @@ using System.Web.Mvc;
 using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
 using EnduranceGoals.Models.Repositories;
-using EnduranceGoals.Models.ViewModelBuilders;
-using EnduranceGoals.Models.ViewModels;
-using FluentNHibernate.Automapping;
-using NHibernate;
 using GoalViewModel = EnduranceGoals.Models.ViewModels.GoalViewModel;
 
 namespace EnduranceGoals.Controllers
@@ -46,6 +42,11 @@ namespace EnduranceGoals.Controllers
         public ActionResult Edit(int id)
         {
             var goal = new Goals(SessionProvider.CurrentSession).GetById(id);
+            var sports = new Sports(SessionProvider.CurrentSession);
+
+            var sportsList = sports.GetAll().ToList();
+
+            ViewData["Sports"] = new SelectList(sportsList, goal.Sport);
 
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
 
@@ -56,15 +57,24 @@ namespace EnduranceGoals.Controllers
         public ActionResult Edit(int id, FormCollection formValues)
         {
             var goals = new Goals(SessionProvider.CurrentSession);
-            var goal = goals.GetById(id);
+            var sports = new Sports(SessionProvider.CurrentSession);
+            var goalViewModel = new GoalViewModel();
 
-            if (TryUpdateModel(goal))
+            var onlyUpdateThisFields = new[] {"Id","Name", "Web", "Description", "SportName"};
+
+            if (TryUpdateModel(goalViewModel, onlyUpdateThisFields))
             {
-                goals.Update(goal);
-                return RedirectToAction("Details", new { Id = goal.Id });
-            }
+                var goal = goals.GetById(goalViewModel.Id);
 
-            GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
+                goal.Name = goalViewModel.Name;
+                goal.Web = goalViewModel.Web;
+                goal.Description = goalViewModel.Description;
+                goal.Sport = sports.GetByName(goalViewModel.SportName);
+
+                goals.Update(goal);
+
+                return RedirectToAction("Details", new { Id = goalViewModel.Id });
+            }
 
             return View(goalViewModel);
         }

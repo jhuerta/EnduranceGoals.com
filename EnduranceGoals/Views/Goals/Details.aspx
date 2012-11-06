@@ -20,7 +20,8 @@
 
             <li><span class="display-label">More info at: </span><span class="display-field">
                 <%= Html.Encode(Model.Web) %></span> </li>
-                
+                <li><span class="display-label">Sport: </span><span class="display-field">
+                <%= Html.Encode(Model.Sport) %></span> </li>
             </ul>  
                 
                 

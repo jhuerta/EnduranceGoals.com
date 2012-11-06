@@ -23,7 +23,7 @@ namespace EnduranceGoals.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(25,ErrorMessage = "Value for {0} must contain less than {1} characters")]
+        [StringLength(25, ErrorMessage = "Value for {0} must contain less than {1} characters")]
         public string Web { get; set; }
     }
 }
