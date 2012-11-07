@@ -22,6 +22,15 @@
             <%= Html.TextBoxFor(model => model.Name) %>
             <%= Html.ValidationMessageFor(model => model.Name) %>
         </div>
+        
+        <div class="editor-label">
+            When:
+        </div>
+        <div class="editor-field">
+            <%= Html.TextBoxFor(model => model.Date) %>
+            <%= Html.ValidationMessageFor(model => model.Date) %>
+        </div>
+        
         <div class="editor-label">
             <%= Html.LabelFor(model => model.Description) %>
         </div>
@@ -39,13 +48,14 @@
             <%= Html.ValidationMessageFor(model => model.Web) %>
         </div>
         
-                <div class="editor-label">
+<%-- This is a different way of populating dropdown list
+        <div class="editor-label">
             Sport:
         </div>
         <div class="editor-field">
             <%= Html.DropDownListFor(model => model.SportName,ViewData["Sports"] as SelectList) %>
         </div>
-        
+--%>        
         
         <%--Make sure the name of the DropDownListFor is the identifier of the list of venues (to allow default value!)--%>
        
@@ -53,10 +63,16 @@
             Venue:
         </div>
         <div class="editor-field">
-            <%= Html.DropDownListFor(m => m.VenueId, Model.Venues)%>
+            <%= Html.DropDownListFor(m => m.Venue, Model.Venues)%>
         </div>
         
-        
+         <div class="editor-label">
+            Sport:
+        </div>
+        <div class="editor-field">
+            <%= Html.DropDownListFor(m => m.Sport, Model.Sports)%>
+        </div>
+               
         <p>
             <input type="submit" value="Save" />
         </p>

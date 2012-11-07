@@ -42,11 +42,6 @@ namespace EnduranceGoals.Controllers
         public ActionResult Edit(int id)
         {
             var goal = new Goals(SessionProvider.CurrentSession).GetById(id);
-            var sports = new Sports(SessionProvider.CurrentSession);
-
-            var sportsList = sports.GetAll().ToList();
-
-            ViewData["Sports"] = new SelectList(sportsList, goal.Sport);
 
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
 
@@ -54,24 +49,15 @@ namespace EnduranceGoals.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection formValues)
+        public ActionResult Edit(GoalViewModel goalViewModel)
         {
-            var goals = new Goals(SessionProvider.CurrentSession);
-            var sports = new Sports(SessionProvider.CurrentSession);
-            var venues = new Venues(SessionProvider.CurrentSession);
-            var goalViewModel = new GoalViewModel();
-
-            var onlyUpdateThisFields = new[] {"Id","Name", "Web", "Description", "SportName", "VenueId"};
-
-            if (TryUpdateModel(goalViewModel, onlyUpdateThisFields))
+            if (ModelState.IsValid)
             {
-                var goal = goals.GetById(goalViewModel.Id);
+                var goalEntityBuilder = new GoalEntityBuilder();
 
-                goal.Name = goalViewModel.Name;
-                goal.Web = goalViewModel.Web;
-                goal.Description = goalViewModel.Description;
-                goal.Sport = sports.GetByName(goalViewModel.SportName);
-                goal.Venue = venues.GetById(Convert.ToInt32(goalViewModel.VenueId));
+                var goal = goalEntityBuilder.OutOfGoalViewModel(goalViewModel);
+
+                var goals = new Goals(SessionProvider.CurrentSession);
 
                 goals.Update(goal);
 
@@ -83,30 +69,26 @@ namespace EnduranceGoals.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(new Goal());
+
+            return View(goalViewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection formValues)
+        public ActionResult Create(GoalViewModel goalViewModel)
         {
-            // This is following the same way as the edit method, using the UpdateModel or TryUpdateModel
-            var goals = new Goals(SessionProvider.CurrentSession);
-            var anyGoal = goals.GetAll().First();
-            var goal = new Goal()
+            if (ModelState.IsValid)
             {
-                CreatedOn = DateTime.Now,
-                Venue = anyGoal.Venue,
-                Sport = anyGoal.Sport,
-                UserCreator = anyGoal.UserCreator
-            };
+                var goalEntityBuilder = new GoalEntityBuilder();
 
-            if (TryUpdateModel(goal))
-            {
+                var goal = goalEntityBuilder.OutOfGoalViewModel(goalViewModel);
+
+                var goals = new Goals(SessionProvider.CurrentSession);
+
                 goals.Add(goal);
+
                 return RedirectToAction("Details", new { Id = goal.Id });
             }
-
-            GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
 
             return View(goalViewModel);
         }

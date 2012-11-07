@@ -32,9 +32,11 @@ namespace EnduranceGoals
             RegisterRoutes(RouteTable.Routes);
 
             Mapper.CreateMap<Goal, GoalViewModel>()
-                .ForMember(dest => dest.Venues, opt => opt.ResolveUsing<VenueToCollectionResolver>());
+                .ForMember(dest => dest.Venues, opt => opt.ResolveUsing<VenuesToCollectionResolver>())
+                .ForMember(dest => dest.Sports, opt => opt.ResolveUsing<SportsToCollectionResolver>());
         }
 
     }
+
 
 }

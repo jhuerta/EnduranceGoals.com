@@ -4,7 +4,7 @@ using Iesi.Collections.Generic;
 
 namespace EnduranceGoals.Models
 {
-    public partial class Goal 
+    public class Goal 
     {
         public Goal()
         {
