@@ -1,60 +1,28 @@
-﻿
-<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-
-<%@ Import Namespace="EnduranceGoals.Controllers" %>
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>
-        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
-    </title>
-    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <div class="page">
-        <div id="header">
-            <div id="title">
-                <h1>
-                    My MVC Application</h1>
+
+    <head runat="server">
+        <title>
+            <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+        </title>
+        
+        <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div class="page">
+        
+            <% Html.RenderPartial("Header"); %>
+            
+            <div id="main">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>
-            <div id="logindisplay">
-                <% Html.RenderPartial("LogOnUserControl"); %>
-            </div>
-            <div id="menucontainer">
-                <ul id="menu">
-                    <li>
-                        <%= Html.ActionLink("Home", "Index", "Home")%></li>
-                    <li>
-                        <%= Html.ActionLink("About", "About", "Home")%></li>
-                                            <li>
-                        <%= Html.ActionLink("Goals", "index","goals")%></li>
-                </ul>
-            </div>
+            
+            <% Html.RenderPartial("FooterLinks"); %>
+            
         </div>
-        <div id="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-            <p id="footer">
-                    <%= Html.ActionLink("Home", "Index", "Home")%>
-                    |
-                    <%= Html.ActionLink("Goals for 10K", "JsonSport", "goalsexperiment", new { id = "10K" }, null)%>
-                    |
-                    <%= Html.ActionLink("Goals for 10K (HTML output)", "html", "goalsexperiment", new { id = "10K" }, null)%>
-                    |
-                    <%= Html.ActionLink("List of goals (JSON)", "index_json","goalsexperiment") %>
-                    |
-                    <%= Html.ActionLink("Venues in Madrid", "in", "venues", new { id = "Madrid" }, null)%>
-                    |
-                    <%= Html.ActionLink("Cities of Spain", "of", "cities", new { id = "Spain" }, null)%>
-                    |
-                    <%= Html.ActionLink("Upcoming Events", "index", "goals")%>
-                    |
-                    <%= Html.ActionLink("Next Goal", "next", "Goals")%>
-                    |
-                    <%= Html.ActionLink("Add Goal", "create", "Goals")%>
-                    |
-                    <%= Html.ActionLink("Action returning HTML", "html", "GoalsExperiment", new { id = "10K" },null)%>
-                </p>
-        </div>
-    </div>
-</body>
+    </body>
+
 </html>

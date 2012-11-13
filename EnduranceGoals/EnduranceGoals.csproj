@@ -89,6 +89,7 @@
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\GoalsExperimentController.cs" />
     <Compile Include="Controllers\HelperExtension.cs" />
+    <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\ViewModels\GoalViewModel.cs" />
     <Compile Include="Models\ViewModelBuilders\GoalViewModelBuilder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -147,9 +148,12 @@
     <Content Include="Global.asax" />
     <Content Include="Views\Goals\Create.aspx" />
     <Content Include="Views\Goals\Delete.aspx" />
+    <Content Include="Views\Goals\EditableForm.ascx" />
     <Content Include="Views\Goals\GoalNotFound.aspx" />
     <Content Include="Views\Goals\Details.aspx" />
     <Content Include="Views\Goals\Edit.aspx" />
+    <Content Include="Views\Shared\FooterLinks.ascx" />
+    <Content Include="Views\Shared\Header.ascx" />
     <Content Include="Views\Shared\NotFound.aspx" />
     <Content Include="Views\Goals\Index.aspx" />
     <Content Include="Web.config" />

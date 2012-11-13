@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
@@ -10,13 +9,21 @@ namespace EnduranceGoals.Controllers
 {
     public class GoalsController : Controller
     {
-        public ActionResult Index()
+
+
+        
+        public ActionResult Index(int? page)
         {
             var goals = new Goals(SessionProvider.CurrentSession);
 
+
+            int pageNumber = page ?? 0;
+
+            int pageSize = 3;
+
             var upcomingGoals = goals.FindUpcomingGoals();
 
-            return View(upcomingGoals);
+            return View(new PaginatedList<Goal>(upcomingGoals, pageNumber, pageSize));
         }
 
         public ActionResult Next()
@@ -34,14 +41,12 @@ namespace EnduranceGoals.Controllers
         {
             Goals goals = new Goals(SessionProvider.CurrentSession);
             var goal = goals.GetById(id);
-            if(goal == null)
+            if (goal == null)
             {
                 return View("NotFound");
             }
             return View(goal);
         }
-
-
 
         public ActionResult Edit(int id)
         {
@@ -60,8 +65,6 @@ namespace EnduranceGoals.Controllers
             return AddOrUpdate(goalViewModel, goals.Update, "Edit");
         }
 
-
-
         public ActionResult Create()
         {
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(new Goal());
@@ -76,8 +79,6 @@ namespace EnduranceGoals.Controllers
 
             return AddOrUpdate(goalViewModel, goals.Add, "Create");
         }
-
-
 
         public ActionResult Delete(int id)
         {
@@ -106,7 +107,6 @@ namespace EnduranceGoals.Controllers
 
             return RedirectToAction("index");
         }
-
 
         private delegate Goal Action(Goal entity);
 

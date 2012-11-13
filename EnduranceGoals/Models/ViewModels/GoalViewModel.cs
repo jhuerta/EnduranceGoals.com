@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace EnduranceGoals.Models.ViewModels
@@ -11,7 +12,11 @@ namespace EnduranceGoals.Models.ViewModels
         public DateTime CreatedOn { get; set; }
 
         public string Name { get; set; }
+
+        [DataType(DataType.Time)]  
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime Date { get; set; }
+
         public string Description { get; set; }
         public string Web { get; set; }
 

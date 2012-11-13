@@ -9,6 +9,7 @@ namespace EnduranceGoals.Models
         public Goal()
         {
             Participants = new HashedSet<GoalParticipant>();
+            Date = DateTime.Now.AddMonths(6);
         }
 
         public virtual void AddParticipant(User user, DateTime signedOndate)
