@@ -145,6 +145,11 @@
     <EmbeddedResource Include="EnduranceGoals.cfg.unit_test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="Content\css\gallery.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\img03.gif" />
+    <Content Include="Content\images\main-wrapper-bg.png" />
+    <Content Include="Content\images\pics01.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Views\Goals\Create.aspx" />
     <Content Include="Views\Goals\Delete.aspx" />
@@ -187,6 +192,13 @@
     <EmbeddedResource Include="EnduranceGoals.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EachContent.ascx" />
+    <Content Include="Views\Shared\Endurance.Master" />
+    <Content Include="Views\Shared\Menu.ascx" />
+    <Content Include="Views\Shared\Page.ascx" />
+    <Content Include="Views\Shared\ValuesMenu.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

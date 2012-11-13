@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ViewPage<EnduranceGoals.Models.PaginatedList<EnduranceGoals.Models.Goal>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Endurance.Master" Inherits="ViewPage<EnduranceGoals.Models.PaginatedList<EnduranceGoals.Models.Goal>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Upcoming
@@ -27,7 +27,7 @@
         <div id="pagination">
             <% if (Model.HasPreviousPage) {%>
                 <% if (Model.PageIndex == 1){%> 
-                    <%= Html.RouteLink("previous", "Default")%> 
+                    <%= Html.RouteLink("previousz", "Default")%> 
                 <% }%>
                 
                 <% else {%>

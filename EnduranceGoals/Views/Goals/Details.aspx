@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.Goal>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Endurance.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.Goal>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Details

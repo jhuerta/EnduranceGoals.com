@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage" MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage" MasterPageFile="~/Views/Shared/Endurance.Master" %>
 <asp:Content runat="server" ID="Title" ContentPlaceHolderID="TitleContent">
     Not Found
 </asp:Content>
