@@ -13,7 +13,7 @@ namespace EnduranceGoals.Models
 
         public virtual void AddParticipant(User user, DateTime signedOndate)
         {
-            this.Participants.Add(
+            Participants.Add(
                 new GoalParticipant
                     {
                         User = user,

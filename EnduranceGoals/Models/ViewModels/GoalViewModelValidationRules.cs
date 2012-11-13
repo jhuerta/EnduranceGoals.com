@@ -13,10 +13,10 @@ namespace EnduranceGoals.Models.ViewModels
         public DateTime Date { get; set; }
 
         [Required]
-        public string Sport { get; set; }
+        public string SportId { get; set; }
 
         [Required]
-        public string Venue { get; set; }
+        public string VenueId { get; set; }
 
         [Required]
         public string Description { get; set; }

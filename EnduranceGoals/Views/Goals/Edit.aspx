@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.ViewModels.GoalViewModel>" %>
+<%@ Import Namespace="EnduranceGoals" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Edit
@@ -63,14 +64,14 @@
             Venue:
         </div>
         <div class="editor-field">
-            <%= Html.DropDownListFor(m => m.Venue, Model.Venues)%>
+            <%= Html.DropDownListFor(m => m.VenueId, Model.Venues)%>
         </div>
         
          <div class="editor-label">
             Sport:
         </div>
         <div class="editor-field">
-            <%= Html.DropDownListFor(m => m.Sport, Model.Sports)%>
+            <%= Html.DropDownListFor(m => m.SportId, Model.Sports)%>
         </div>
                
         <p>

@@ -49,14 +49,14 @@
             Venue:
         </div>
         <div class="editor-field">
-            <%= Html.DropDownListFor(m => m.Venue, Model.Venues)%>
+            <%= Html.DropDownListFor(m => m.VenueId, Model.Venues)%>
         </div>
         
          <div class="editor-label">
             Sport:
         </div>
         <div class="editor-field">
-            <%= Html.DropDownListFor(m => m.Sport, Model.Sports)%>
+            <%= Html.DropDownListFor(m => m.SportId, Model.Sports)%>
         </div>
             
             <p>

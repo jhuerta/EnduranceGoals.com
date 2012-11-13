@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -8,19 +9,20 @@ using EnduranceGoals.Models.Repositories;
 
 namespace EnduranceGoals
 {
-    public class VenuesToCollectionResolver : ValueResolver<Goal, SelectList>
+    public class VenuesToCollectionResolver : ValueResolver<Goal, ICollection<SelectListItem>>
     {
-        protected override SelectList ResolveCore(Goal goal)
+        protected override ICollection<SelectListItem> ResolveCore(Goal goal)
         {
-            var venues = new Venues(SessionProvider.CurrentSession).GetAll();
+            var venues = new Venues(SessionProvider.CurrentSession)
+                .GetAll()
+                .Select(m => new SelectListItem
+                                 {
+                                     Selected = (goal.Venue == null) ? false : (m.Id == goal.Venue.Id),
+                                     Text = string.Format("{0}, {1} ({2})", m.Name, m.City, m.City.Country),
+                                     Value = m.Id.ToString()
+                                 }).ToList();
 
-            var query = venues.Select(v => new SelectListItem()
-                                               {
-                                                   Text = v.Id.ToString(),
-                                                   Value = string.Format("{0}, {1} ({2})", v.Name, v.City, v.City.Country)
-                                               });
-
-            return new SelectList(query, "Text", "Value");
+            return venues;
         }
     }
 }

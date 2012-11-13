@@ -18,10 +18,10 @@ namespace EnduranceGoals.Tests
         {
             SessionProvider.OpenSession();
 
-            var model = new Goal()
+            var model = new GoalViewModel()
                             {
                                 Name = "any",
-                                Sport = new Sport(),
+                                SportId = 0.ToString(),
                                 Web = "www.anyweb.com",
                                 Date = Convert.ToDateTime(dateOfGoal)
                             };
@@ -35,11 +35,11 @@ namespace EnduranceGoals.Tests
         public void SportIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new Goal()
+            var model = new GoalViewModel()
             {
                 Description = "any",
                 Name = "any",
-                Sport = null,
+                SportId = null,
                 Web = "www.anyweb.com",
                 Date = Convert.ToDateTime("1/1/2013")
             };
@@ -54,11 +54,11 @@ namespace EnduranceGoals.Tests
         public void NameIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new Goal()
+            var model = new GoalViewModel()
             {
                 Description = "any",
                 Name = null,
-                Sport = new Sport(),
+                SportId = 0.ToString(),
                 Web = "www.anyweb.com",
                 Date = Convert.ToDateTime("1/1/2013")
             };
@@ -73,11 +73,11 @@ namespace EnduranceGoals.Tests
         public void WebStringShouldBeLessThan25characters()
         {
             SessionProvider.OpenSession();
-            var model = new Goal()
+            var model = new GoalViewModel()
             {
                 Description = "any",
                 Name = "any",
-                Sport = new Sport(),
+                SportId = 0.ToString(),
                 Web = "123456789012345678901234567890",
                 Date = Convert.ToDateTime("1/1/2013")
             };
@@ -92,10 +92,10 @@ namespace EnduranceGoals.Tests
         public void DescriptionIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new Goal()
+            var model = new GoalViewModel()
             {
                 Name = "any",
-                Sport = new Sport(),
+                SportId = 0.ToString(),
                 Web = "123456789012345678901234567890",
                 Date = Convert.ToDateTime("1/1/2013")
             };
@@ -110,11 +110,11 @@ namespace EnduranceGoals.Tests
         public void WebStringIsRequired()
         {
             SessionProvider.OpenSession();
-            var model = new Goal()
+            var model = new GoalViewModel()
             {
                 Description = "any",
                 Name = "any",
-                Sport = new Sport(),
+                SportId = 0.ToString(),
                 Web = null,
                 Date = Convert.ToDateTime("1/1/2013")
             };

@@ -15,10 +15,10 @@ namespace EnduranceGoals.Models.ViewModels
         public string Description { get; set; }
         public string Web { get; set; }
 
-        public string Venue { get; set; }
-        public SelectList Venues { get; set; }
+        public string VenueId { get; set; }
+        public ICollection<SelectListItem> Venues { get; set; }
 
-        public string Sport { get; set; }
-        public SelectList Sports { get; set; }
+        public string SportId { get; set; }
+        public ICollection<SelectListItem> Sports { get; set; }
     }
 }

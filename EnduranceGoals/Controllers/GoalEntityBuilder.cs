@@ -33,8 +33,8 @@ namespace EnduranceGoals.Controllers
             goal.Description = goalViewModel.Description;
 
             goal.Web = goalViewModel.Web;
-            goal.Venue = venues.GetById(Convert.ToInt32(goalViewModel.Venue));
-            goal.Sport = sports.GetById(Convert.ToInt32(goalViewModel.Sport));
+            goal.Venue = venues.GetById(Convert.ToInt32(goalViewModel.VenueId));
+            goal.Sport = sports.GetById(Convert.ToInt32(goalViewModel.SportId));
 
             return goal;
         }

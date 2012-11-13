@@ -13,6 +13,7 @@ namespace EnduranceGoals.Controllers
 {
     public class GoalsExperimentController : Controller
     {
+
         public void html([Bind(Prefix = "id")] string name)
         {
             Goals goals = new Goals(SessionProvider.CurrentSession);
