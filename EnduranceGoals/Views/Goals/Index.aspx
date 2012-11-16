@@ -1,11 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ViewPage<EnduranceGoals.Models.PaginatedList<EnduranceGoals.Models.Goal>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="ViewPage<EnduranceGoals.Models.PaginatedList<EnduranceGoals.Models.Goal>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Upcoming
 </asp:Content>
+
+        <asp:Content ID="Content3" ContentPlaceHolderID="PartialTitle" runat="server">
+        Upcoming Goals!
+        </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <fieldset>
-        <legend>Upcoming Goals</legend>
+        
         <ul>
 
             <% foreach (var goal in Model) { %>

@@ -1,14 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.Goal>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.Goal>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Details
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <legend>
+
+        <asp:Content ID="Content3" ContentPlaceHolderID="PartialTitle" runat="server">
         <%= Html.Encode(Model.Name) %>
         <b>(<%= Html.ActionLink("edit", "edit", new { id = Model.Id })%>) </b>
-    </legend>
+        </asp:Content>
+        
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+
     
     <fieldset>
         <ul>
