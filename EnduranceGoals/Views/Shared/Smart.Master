@@ -1,8 +1,8 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head  runat="server">
+<head runat="server">
     <!-- start: Meta -->
     <meta charset="utf-8">
     <title>
@@ -22,11 +22,15 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- end: Facebook Open Graph -->
-    <!-- start: CSS -->    
-    <link href="<%= Url.Content("~/Content/smart/css/bootstrap-responsive.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= Url.Content("~/Content/smart/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= Url.Content("~/Content/smart/css/style.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= Url.Content("~/Content/smart/css/jquery.selectboxit.css") %>" rel="stylesheet" type="text/css" />
+    <!-- start: CSS -->
+    <link href="<%= Url.Content("~/Content/smart/css/bootstrap-responsive.css") %>" rel="stylesheet"
+        type="text/css" />
+    <link href="<%= Url.Content("~/Content/smart/css/bootstrap.css") %>" rel="stylesheet"
+        type="text/css" />
+    <link href="<%= Url.Content("~/Content/smart/css/style.css") %>" rel="stylesheet"
+        type="text/css" />
+    <link href="<%= Url.Content("~/Content/smart/css/jquery.selectboxit.css") %>" rel="stylesheet"
+        type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
@@ -36,8 +40,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
-     <asp:ContentPlaceHolder ID="JSHeader" runat="server" />
+    <asp:ContentPlaceHolder ID="JSHeader" runat="server" />
 </head>
 <body>
     <!--start: Header -->
@@ -85,10 +88,12 @@
 									<li><%= Html.ActionLink("Goals", "index","goals")%></li>
 	                  				<li><%= Html.ActionLink("Create Goal", "create", "goals")%></li>
 									<li><%= Html.ActionLink("About", "About", "Home")%></li>
+
 									<li>
 									    <%
-									        Html.RenderPartial("LogOnUserControl"); %>
+                                            Html.RenderPartial("LogOnUserControl"); %>
 									</li>
+									
 			
 
 			            		</ul>
@@ -109,29 +114,24 @@
 		<!--end: Container-->			
 			
 	</header>
-	
-
-                
-                
     <!--end: Header-->
+    <!-- starts: Google Maps -->
+    <div>
 
-                <!-- starts: Google Maps -->
-                <div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <div id="googlemaps-container-top">
+        </div>
+        <div id="googlemaps" class="google-map google-map-full">
+        </div>
+        <div id="googlemaps-container-bottom">
+        </div>
 
-                    <div id="googlemaps-container-top">
-                    </div>
-                    <div id="googlemaps" class="google-map google-map-full">
-                    </div>
-                    <div id="googlemaps-container-bottom">
-                    </div>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
-                    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="<%= Url.Content("~/Content/Smart/js/jquery.gmap.min.js")%>"></script>
 
-                    <script src="<%= Url.Content("~/Content/Smart/js/jquery.gmap.min.js")%>"></script>
-
-                    <script type="text/javascript">
+        <script type="text/javascript">
 			            $('#googlemaps').gMap({
 				            maptype: 'ROADMAP',
 				            scrollwheel: false,
@@ -148,9 +148,8 @@
 			            });
 		            </script>
 
-                </div>
-                <!-- end: Google Maps -->
-
+    </div>
+    <!-- end: Google Maps -->
     <!-- end: Map -->
     <!-- start: Wrapper -->
     <div id="wrapper">
@@ -158,29 +157,35 @@
         <div class="container">
             <!-- start: Row -->
             <div class="row">
-                
                 <!-- end: Main  -->
-                	        <div class="span8">
-                	                                <div class="title">
+                <div class="span12">
+                    <div class="title">
                         <h3>
-        <asp:ContentPlaceHolder ID="PartialTitle" runat="server" /></h3>
+                            <asp:ContentPlaceHolder ID="PartialTitle" runat="server" />
+                        </h3>
                     </div>
-    
+                </div>
+                <!-- end: Row -->
+            </div>
+            <!-- end: Container -->
+        </div>
+        <!-- start: Container -->
+        <div class="container">
+            <!-- start: Row -->
+            <div class="row">
+                <!-- end: Main  -->
+                <div class="span12">
                     <div id="main">
                         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                     </div>
                 </div>
-                 <!-- end: Main -->
-                
-                
-
+                <!-- end: Row -->
             </div>
-            <!-- end: Row -->
+            <!-- end: Container -->
         </div>
-        <!-- end: Container -->
+        <!-- end: Main -->
     </div>
     <!-- end: Wrapper  -->
-                    
     <!-- start: Footer Menu -->
     <div id="footer-menu" class="hidden-tablet hidden-phone">
         <!-- start: Container -->
@@ -209,8 +214,6 @@
                     </div>
                 </div>
                 <!-- end: Footer Menu Links-->
-                
-                
             </div>
             <!-- end: Row -->
         </div>
@@ -224,7 +227,7 @@
             <div class="sixteen columns">
                 <p>
                     © 2012, creativeLabs. Designed by creativeLabs in Poland
-                    <img src="<%= Url.Content("~/Content/smart/img/poland2.png") %>"  alt="Poland" style="margin-top: -4px">
+                    <img src="<%= Url.Content("~/Content/smart/img/poland2.png") %>" alt="Poland" style="margin-top: -4px">
                 </p>
             </div>
         </div>
@@ -235,18 +238,29 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script src="<%= Url.Content ("~/Content/smart/js/jquery-1.8.2.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/jquery-ui-1.9.1.custom.min.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.selectBoxIt.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/bootstrap.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/isotope.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.imagesloaded.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/flexslider.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/carousel.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.cslider.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/slider.js") %>"></script>
+
     <script src="<%= Url.Content ("~/Content/smart/js/fancybox.js") %>"></script>
+
     <script defer="defer" src="<%= Url.Content("~/Content/smart/js/custom.js") %>"></script>
+
     <!-- end: Java Script -->
 </body>
 </html>
-

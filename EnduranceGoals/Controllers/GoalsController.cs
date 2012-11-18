@@ -19,7 +19,7 @@ namespace EnduranceGoals.Controllers
 
             int pageNumber = page ?? 0;
 
-            int pageSize = 3;
+            int pageSize = 10;
 
             var upcomingGoals = goals.FindUpcomingGoals();
 

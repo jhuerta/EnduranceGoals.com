@@ -6,6 +6,12 @@
    {%>
 <%= Html.ValidationSummary(false) %>
 <fieldset>
+            <!-- start: Container -->
+            <div class="container">
+                <!-- start: Row -->
+                <div class="row">
+                    <!-- start: About -->
+                    <div class="span3">
     <input type="hidden" id="Id" value="<%=Model.Id%>" />
     <div class="editor-label">
         <%= Html.LabelFor(model => model.Name) %>
@@ -21,19 +27,24 @@
         <%= Html.EditorFor(model => model.Date)%>
         <%= Html.ValidationMessageFor(model => model.Date) %>
     </div>
-    <div class="editor-label">
-        <%= Html.LabelFor(model => model.Description) %>
-    </div>
-    <div class="editor-field">
-        <%= Html.TextAreaFor(model => model.Description) %>
-        <%= Html.ValidationMessageFor(model => model.Description) %>
-    </div>
-    <div class="editor-label">
+        <div class="editor-label">
         <%= Html.LabelFor(model => model.Web) %>
     </div>
     <div class="editor-field">
         <%= Html.TextBoxFor(model => model.Web) %>
         <%= Html.ValidationMessageFor(model => model.Web) %>
+    </div>
+    </div>
+    
+    <div class="span6">
+    <div class="editor-label">
+        <%= Html.LabelFor(model => model.Description) %>
+    </div>
+    <div class="editor-field">
+        <%= Html.TextAreaFor(model => model.Description, new { @class = "span6", style = "height: 135px;"})%>
+        <%= Html.ValidationMessageFor(model => model.Description) %>
+    </div>
+
     </div>
     <%-- This is a different way of populating dropdown list
         <div class="editor-label">
@@ -44,6 +55,7 @@
         </div>
 --%>
     <%--Make sure the name of the DropDownListFor is the identifier of the list of venues (to allow default value!)--%>
+    <div class="span3">
     <div class="editor-label">
         Venue:
     </div>
@@ -57,8 +69,13 @@
         <%= Html.DropDownListFor(m => m.SportId, Model.Sports)%>
     </div>
     <p>
-        <input type="submit" value="Save" class="btn btn-succes btn-small" />
+        <input type="submit" value="Save" class="btn btn-primary btn-large" />
     </p>
+    </div>
+                </div>
+                <!-- end: Row -->
+            </div>
+            <!-- end: Container -->
 </fieldset>
 <% } %>
 
