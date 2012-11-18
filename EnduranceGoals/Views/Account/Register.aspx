@@ -14,6 +14,22 @@
         <%= Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.") %>
         <div>
             <fieldset>
+                            <div class="editor-label">
+                    <%= Html.LabelFor(m => m.Name) %>
+                </div>
+                <div class="editor-field">
+                    <%= Html.TextBoxFor(m => m.Name)%>
+                    <%= Html.ValidationMessageFor(m => m.Name) %>
+                </div>
+                
+                                <div class="editor-label">
+                    <%= Html.LabelFor(m => m.LastName) %>
+                </div>
+                <div class="editor-field">
+                    <%= Html.TextBoxFor(m => m.LastName) %>
+                    <%= Html.ValidationMessageFor(m => m.LastName) %>
+                </div>
+                
                 <div class="editor-label">
                     <%= Html.LabelFor(m => m.UserName) %>
                 </div>

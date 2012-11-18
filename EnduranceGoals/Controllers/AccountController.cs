@@ -90,7 +90,7 @@ namespace EnduranceGoals.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
+                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email,model.Name,model.LastName);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {

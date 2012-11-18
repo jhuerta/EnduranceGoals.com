@@ -20,14 +20,16 @@ namespace EnduranceGoals.Models
 
         private int minRequiredPasswordLength { get; set; }
 
-        public override MembershipUser CreateUser(string username,
+
+
+        public EnduranceMembershipUser CreateUser(string username,
             string password,
             string email,
             string passwordQuestion,
             string passwordAnswer,
             bool isApproved,
             object providerUserKey,
-            out MembershipCreateStatus status)
+            string name, string lastname,out MembershipCreateStatus status)
         {
             bool userExist = users.GetByUserName(username) != null;
             bool emailExit = GetUserNameByEmail(email) != null;
@@ -46,20 +48,35 @@ namespace EnduranceGoals.Models
 
             users.Add(new User()
             {
-                Name = "",
-                Lastname = "",
+                Name = name,
+                Lastname = lastname,
                 Username = username,
-                Password = password,
+                Password = HashSHA1(password),
                 Email = email,
                 CreatedOn = DateTime.Now
             });
 
             status = MembershipCreateStatus.Success;
 
+            return (EnduranceMembershipUser) GetUser(username);
+        }
+        public override MembershipUser CreateUser(string username,
+            string password,
+            string email,
+            string passwordQuestion,
+            string passwordAnswer,
+            bool isApproved,
+            object providerUserKey,
+            out MembershipCreateStatus status)
+        {
+            return this.CreateUser(username, password, email, passwordQuestion, passwordAnswer, isApproved,
+                                   providerUserKey,"","",out status);
 
+        }
 
-            return GetUser(username);
-
+        private string HashSHA1(string password)
+        {
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
         }
 
 
@@ -82,13 +99,15 @@ namespace EnduranceGoals.Models
                     string _comment = null;
                     bool _isApproved = true;
                     bool _isLockedOut = false;
+                    string name = createdUser.Name;
+                    string lastname = createdUser.Lastname;
                     DateTime _creationDate = createdUser.CreatedOn;
                     DateTime _lastLoginDate = DateTime.Now;
                     DateTime _lastActivityDate = DateTime.Now;
                     DateTime _lastPasswordChangedDate = DateTime.Now;
                     DateTime _lastLockedOutDate = DateTime.Now;
 
-                    MembershipUser user = new MembershipUser("SQLMemberShipProvider",
+                    var user = new EnduranceMembershipUser("SQLMemberShipProvider",
                                                               _username,
                                                               _providerUserKey,
                                                               _email,
@@ -100,7 +119,9 @@ namespace EnduranceGoals.Models
                                                               _lastLoginDate,
                                                               _lastActivityDate,
                                                               _lastPasswordChangedDate,
-                                                              _lastLockedOutDate);
+                                                              _lastLockedOutDate,
+                                                              name,
+                                                              lastname);
 
                     return user;
                 }
@@ -132,12 +153,19 @@ namespace EnduranceGoals.Models
 
         public override void UpdateUser(MembershipUser user)
         {
+            //var currentUser = users.GetById((int)user.ProviderUserKey);
+
+            //currentUser.Email = user.Email; 
+            //currentUser.Username = user.UserName;
+
+            //users.Update(currentUser);
+
             throw new NotImplementedException();
         }
 
         public override bool ValidateUser(string username, string password)
         {
-            return users.GetByUserName(username).Password == password;
+            return users.GetByUserName(username).Password == HashSHA1(password);
         }
 
         public override bool UnlockUser(string userName)

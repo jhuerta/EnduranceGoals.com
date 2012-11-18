@@ -89,8 +89,16 @@
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\GoalsExperimentController.cs" />
     <Compile Include="Controllers\HelperExtension.cs" />
+    <Compile Include="Models\AccountMembershipService.cs" />
+    <Compile Include="Models\AccountValidation.cs" />
+    <Compile Include="Models\EnduranceMembershipUser.cs" />
+    <Compile Include="Models\FormsAuthenticationService.cs" />
+    <Compile Include="Models\IFormsAuthenticationService.cs" />
+    <Compile Include="Models\IMembershipService.cs" />
     <Compile Include="Models\PaginatedList.cs" />
+    <Compile Include="Models\PropertiesMustMatchAttribute.cs" />
     <Compile Include="Models\SQLMemberShipProvider.cs" />
+    <Compile Include="Models\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="Models\ViewModels\GoalViewModel.cs" />
     <Compile Include="Models\ViewModelBuilders\GoalViewModelBuilder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
