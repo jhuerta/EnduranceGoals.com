@@ -90,6 +90,7 @@
     <Compile Include="Controllers\GoalsExperimentController.cs" />
     <Compile Include="Controllers\HelperExtension.cs" />
     <Compile Include="Models\PaginatedList.cs" />
+    <Compile Include="Models\SQLMemberShipProvider.cs" />
     <Compile Include="Models\ViewModels\GoalViewModel.cs" />
     <Compile Include="Models\ViewModelBuilders\GoalViewModelBuilder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -157,7 +158,6 @@
     <Content Include="Views\Shared\NotFound.aspx" />
     <Content Include="Views\Goals\Index.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -202,6 +202,7 @@
     <Content Include="Content\smart\css\hover.css" />
     <Content Include="Content\smart\css\icons-color.css" />
     <Content Include="Content\smart\css\icons.css" />
+    <Content Include="Content\smart\css\jquery.selectboxit.css" />
     <Content Include="Content\smart\css\parallax-slider.css" />
     <Content Include="Content\smart\css\parallax-slider2.css" />
     <Content Include="Content\smart\css\social-icons.css" />
@@ -483,9 +484,12 @@
     <Content Include="Content\smart\js\flexslider.js" />
     <Content Include="Content\smart\js\isotope.js" />
     <Content Include="Content\smart\js\jquery-1.8.2.js" />
+    <Content Include="Content\smart\js\jquery-ui-1.9.1.custom.min.js" />
     <Content Include="Content\smart\js\jquery.cslider.js" />
     <Content Include="Content\smart\js\jquery.gmap.min.js" />
     <Content Include="Content\smart\js\jquery.imagesloaded.js" />
+    <Content Include="Content\smart\js\jquery.selectBoxIt.js" />
+    <Content Include="Content\smart\js\select2.min.js" />
     <Content Include="Content\smart\js\slider.js" />
     <Content Include="Content\smart\list-styles.html" />
     <Content Include="Content\smart\portfolio3.html" />

@@ -92,7 +92,7 @@ namespace EnduranceGoals.Models
         private readonly MembershipProvider _provider;
 
         public AccountMembershipService()
-            : this(null)
+            : this(new SQLMemberShipProvider())
         {
         }
 

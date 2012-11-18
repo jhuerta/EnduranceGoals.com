@@ -26,5 +26,12 @@ namespace EnduranceGoals.Models.Repositories
                 .Add(Expression.Eq("Goal", goal))
                 .List<User>();
         }
+
+        public User GetByEmail(string email)
+        {
+            return session.CreateCriteria<User>()
+                .Add(Restrictions.Eq("Email", email))
+                .UniqueResult<User>();
+        }
     }
 }

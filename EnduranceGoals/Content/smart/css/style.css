@@ -823,6 +823,7 @@ input[type="button"] {
 
 /* Alert Boxes
 =================================================================== */
+
 .alert {
 	font-family: Arial, sans-serif;
 	font-size: 12px;
@@ -840,10 +841,21 @@ input[type="button"] {
 	border: 1px solid #9fc76f !important;
 }
 
+
 .alert.alert-error {
 	background-color: #fdeaea !important;
 	color: #ca6f74 !important;
 	border: 1px solid #f27b81 !important;
+}
+
+.input-validation-error,
+.validation-summary-errors {
+	background-color: #fdeaea !important;
+	color: #ca6f74 !important;
+	border: 1px solid #f27b81 !important;
+}
+.field-validation-error {
+	color: #ca6f74 !important;
 }
 
 .alert {
@@ -2394,3 +2406,14 @@ form#newsletter input[type=submit] {
 	
 }
 	
+	
+.validation-summary-errors
+{
+    .alert();
+    .alert-error();
+}
+.field-validation-error 
+{
+    .label();
+    .label-important();
+}

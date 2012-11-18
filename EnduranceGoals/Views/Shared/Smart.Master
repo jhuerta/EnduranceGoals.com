@@ -22,12 +22,11 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- end: Facebook Open Graph -->
-    <!-- start: CSS -->
-    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-    
+    <!-- start: CSS -->    
     <link href="<%= Url.Content("~/Content/smart/css/bootstrap-responsive.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%= Url.Content("~/Content/smart/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%= Url.Content("~/Content/smart/css/style.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/smart/css/jquery.selectboxit.css") %>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
@@ -37,6 +36,8 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    
+     <asp:ContentPlaceHolder ID="JSHeader" runat="server" />
 </head>
 <body>
     <!--start: Header -->
@@ -59,16 +60,12 @@
 				<!--start: Navigation -->
 				<div class="span8">
 					
-					<div class="navbar navbar-inverse">
+					<div class="navbar">
+					
 			    		<div class="navbar-inner">
-			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			            		<span class="icon-bar"></span>
-			            		<span class="icon-bar"></span>
-			            		<span class="icon-bar"></span>
-			          		</a>
-			          		<div class="nav-collapse collapse">
+
 			            		<ul class="nav">
-			            			              			
+			            			              		
 									<li class="dropdown">
 			                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Done!<b class="caret"></b></a>
 			                			<ul class="dropdown-menu">
@@ -88,8 +85,12 @@
 									<li><%= Html.ActionLink("Goals", "index","goals")%></li>
 	                  				<li><%= Html.ActionLink("Create Goal", "create", "goals")%></li>
 									<li><%= Html.ActionLink("About", "About", "Home")%></li>
-									
-									                       
+									<li>
+									    <%
+									        Html.RenderPartial("LogOnUserControl"); %>
+									</li>
+			
+
 			            		</ul>
                        
                        
@@ -99,13 +100,12 @@
 			          		</div>
 			        	</div>
 			      	</div>
+				<!--end: Navigation -->        
 					
 				</div>	
-				<!--end: Navigation -->        
-			</div>
 			<!--end: Row -->
-			
-		</div>
+				
+			</div>
 		<!--end: Container-->			
 			
 	</header>
@@ -158,48 +158,6 @@
         <div class="container">
             <!-- start: Row -->
             <div class="row">
-
-                <!-- start: Contact Form -->
-                <div class="span4">
-                    <div class="title">
-                        <h3>
-                            Contact Form</h3>
-                    </div>
-                    <!-- start: Contact Form -->
-                    <div id="contact-form">
-                        <form method="post" action="">
-                        <fieldset>
-                            <div class="clearfix">
-                                <label for="name">
-                                    <span>Name:</span></label>
-                                <div class="input">
-                                    <input tabindex="1" size="18" id="name" name="name" type="text" value="">
-                                </div>
-                            </div>
-                            <div class="clearfix">
-                                <label for="email">
-                                    <span>Email:</span></label>
-                                <div class="input">
-                                    <input tabindex="2" size="25" id="email" name="email" type="text" value="" class="input-xlarge">
-                                </div>
-                            </div>
-                            <div class="clearfix">
-                                <label for="message">
-                                    <span>Message:</span></label>
-                                <div class="input">
-                                    <textarea tabindex="3" class="input-xlarge" id="message" name="body" rows="7"></textarea>
-                                </div>
-                            </div>
-                            <div class="actions">
-                                <button tabindex="3" type="submit" class="btn btn-succes btn-large">
-                                    Send message</button>
-                            </div>
-                        </fieldset>
-                        </form>
-                    </div>
-                    <!-- end: Contact Form -->
-                </div>
-                <!-- end: Contact Form -->
                 
                 <!-- end: Main  -->
                 	        <div class="span8">
@@ -222,80 +180,7 @@
         <!-- end: Container -->
     </div>
     <!-- end: Wrapper  -->
-    
-    
-        <!-- start: SubFooter -->
-    <div id="SubFooter">
-        <!-- start: Container -->
-        <div class="container">
-            <!-- start: Row -->
-
-            
-                    <!-- start: Social Sites -->
-                <div>
-                    <div class="title">
-                        <h3>
-                            Follow US!</h3>
-                    </div>
-                    <ul class="social-bookmarks">
-                        <li class="aim"><a href="#">aim</a></li>
-                        <li class="apple"><a href="#">apple</a></li>
-                        <li class="behance"><a href="#">behance</a></li>
-                        <li class="blogger"><a href="#">blogger</a></li>
-                        <li class="cargo"><a href="#">cargo</a></li>
-                        <li class="delicious"><a href="#">delicious</a></li>
-                        <li class="deviantart"><a href="#">deviantart</a></li>
-                        <li class="digg"><a href="#">digg</a></li>
-                        <li class="dopplr"><a href="#">dopplr</a></li>
-                        <li class="dribbble"><a href="#">dribbble</a></li>
-                        <li class="ember"><a href="#">ember</a></li>
-                        <li class="evernote"><a href="#">evernote</a></li>
-                        <li class="facebook"><a href="https://www.facebook.com/brankic1979themes">facebook</a></li>
-                        <li class="flickr"><a href="http://www.flickr.com/photos/brankic1979/">flickr</a></li>
-                        <li class="forrst"><a href="#">forrst</a></li>
-                        <li class="github"><a href="#">github</a></li>
-                        <li class="google"><a href="#">google</a></li>
-                        <li class="googleplus"><a href="#">googleplus</a></li>
-                        <li class="gowalla"><a href="#">gowalla</a></li>
-                        <li class="grooveshark"><a href="#">grooveshark</a></li>
-                        <li class="html5"><a href="#">html5</a></li>
-                        <li class="icloud"><a href="#">icloud</a></li>
-                        <li class="lastfm"><a href="#">lastfm</a></li>
-                        <li class="linkedin"><a href="#">linkedin</a></li>
-                        <li class="metacafe"><a href="#">metacafe</a></li>
-                        <li class="mixx"><a href="#">mixx</a></li>
-                        <li class="myspace"><a href="#">myspace</a></li>
-                        <li class="netvibes"><a href="#">netvibes</a></li>
-                        <li class="newsvine"><a href="#">newsvine</a></li>
-                        <li class="orkut"><a href="#">orkut</a></li>
-                        <li class="paypal"><a href="#">paypal</a></li>
-                        <li class="picasa"><a href="#">picasa</a></li>
-                        <li class="pinterest"><a href="#">pinterest</a></li>
-                        <li class="plurk"><a href="#">plurk</a></li>
-                        <li class="posterous"><a href="#">posterous</a></li>
-                        <li class="reddit"><a href="#">reddit</a></li>
-                        <li class="rss"><a href="#">rss</a></li>
-                        <li class="skype"><a href="#">skype</a></li>
-                        <li class="stumbleupon"><a href="#">stumbleupon</a></li>
-                        <li class="technorati"><a href="#">technorati</a></li>
-                        <li class="tumblr"><a href="#">tumblr</a></li>
-                        <li class="twitter"><a href="#">twitter</a></li>
-                        <li class="vimeo"><a href="#">vimeo</a></li>
-                        <li class="wordpress"><a href="#">wordpress</a></li>
-                        <li class="yahoo"><a href="#">yahoo</a></li>
-                        <li class="yelp"><a href="#">yelp</a></li>
-                        <li class="youtube"><a href="#">youtube</a></li>
-                        <li class="zerply"><a href="#">zerply</a></li>
-                        <li class="zootool"><a href="#">zootool</a></li>
-                    </ul>
-                </div>
-                <!-- end: Social Sites -->
-                       </div>
-
-        <!-- end: Container -->
-    </div>
-    <!-- end: SubFooter  -->     
-                
+                    
     <!-- start: Footer Menu -->
     <div id="footer-menu" class="hidden-tablet hidden-phone">
         <!-- start: Container -->
@@ -350,6 +235,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script src="<%= Url.Content ("~/Content/smart/js/jquery-1.8.2.js") %>"></script>
+    <script src="<%= Url.Content ("~/Content/smart/js/jquery-ui-1.9.1.custom.min.js") %>"></script>
+    <script src="<%= Url.Content ("~/Content/smart/js/jquery.selectBoxIt.js") %>"></script>
     <script src="<%= Url.Content ("~/Content/smart/js/bootstrap.js") %>"></script>
     <script src="<%= Url.Content ("~/Content/smart/js/isotope.js") %>"></script>
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.imagesloaded.js") %>"></script>
@@ -359,7 +246,7 @@
     <script src="<%= Url.Content ("~/Content/smart/js/slider.js") %>"></script>
     <script src="<%= Url.Content ("~/Content/smart/js/fancybox.js") %>"></script>
     <script defer="defer" src="<%= Url.Content("~/Content/smart/js/custom.js") %>"></script>
-
     <!-- end: Java Script -->
 </body>
 </html>
+
