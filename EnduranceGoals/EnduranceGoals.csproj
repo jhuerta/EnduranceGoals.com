@@ -88,7 +88,8 @@
     <Compile Include="Controllers\GoalEntityBuilder.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\GoalsExperimentController.cs" />
-    <Compile Include="Controllers\HelperExtension.cs" />
+    <Compile Include="Helpers\HelperExtension.cs" />
+    <Compile Include="ListOfParticipantsResolver.asax.cs" />
     <Compile Include="Models\AccountMembershipService.cs" />
     <Compile Include="Models\AccountValidation.cs" />
     <Compile Include="Models\EnduranceMembershipUser.cs" />
@@ -510,6 +511,7 @@
     <Content Include="Content\smart\sliders.html" />
     <Content Include="Content\smart\social-icons.html" />
     <Content Include="Content\smart\typography.html" />
+    <Content Include="Views\Goals\YouAreNotTheOwner.aspx" />
     <Content Include="Views\Shared\Smart.Master" />
   </ItemGroup>
   <ItemGroup>

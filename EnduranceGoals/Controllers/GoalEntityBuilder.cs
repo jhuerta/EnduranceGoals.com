@@ -9,7 +9,7 @@ namespace EnduranceGoals.Controllers
 {
     public class GoalEntityBuilder
     {
-        public Goal OutOfGoalViewModel(GoalViewModel goalViewModel)
+        public Goal OutOfGoalViewModel(GoalViewModel goalViewModel, string username)
         {
             Sports sports = new Sports(SessionProvider.CurrentSession);
             Venues venues = new Venues(SessionProvider.CurrentSession);
@@ -21,7 +21,7 @@ namespace EnduranceGoals.Controllers
             {
                 goal = new Goal();
                 goal.CreatedOn = DateTime.Now;
-                goal.UserCreator = GetRandomUser(users);
+                goal.UserCreator = users.GetByUserName(username);
             }
             else
             {

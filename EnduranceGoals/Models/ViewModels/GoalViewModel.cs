@@ -7,6 +7,13 @@ namespace EnduranceGoals.Models.ViewModels
 {
     public partial class GoalViewModel
     {
+        public string Location { get; set; }
+        public IDictionary<int, string> ListOrParticipants  { get; set; }
+        public bool UserCanModifyEvent { get; set; }
+        public string SportName { get; set; }
+        public int NumberParticipants { get; set; }
+
+        public string UserCreatorUsername { get; set; }
 
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }

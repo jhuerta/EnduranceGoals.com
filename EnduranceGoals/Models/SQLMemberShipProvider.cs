@@ -165,7 +165,8 @@ namespace EnduranceGoals.Models
 
         public override bool ValidateUser(string username, string password)
         {
-            return users.GetByUserName(username).Password == HashSHA1(password);
+            var user = users.GetByUserName(username);
+            return user ==null ? false : (user.Password == HashSHA1(password));
         }
 
         public override bool UnlockUser(string userName)

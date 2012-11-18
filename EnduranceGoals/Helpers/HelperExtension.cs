@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using System.Web.Routing;
 
-namespace EnduranceGoals.Controllers
+namespace EnduranceGoals.Helpers
 {
     public static class HelperExtension
     {
@@ -19,6 +20,16 @@ namespace EnduranceGoals.Controllers
             input.MergeAttributes(new RouteValueDictionary(htmlAttributes));
 
             return MvcHtmlString.Create(input.ToString());
+        }
+    }
+    public static class ActionLinkExtension
+    {
+        public static string ActionLink(this HtmlHelper helper, string userName)
+        {
+            return helper.ActionLink(
+                userName, "Details", "Goals", new { Id = userName }).
+                ToHtmlString();
+
         }
     }
 }

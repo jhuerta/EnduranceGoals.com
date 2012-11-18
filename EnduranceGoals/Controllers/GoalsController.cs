@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
@@ -23,7 +24,10 @@ namespace EnduranceGoals.Controllers
 
             var upcomingGoals = goals.FindUpcomingGoals();
 
-            return View(new PaginatedList<Goal>(upcomingGoals, pageNumber, pageSize));
+            var listOfUpcomingGoals = AutoMapper.Mapper.Map<IEnumerable<Goal>, IEnumerable<GoalViewModel>>(upcomingGoals);
+
+
+            return View(new PaginatedList<GoalViewModel>(listOfUpcomingGoals, pageNumber, pageSize));
         }
 
         public ActionResult Next()
@@ -45,14 +49,22 @@ namespace EnduranceGoals.Controllers
             {
                 return View("NotFound");
             }
-            return View(goal);
+            GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
+
+            return View(goalViewModel);
         }
+
 
         public ActionResult Edit(int id)
         {
             var goal = new Goals(SessionProvider.CurrentSession).GetById(id);
 
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
+
+            if(goal.UserCreator.Username != User.Identity.Name)
+            {
+                return View("YouAreNotTheOwner", goalViewModel);
+            }
 
             return View(goalViewModel);
         }
@@ -65,6 +77,7 @@ namespace EnduranceGoals.Controllers
             return AddOrUpdate(goalViewModel, goals.Update, "Edit");
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(new Goal());
@@ -77,6 +90,7 @@ namespace EnduranceGoals.Controllers
         {
             var goals = new Goals(SessionProvider.CurrentSession);
 
+            
             return AddOrUpdate(goalViewModel, goals.Add, "Create");
         }
 
@@ -112,11 +126,12 @@ namespace EnduranceGoals.Controllers
 
         private ActionResult AddOrUpdate(GoalViewModel goalViewModel, Action AddOrEdit, string viewName)
         {
+            var users = new Users(SessionProvider.CurrentSession);
             if (ModelState.IsValid)
             {
                 var goalEntityBuilder = new GoalEntityBuilder();
 
-                var goal = goalEntityBuilder.OutOfGoalViewModel(goalViewModel);
+                var goal = goalEntityBuilder.OutOfGoalViewModel(goalViewModel, User.Identity.Name);
 
                 AddOrEdit(goal);
 

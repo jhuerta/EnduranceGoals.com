@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.Goal>" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.ViewModels.GoalViewModel>" %>
+<%@ Import Namespace="EnduranceGoals.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Details
 </asp:Content>
@@ -21,18 +21,32 @@
             <li><span class="display-label">When: </span><span class="display-field">
                 <%= Html.Encode(String.Format("{0:D}", Model.Date)) %></span> </li>
             <li><span class="display-label">Where: </span><span class="display-field">
-                <%= Html.Encode(String.Format("{0}, {1} ({2})", Model.Venue, Model.Venue.City, Model.Venue.City.Country))%></span>
+                <%= Html.Encode( String.Format(Model.Location))%></span>
             </li>
             <li><span class="display-label">Added By: </span><span class="display-field">
-                <%= Html.Encode(String.Format("{0:D}", Model.UserCreator.Username)) %></span>
+            <%= Html.ActionLink(Model.UserCreatorUsername)%></span>
             </li>
-            <li><span class="display-label">Current Participants: </span><span class="display-field">
-                <%= Html.Encode(String.Format("{0}", string.Join(",", Model.Participants.Select(participant => participant.User.Username).ToArray())))%></span>
+            <li>
+                <span class="display-label">Current Participants: </span>
+                   <span class="display-field">
+                 <% if (Model.ListOrParticipants.Count > 0)
+                    {%>
+                            <%=Model.ListOrParticipants.Select(
+                            participant =>
+                            Html.ActionLink(participant.Value, "Details", "Goals", new { Id = participant.Key }).
+                                ToHtmlString())
+                                              .Aggregate((current, next) => current + "," + next)%>
+                
+                 <% }else{%>
+                    None, go for it!
+                    <% }%>
+                 
+                    </span>
             </li>
             <li><span class="display-label">More info at: </span><span class="display-field">
                 <%= Html.Encode(Model.Web) %></span> </li>
             <li><span class="display-label">Sport: </span><span class="display-field">
-                <%= Html.Encode(Model.Sport) %></span> </li>
+                <%= Html.Encode(Model.SportName) %></span> </li>
         </ul>
     </fieldset>
     

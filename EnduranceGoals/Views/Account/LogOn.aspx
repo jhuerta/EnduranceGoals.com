@@ -4,18 +4,23 @@
     Log On
 </asp:Content>
 
-<asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Log On</h2>
-    <p>
-        Please enter your username and password. <%= Html.ActionLink("Register", "Register") %> if you don't have an account.
-    </p>
+<asp:Content ID="Content4" ContentPlaceHolderID="PartialTitle" runat="server">
+Log On (<%= Html.ActionLink("Register", "Register") %> )
+</asp:Content>
 
+<asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <% using (Html.BeginForm()) { %>
         <%= Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
         <div>
             <fieldset>
-                <legend>Account Information</legend>
                 
+                            <!-- start: Container -->
+            <div class="container">
+                <!-- start: Row -->
+                <div class="row">
+                    <!-- start: About -->
+                    <div class="span3">
+                    
                 <div class="editor-label">
                     <%= Html.LabelFor(m => m.UserName) %>
                 </div>
@@ -23,6 +28,8 @@
                     <%= Html.TextBoxFor(m => m.UserName) %>
                     <%= Html.ValidationMessageFor(m => m.UserName) %>
                 </div>
+                </div>
+                    <div class="span3">
                 
                 <div class="editor-label">
                     <%= Html.LabelFor(m => m.Password) %>
@@ -30,16 +37,19 @@
                 <div class="editor-field">
                     <%= Html.PasswordFor(m => m.Password) %>
                     <%= Html.ValidationMessageFor(m => m.Password) %>
+                    <%= Html.CheckBoxFor(m => m.RememberMe, new { style = "float: left;margin-right: 10px;" })%> <%= Html.LabelFor(m => m.RememberMe) %>
+                    
+                </div>
                 </div>
                 
-                <div class="editor-label">
-                    <%= Html.CheckBoxFor(m => m.RememberMe) %>
-                    <%= Html.LabelFor(m => m.RememberMe) %>
+         
+                
+                    <div class="span2">
+                
+                <div><div><br/></div>
+                    <input type="submit" value="Log On" class="btn btn-primary btn-large"/>
                 </div>
                 
-                <p>
-                    <input type="submit" value="Log On" />
-                </p>
             </fieldset>
         </div>
     <% } %>

@@ -25,6 +25,8 @@ namespace EnduranceGoals.Models.ViewModels
         [StringLength(75)]
         public string Name { get; set; }
 
+        public string UserCreatorUsername { get; set; }
+
         [Required]
         [StringLength(25, ErrorMessage = "Value for {0} must contain less than {1} characters")]
         public string Web { get; set; }
