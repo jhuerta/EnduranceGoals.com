@@ -50,7 +50,7 @@ namespace EnduranceGoals.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Goals");
                     }
                 }
                 else
@@ -71,7 +71,7 @@ namespace EnduranceGoals.Controllers
         {
             FormsService.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Goals");
         }
 
         // **************************************
@@ -95,7 +95,7 @@ namespace EnduranceGoals.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Goals");
                 }
                 else
                 {
