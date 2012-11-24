@@ -11,7 +11,7 @@ namespace EnduranceGoals.Models.ViewModels
         public IDictionary<int, string> ListOrParticipants  { get; set; }
         public bool UserCanModifyEvent { get; set; }
         public string SportName { get; set; }
-        public int NumberParticipants { get; set; }
+        public bool CanBeDeleted { get; set; }
 
         public string UserCreatorUsername { get; set; }
 

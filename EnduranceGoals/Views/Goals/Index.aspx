@@ -15,14 +15,15 @@
 
             <% foreach (var goal in Model) { %>
                 <li><span class="display-label">
-                    <%= Html.Encode(String.Format("{0:D}: ", goal.Date)) %></span> <span class="display-field">
+                    <%= Html.Encode(String.Format("{0:D}: ", goal.Date)) %></span> 
+                    <span>
                         <%= String.Format("{0} ({1})", goal.Name, goal.SportName) %>
                         <%= Html.ActionLink(" more", "Details", new { id=goal.Id})%>
                         <% if (goal.UserCanModifyEvent)
                            {%>
                             |
                             <%= Html.ActionLink("edit", "edit", new { id=goal.Id})%>
-                            <% if (goal.NumberParticipants  == 0)
+                            <% if (goal.CanBeDeleted)
                                {%>
                             |
                             <%= Html.ActionLink("delete", "delete", new { id=goal.Id})%>

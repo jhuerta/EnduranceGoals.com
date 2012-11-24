@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.LogOnModel>" %>
-=======
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Endurance.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.LogOnModel>" %>
->>>>>>> 675e7f5c8871d68d50cb7af8df43ce5839c94609
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="System.Web.Mvc.ViewPage<EnduranceGoals.Models.LogOnModel>" %>
 
 <asp:Content ID="loginTitle" ContentPlaceHolderID="TitleContent" runat="server">
     Log On
