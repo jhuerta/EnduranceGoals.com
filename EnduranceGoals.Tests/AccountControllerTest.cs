@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -6,6 +7,7 @@ using System.Web.Security;
 using EnduranceGoals.Controllers;
 using EnduranceGoals.Models;
 using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace EnduranceGoals.Tests
 {
@@ -15,7 +17,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void ChangePasswordPostReturnsRedirectOnSuccess()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new ChangePasswordModel
                             {
                                 OldPassword = "goodOldPassword",
@@ -33,7 +35,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void ChangePasswordPostReturnsViewIfModelStateIsInvalid()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new ChangePasswordModel
                             {
                                 OldPassword = "goodOldPassword",
@@ -53,7 +55,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void ChangePasswordPostReturnsViewWithCorrectMessageIfChangePasswordFails()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new ChangePasswordModel
                             {
                                 OldPassword = "goodOldPassword",
@@ -74,7 +76,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void ChangePasswordShouldReturnCorrectView()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
 
             ActionResult result = controller.ChangePassword();
 
@@ -85,7 +87,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void ChangePasswordSuccessReturnsView()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
 
             ActionResult result = controller.ChangePasswordSuccess();
 
@@ -95,13 +97,14 @@ namespace EnduranceGoals.Tests
         [Test]
         public void LogOffLogsOutAndRedirects()
         {
-            AccountController controller = GetAccountController();
+            
+            AccountController controller = GetAccountController(new MockMembershipService());
 
             ActionResult result = controller.LogOff();
 
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             var redirectResult = (RedirectToRouteResult) result;
-            Assert.AreEqual("Home", redirectResult.RouteValues["controller"]);
+            Assert.AreEqual("Goals", redirectResult.RouteValues["controller"]);
             Assert.AreEqual("Index", redirectResult.RouteValues["action"]);
             Assert.IsTrue(((MockFormsAuthenticationService) controller.FormsService).SignOutWasCalled);
         }
@@ -109,7 +112,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void LogOnGetReturnsView()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
 
             ActionResult result = controller.LogOn();
 
@@ -119,7 +122,20 @@ namespace EnduranceGoals.Tests
         [Test]
         public void LogOnPostReturnsRedirectOnSuccessWithReturnUrl()
         {
-            AccountController controller = GetAccountController();
+            var mock = MockRepository.GenerateMock<IMembershipService>();
+            
+            mock.Stub(s => s.CreateUser(
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything))
+                .IgnoreArguments()
+                .Return(MembershipCreateStatus.Success);
+
+            mock.Stub(s => s.MinPasswordLength).Return(10);
+
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new LogOnModel
                             {
                                 UserName = "someUser",
@@ -138,7 +154,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void LogOnPostReturnsRedirectOnSuccessWithoutReturnUrl()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new LogOnModel
                             {
                                 UserName = "someUser",
@@ -150,7 +166,7 @@ namespace EnduranceGoals.Tests
 
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             var redirectResult = (RedirectToRouteResult) result;
-            Assert.AreEqual("Home", redirectResult.RouteValues["controller"]);
+            Assert.AreEqual("Goals", redirectResult.RouteValues["controller"]);
             Assert.AreEqual("Index", redirectResult.RouteValues["action"]);
             Assert.IsTrue(((MockFormsAuthenticationService) controller.FormsService).SignInWasCalled);
         }
@@ -158,7 +174,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void LogOnPostReturnsViewIfModelStateIsInvalid()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new LogOnModel
                             {
                                 UserName = "someUser",
@@ -177,7 +193,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void LogOnPostReturnsViewIfValidateUserFails()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new LogOnModel
                             {
                                 UserName = "someUser",
@@ -197,7 +213,7 @@ namespace EnduranceGoals.Tests
         [Test]
         public void RegisterGetReturnsView()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
 
             ActionResult result = controller.Register();
 
@@ -208,7 +224,19 @@ namespace EnduranceGoals.Tests
         [Test]
         public void RegisterPostReturnsRedirectOnSuccess()
         {
-            AccountController controller = GetAccountController();
+            var mock = MockRepository.GenerateStub<IMembershipService>(); ;
+            mock.Stub(s => s.CreateUser(
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything))
+                .IgnoreArguments()
+                .Return(MembershipCreateStatus.Success);
+
+            mock.Stub(s => s.MinPasswordLength).Return(10);
+
+            AccountController controller = GetAccountController(mock);
             var model = new RegisterModel
                             {
                                 UserName = "someUser",
@@ -221,14 +249,14 @@ namespace EnduranceGoals.Tests
 
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             var redirectResult = (RedirectToRouteResult) result;
-            Assert.AreEqual("Home", redirectResult.RouteValues["controller"]);
+            Assert.AreEqual("Goals", redirectResult.RouteValues["controller"]);
             Assert.AreEqual("Index", redirectResult.RouteValues["action"]);
         }
 
         [Test]
         public void RegisterPostReturnsViewIfModelStateIsInvalid()
         {
-            AccountController controller = GetAccountController();
+            AccountController controller = GetAccountController(new MockMembershipService());
             var model = new RegisterModel
                             {
                                 UserName = "someUser",
@@ -249,13 +277,30 @@ namespace EnduranceGoals.Tests
         [Test]
         public void RegisterPostReturnsViewWithCorrectMessageIfRegistrationFails()
         {
-            AccountController controller = GetAccountController();
+            string uname =  "duplicateUser";
+            string email = "goodEmail";
+            string password =  "goodPassword";
+
+            var mock = MockRepository.GenerateStub<IMembershipService>();;
+            mock.Stub(s => s.CreateUser(
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything,
+                Arg<string>.Is.Anything))
+                .IgnoreArguments()
+                .Return(MembershipCreateStatus.DuplicateUserName);
+
+            mock.Stub(s => s.MinPasswordLength).Return(10);
+
+            AccountController controller = GetAccountController(mock);
+
             var model = new RegisterModel
                             {
-                                UserName = "duplicateUser",
-                                Email = "goodEmail",
-                                Password = "goodPassword",
-                                ConfirmPassword = "goodPassword"
+                                UserName =uname,
+                                Email = email,
+                                Password = password,
+                                ConfirmPassword = password
                             };
 
             ActionResult result = controller.Register(model);
@@ -268,12 +313,12 @@ namespace EnduranceGoals.Tests
             Assert.AreEqual(10, viewResult.ViewData["PasswordLength"]);
         }
 
-        private static AccountController GetAccountController()
+        private static AccountController GetAccountController(IMembershipService mockMembershipService)
         {
             var controller = new AccountController
             {
                 FormsService = new MockFormsAuthenticationService(),
-                MembershipService = new MockMembershipService()
+                MembershipService = mockMembershipService
             };
             controller.ControllerContext = new ControllerContext
             {
@@ -324,6 +369,11 @@ namespace EnduranceGoals.Tests
             public bool ValidateUser(string userName, string password)
             {
                 return (userName == "someUser" && password == "goodPassword");
+            }
+
+            public MembershipCreateStatus CreateUser(string userName, string password, string email, string name, string lastname)
+            {
+                return MembershipCreateStatus.InvalidAnswer;
             }
 
             public MembershipCreateStatus CreateUser(string userName, string password, string email)
