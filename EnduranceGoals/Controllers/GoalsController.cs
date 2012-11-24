@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using EnduranceGoals.Infrastructure;
@@ -61,7 +62,7 @@ namespace EnduranceGoals.Controllers
 
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
 
-            if(goal.UserCreator.Username != User.Identity.Name)
+            if(!goal.IsOwner(User.Identity.Name))
             {
                 return View("YouAreNotTheOwner", goalViewModel);
             }
@@ -98,9 +99,15 @@ namespace EnduranceGoals.Controllers
         {
             var goals = new Goals(SessionProvider.CurrentSession);
             var goal = goals.GetById(id);
+
             if (goal != null)
             {
                 GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
+
+                if (!goal.IsOwner(User.Identity.Name))
+                {
+                    return View("YouAreNotTheOwner", goalViewModel);
+                }
 
                 return View(goalViewModel);
             }
@@ -116,6 +123,11 @@ namespace EnduranceGoals.Controllers
             var goals = new Goals(SessionProvider.CurrentSession);
 
             var goal = goals.GetById(id);
+
+            if (!goal.IsOwner(User.Identity.Name))
+            {
+                return View("YouAreNotTheOwner", new GoalViewModel(){Id = id});
+            }
 
             goals.Remove(goal);
 
@@ -147,6 +159,7 @@ namespace EnduranceGoals.Controllers
 
             return AutoMapper.Mapper.Map<Goal, GoalViewModel>(originalGoal);
         }
+
 
     }
 }

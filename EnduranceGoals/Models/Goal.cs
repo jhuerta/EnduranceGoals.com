@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Iesi.Collections.Generic;
 
 namespace EnduranceGoals.Models
@@ -21,6 +22,15 @@ namespace EnduranceGoals.Models
                         Goal = this,
                         SignedOnDate = signedOndate
                     });
+        }
+        public virtual bool IsOwner(string username)
+        {
+            return username == UserCreator.Username;
+        }
+
+        public virtual bool IsParticipant(string username)
+        {
+            return Participants.Any(goalParticipant => goalParticipant.User.Username.Equals(username));
         }
 
         public virtual int Id { get; set; }

@@ -22,7 +22,7 @@ namespace EnduranceGoals.Models.NHMaps
 
             HasMany(u => u.Goals)
                 .Table("GoalParticipants")
-                .Cascade.SaveUpdate()
+                .Cascade.All()
                 .KeyColumn("UserId")
                 .Inverse();
         }

@@ -18,12 +18,12 @@ namespace EnduranceGoals.Models.NHMaps
             
             References(gp => gp.User)
                 .Not.Nullable()
-                .Cascade.SaveUpdate()
+                //.Cascade.All()
                 .Column("UserId");
 
             References(gp => gp.Goal)
                 .Not.Nullable()
-                .Cascade.SaveUpdate()
+                //.Cascade.All()
                 .Column("GoalId");
         }
     }

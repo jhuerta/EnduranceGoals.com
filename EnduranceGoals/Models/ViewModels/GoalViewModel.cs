@@ -7,9 +7,12 @@ namespace EnduranceGoals.Models.ViewModels
 {
     public partial class GoalViewModel
     {
+        public bool CanJoin { get; set; }
         public string Location { get; set; }
         public IDictionary<int, string> ListOrParticipants  { get; set; }
         public bool UserCanModifyEvent { get; set; }
+        public bool UserLoggedIn { get; set; }
+
         public string SportName { get; set; }
         public bool CanBeDeleted { get; set; }
 

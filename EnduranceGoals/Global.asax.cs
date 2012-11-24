@@ -43,6 +43,14 @@ namespace EnduranceGoals
                 .ForMember(dest => dest.Sports, opt => opt.ResolveUsing<SportsToCollectionResolver>())
                 .ForMember(dest => dest.ListOrParticipants, opt => opt.ResolveUsing<ListOfParticipantsResolver>())
                 .ForMember(dest => dest.CanBeDeleted, source => source.MapFrom(item => item.Participants.Count == 0))
+                .ForMember(dest => dest.CanJoin, source => source.MapFrom(item => !item.IsParticipant(HttpContext.Current.User.Identity.Name)))
+                .ForMember(dest => dest.UserLoggedIn, source => source.MapFrom((item =>
+                                                                                    {
+                                                                                        return
+                                                                                            HttpContext.Current.User.
+                                                                                                 Identity.
+                                                                                                 IsAuthenticated;
+                                                                                    })))
                 .ForMember(dest => dest.UserCanModifyEvent,
                            source => source.MapFrom(item => item.UserCreator.Username == HttpContext.Current.User.Identity.Name))
                 .ForMember(dest => dest.Location,

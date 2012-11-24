@@ -88,6 +88,8 @@
     <Compile Include="Controllers\GoalEntityBuilder.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\GoalsExperimentController.cs" />
+    <Compile Include="Controllers\MembershipController.cs" />
+    <Compile Include="Models\ViewModels\MembershipManagementViewModel.cs" />
     <Compile Include="Helpers\HelperExtension.cs" />
     <Compile Include="ListOfParticipantsResolver.asax.cs" />
     <Compile Include="Models\AccountMembershipService.cs" />
@@ -157,9 +159,7 @@
     </EmbeddedResource>
     <Content Include="Global.asax" />
     <Content Include="Views\Goals\Create.aspx" />
-    <Content Include="Views\Goals\Delete.aspx" />
     <Content Include="Views\Goals\EditableForm.ascx" />
-    <Content Include="Views\Goals\GoalNotFound.aspx" />
     <Content Include="Views\Goals\Details.aspx" />
     <Content Include="Views\Goals\Edit.aspx" />
     <Content Include="Views\Shared\FooterLinks.ascx" />
@@ -186,7 +186,6 @@
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -512,6 +511,7 @@
     <Content Include="Content\smart\social-icons.html" />
     <Content Include="Content\smart\typography.html" />
     <Content Include="Views\Goals\YouAreNotTheOwner.aspx" />
+    <Content Include="Views\Membership\MembershipWidget.aspx" />
     <Content Include="Views\Shared\Smart.Master" />
   </ItemGroup>
   <ItemGroup>
