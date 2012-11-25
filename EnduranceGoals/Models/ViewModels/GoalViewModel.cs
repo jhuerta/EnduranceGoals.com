@@ -35,5 +35,8 @@ namespace EnduranceGoals.Models.ViewModels
 
         public string SportId { get; set; }
         public ICollection<SelectListItem> Sports { get; set; }
+
+        public double VenueLatitude { get; set; }
+        public double VenueLongitude { get; set; }
     }
 }

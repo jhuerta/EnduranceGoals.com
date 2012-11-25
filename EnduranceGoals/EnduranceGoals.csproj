@@ -512,6 +512,7 @@
     <Content Include="Content\smart\typography.html" />
     <Content Include="Views\Goals\YouAreNotTheOwner.aspx" />
     <Content Include="Views\Membership\MembershipWidget.aspx" />
+    <Content Include="Views\Shared\Map.ascx" />
     <Content Include="Views\Shared\Smart.Master" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,10 @@
             "Unsubscribe",
                 "Membership",
                 new { goalId=Model.GoalId},
-                        new AjaxOptions() { UpdateTargetId = Model.DivId, OnSuccess = "AnimateSubscriptionMessage($('#" + Model.DivId + "'))" })%>
+                        new AjaxOptions() { UpdateTargetId = Model.DivId,
+                                            OnSuccess = "AnimateSubscriptionMessageIn($('#" + Model.DivId + "'))"
+                        },
+                                            new { Class = "btn btn-warning btn-micro" })%>
     <% } %>
     <% else
         {%>
@@ -18,13 +21,20 @@
             "Subscribe",
                 "Membership",
                 new { goalId=Model.GoalId},
-                        new AjaxOptions() { UpdateTargetId = Model.DivId, OnSuccess = "AnimateSubscriptionMessage($('#" + Model.DivId + "'))" })%>
+                        new AjaxOptions() { UpdateTargetId = Model.DivId,
+                                            OnSuccess = "AnimateSubscriptionMessageIn($('#" + Model.DivId + "'))"
+                        },
+                                            new { Class = "btn btn-success btn-micro" })%>
     <% } %>
 </span>
 
 <script type="text/javascript">
-    function AnimateSubscriptionMessage(item) {
-        item.effect("highlight", { color: '#29A9DF' }, 2000);
+    function AnimateSubscriptionMessageOut(item) {
+        //item.fadeOut(10000);
+    }
+
+    function AnimateSubscriptionMessageIn(item) {
+        //item.fadeOut(10000);
     }
 </script>
 

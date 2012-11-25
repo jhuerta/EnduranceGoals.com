@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Smart.Master" Inherits="ViewPage<EnduranceGoals.Models.PaginatedList<EnduranceGoals.Models.ViewModels.GoalViewModel>>" %>
+<%@ Import Namespace="EnduranceGoals.Models.ViewModels" %>
 
 
 
@@ -9,6 +10,10 @@
 
 </asp:Content>
 
+<asp:Content ID="Content5" ContentPlaceHolderID="Map" runat="server">
+    <%
+        Html.RenderPartial("Map", new GoalViewModel());%>>
+</asp:Content>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -25,10 +30,10 @@
             <li><span class="display-label">
                 <%= Html.Encode(String.Format("{0:D}: ", goal.Date)) %></span> <span>
                     <%= String.Format("{0} ({1})", goal.Name, goal.SportName) %>
-                    <%= Html.ActionLink(" more", "Details", new { id=goal.Id})%>
+                    <%= Html.ActionLink("details", "Details", new { id = goal.Id }, new { Class = "btn btn-micro btn-custom-info" })%>
                     <% if (goal.UserLoggedIn)
                        {%>
-                    |
+                    
                     <%Html.RenderAction("SubscriptionStatus", "Membership", new {goalId = goal.Id}); %>
                    <% }%>
                     </span>
