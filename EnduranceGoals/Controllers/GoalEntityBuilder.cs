@@ -36,6 +36,9 @@ namespace EnduranceGoals.Controllers
             goal.Venue = venues.GetById(Convert.ToInt32(goalViewModel.VenueId));
             goal.Sport = sports.GetById(Convert.ToInt32(goalViewModel.SportId));
 
+            goal.Venue.Latitude = Convert.ToInt32(goalViewModel.VenueLatitude);
+            goal.Venue.Longitude = Convert.ToInt32(goalViewModel.VenueLongitude);
+
             return goal;
         }
 

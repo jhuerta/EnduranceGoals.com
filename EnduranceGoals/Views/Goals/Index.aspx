@@ -12,7 +12,7 @@
 
 <asp:Content ID="Content5" ContentPlaceHolderID="Map" runat="server">
     <%
-        Html.RenderPartial("Map", new GoalViewModel());%>>
+        Html.RenderPartial("Map", Model);%>
 </asp:Content>
 
 
@@ -40,11 +40,11 @@
                     <% if (goal.UserCanModifyEvent)
                        {%>
                     |
-                    <%= Html.ActionLink("edit", "edit", new { id=goal.Id})%>
+                    <%= Html.ActionLink("edit", "edit", new { id = goal.Id }, new { Class = "btn btn-micro btn-custom-wantin" })%>
                     <% if (goal.CanBeDeleted)
                        {%>
                     |
-                    <%= Html.ActionLink("delete", "delete", new { id=goal.Id})%>
+                    <%= Html.ActionLink("delete", "delete", new { id = goal.Id }, new { Class = "btn btn-micro btn-danger" })%>
                     <% } %>
                     <% }%>
 </li>

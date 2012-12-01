@@ -62,10 +62,10 @@ namespace EnduranceGoals.Controllers
 
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
 
-            if(!goal.IsOwner(User.Identity.Name))
-            {
-                return View("YouAreNotTheOwner", goalViewModel);
-            }
+            //if(!goal.IsOwner(User.Identity.Name))
+            //{
+            //    return View("YouAreNotTheOwner", goalViewModel);
+            //}
 
             return View(goalViewModel);
         }

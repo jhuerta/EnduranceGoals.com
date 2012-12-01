@@ -197,6 +197,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\Map.js" />
     <Content Include="Content\smart\about.html" />
     <Content Include="Content\smart\blog.html" />
     <Content Include="Content\smart\contact.html" />
@@ -510,6 +511,7 @@
     <Content Include="Content\smart\sliders.html" />
     <Content Include="Content\smart\social-icons.html" />
     <Content Include="Content\smart\typography.html" />
+    <Content Include="Views\Goals\Delete.aspx" />
     <Content Include="Views\Goals\YouAreNotTheOwner.aspx" />
     <Content Include="Views\Membership\MembershipWidget.aspx" />
     <Content Include="Views\Shared\Map.ascx" />

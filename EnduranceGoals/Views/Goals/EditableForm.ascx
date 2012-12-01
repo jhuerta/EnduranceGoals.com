@@ -2,6 +2,8 @@
 
 
 
+
+
 <% using (Html.BeginForm())
    {%>
 <%= Html.ValidationSummary(false) %>
@@ -27,13 +29,20 @@
         <%= Html.EditorFor(model => model.Date)%>
         <%= Html.ValidationMessageFor(model => model.Date) %>
     </div>
-        <div class="editor-label">
+
+    <div class="editor-label">
         <%= Html.LabelFor(model => model.Web) %>
     </div>
     <div class="editor-field">
         <%= Html.TextBoxFor(model => model.Web) %>
         <%= Html.ValidationMessageFor(model => model.Web) %>
     </div>
+
+        <%= Html.TextBoxFor(model => model.VenueLatitude, new { @id= "latitude-" + Model.Id, type="hidden"})%>
+        <%= Html.TextBoxFor(model => model.VenueLongitude, new { @id = "longitude-" + Model.Id , type="hidden"})%>
+
+
+    
     </div>
     
     <div class="span6">
@@ -62,6 +71,7 @@
     <div class="editor-field dropdown">
         <%= Html.DropDownListFor(m => m.VenueId, Model.Venues)%>
     </div>
+    <div id="longitudeLatitudeVenue">Coordinates: </div>
     <div class="editor-label">
         Sport:
     </div>
@@ -84,18 +94,38 @@
 
     <script type="text/javascript">
         $(function() {
-        var selectBox = $("select#VenueId").selectBoxIt({
-            showEffect: "fadeIn",
-            showEffectSpeed: 300,
-            hideEffect: "fadeOut",
-            hideEffectSpeed: 300
-        });
-        var selectBox = $("select#SportId").selectBoxIt({
-            showEffect: "fadeIn",
-            showEffectSpeed: 300,
-            hideEffect: "fadeOut",
-            hideEffectSpeed: 300
-        });
+            var selectBox = $("select#VenueId").selectBoxIt({
+                showEffect: "fadeIn",
+                showEffectSpeed: 300,
+                hideEffect: "fadeOut",
+                hideEffectSpeed: 300
+            });
+            var selectBox = $("select#SportId").selectBoxIt({
+                showEffect: "fadeIn",
+                showEffectSpeed: 300,
+                hideEffect: "fadeOut",
+                hideEffectSpeed: 300
+            });
+
+            $("#Date").datepicker(
+        { maxDate: "10/2/2013", minDate: "10/2/2012", gotoCurrent: true }
+        );
+
+            $("#Date").datepicker(
+        { maxDate: "10/2/2013", minDate: "10/2/2012", gotoCurrent: true }
+        );
+
+
+
+
+            $("#longitude-" + "<%= Model.Id %>").on('change', function() {
+                var longitude = $("#longitude-" + "<%= Model.Id %>").val();
+                var latitude = $("#latitude-" + "<%= Model.Id %>").val();
+                var longLatMessage = "Coordinates: " + longitude + "," + latitude;
+                console.log(longLatMessage);
+                $("#longitudeLatitudeVenue").text(longLatMessage);
+
+            });
         });
 
     </script>
