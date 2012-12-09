@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using EnduranceGoals.Infrastructure;
 using EnduranceGoals.Models;
@@ -37,12 +38,12 @@ namespace EnduranceGoals.Controllers
 
         public ActionResult RaceList([Bind(Prefix = "id")] int currentPage)
         {
-            var resultsPerPage = 11;
+            var resultsPerPage = 3;
 
             var upcomingGoals = UpcomingGoals();
-            var jsonGoals = JsonBuilder.BuildJsonExtendedGoal(upcomingGoals);
+            var jsonGoals = JsonBuilder.BuildJsonExtendedGoal(upcomingGoals,HttpContext.User.Identity.Name);
             var numberOfPages = (int) Math.Ceiling(jsonGoals.Count() / (double) resultsPerPage);
-            currentPage = FirstPageIfNonExisting(currentPage, numberOfPages);
+            currentPage = FirstOrLastPage(currentPage, numberOfPages);
             var list = new List<object>();
             list.AddRange(jsonGoals.Skip(resultsPerPage * (currentPage-1)).Take(resultsPerPage));
             return Json(new
@@ -50,14 +51,16 @@ namespace EnduranceGoals.Controllers
                     Goals = list,
                     Pages = numberOfPages,
                     CurrentPage = currentPage,
-                    HasNext = currentPage < numberOfPages,
-                    HasPrevious = currentPage > 1
+                    Next = (currentPage < numberOfPages) ? currentPage + 1 : numberOfPages,
+                    Prev = (currentPage > 1) ? currentPage - 1 : 1
                 }, JsonRequestBehavior.AllowGet);
         }
 
-        private static int FirstPageIfNonExisting(int currentPage, int numberOfPages)
+        private static int FirstOrLastPage(int currentPage, int numberOfPages)
         {
-            return ( (currentPage > numberOfPages) || (currentPage < 1)) ? 1 : currentPage;
+            if (currentPage >= numberOfPages) return numberOfPages;
+            if (currentPage < 1) return 1;
+            return currentPage;
         }
 
         public ActionResult Next()
@@ -82,6 +85,20 @@ namespace EnduranceGoals.Controllers
             GoalViewModel goalViewModel = AutoMapper.Mapper.Map<Goal, GoalViewModel>(goal);
 
             return View(goalViewModel);
+        }
+
+        public ActionResult Participants(int id)
+        {
+            Goals goals = new Goals(SessionProvider.CurrentSession);
+            var goal = goals.GetById(id);
+            if (goal == null)
+            {
+                return View("NotFound");
+            }
+            return Json(new
+            {
+                ParticipantList = goal.Participants.Select(x => x.User.Username)
+            }, JsonRequestBehavior.AllowGet);
         }
 
 

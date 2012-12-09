@@ -50,7 +50,6 @@
             
             <% foreach (var goal in Model){ %>
                 detailsUrl = '<%= Html.ActionLink("more","Details", new { id = goal.Id })%>'
-                console.log( detailsUrl);
                 title = "<%= goal.Name %>";
                 address = "<%= goal.Location %>";
                 date = "<%= String.Format("{0:d}",goal.Date)%>";

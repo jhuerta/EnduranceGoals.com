@@ -18,17 +18,20 @@ namespace EnduranceGoals.Controllers
                 }).Cast<object>();
         }
 
-        public static IEnumerable<object> BuildJsonExtendedGoal(IEnumerable<Goal> goalList)
+        public static IEnumerable<object> BuildJsonExtendedGoal(IEnumerable<Goal> goalList, string currentUser)
         {
             return goalList.Select(goal => new
             {
                 Id = goal.Id,
-                //Name = goal.Name,
-                //Sport = goal.Sport,
-                //Date = String.Format("{0:D}: ", goal.Date),
-                //Location = String.Format("{0}, {1} - {2}", goal.Venue, goal.Venue.City,
-                //                         goal.Venue.City.Country),
-                //Participants = goal.Participants.Select(p => p.User.Username)
+                Name = goal.Name,
+                Sport = goal.Sport,
+                Date = String.Format("{0:D}", goal.Date),
+                Location = String.Format("{0}, {1} - {2}", goal.Venue, goal.Venue.City,
+                                         goal.Venue.City.Country),
+                Participants = goal.Participants.Select(p => p.User.Username),
+                IsParticipant = goal.Participants.Any(p => p.User.Username == currentUser),
+                GoalCanBeDeleted = !goal.Participants.Any(),
+                UserCanModifyEvent = goal.IsOwner(currentUser)
             }).Cast<object>();
         }
     }

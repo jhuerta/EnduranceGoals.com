@@ -198,7 +198,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\js\GoalListTemplate.js" />
     <Content Include="Content\js\Goals.js" />
+    <Content Include="Content\js\jquery.tmpl.min.js" />
     <Content Include="Content\js\Map.js" />
     <Content Include="Content\smart\about.html" />
     <Content Include="Content\smart\blog.html" />
@@ -513,6 +516,7 @@
     <Content Include="Content\smart\sliders.html" />
     <Content Include="Content\smart\social-icons.html" />
     <Content Include="Content\smart\typography.html" />
+    <Content Include="Views\Goals\OldIndex.aspx" />
     <Content Include="Views\Goals\Delete.aspx" />
     <Content Include="Views\Goals\YouAreNotTheOwner.aspx" />
     <Content Include="Views\Membership\MembershipWidget.aspx" />

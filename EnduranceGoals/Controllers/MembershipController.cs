@@ -14,7 +14,7 @@ namespace EnduranceGoals.Controllers
     public class MembershipController : Controller
     {
         [Authorize]
-        public ActionResult Subscribe(int goalId)
+        public ActionResult Subscribe([Bind(Prefix = "id")] int goalId)
         {
             var goals = new Goals(SessionProvider.CurrentSession);
 
@@ -35,7 +35,7 @@ namespace EnduranceGoals.Controllers
         }
 
         [Authorize]
-        public ActionResult Unsubscribe(int goalId)
+        public ActionResult Unsubscribe([Bind(Prefix = "id")] int goalId)
         {
             var goals = new Goals(SessionProvider.CurrentSession);
 

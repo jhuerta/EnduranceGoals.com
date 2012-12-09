@@ -19,15 +19,8 @@ namespace EnduranceGoals.Tests
         [Test]
         public void RaceList_returns_json_object()
         {
-            //ISession session;
+            CurrentSessionContext.Bind(SessionProvider.OpenSession());
 
-            //NHibernateProfiler.Initialize();
-
-            var wholisticSession = SessionProvider.OpenSession();
-
-            CurrentSessionContext.Bind(wholisticSession);
-
-            //session = SessionProvider.CurrentSession;
 
             // Arrange
             var goalsController = new GoalsController();
