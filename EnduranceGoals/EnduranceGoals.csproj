@@ -5,7 +5,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A1C7359C-B4A6-4B20-990C-4E110763C420}</ProjectGuid>
-    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EnduranceGoals</RootNamespace>
@@ -88,6 +88,7 @@
     <Compile Include="Controllers\GoalEntityBuilder.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\GoalsExperimentController.cs" />
+    <Compile Include="Controllers\JsonBuilder.cs" />
     <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Models\ViewModels\MembershipManagementViewModel.cs" />
     <Compile Include="Helpers\HelperExtension.cs" />
@@ -197,6 +198,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\Goals.js" />
     <Content Include="Content\js\Map.js" />
     <Content Include="Content\smart\about.html" />
     <Content Include="Content\smart\blog.html" />

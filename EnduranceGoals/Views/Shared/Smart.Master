@@ -40,7 +40,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <asp:ContentPlaceHolder ID="JSHeader" runat="server" />
+
 
 </head>
 <body>
@@ -205,32 +205,21 @@
     <!-- end: Copyright -->
     <!-- start: Java Script -->
     <!-- Placed at the end of the document so the pages load faster -->
-
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <script src="<%= Url.Content ("~/Content/smart/js/jquery-1.8.2.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/jquery-ui-1.9.1.custom.min.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.selectBoxIt.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/bootstrap.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/isotope.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.imagesloaded.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/flexslider.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/carousel.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/jquery.cslider.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/slider.js") %>"></script>
-
     <script src="<%= Url.Content ("~/Content/smart/js/fancybox.js") %>"></script>
-
     <script defer="defer" src="<%= Url.Content("~/Content/smart/js/custom.js") %>"></script>
-
+    
+        <asp:ContentPlaceHolder ID="JSHeader" runat="server" />
     <!-- end: Java Script -->
 </body>
 </html>

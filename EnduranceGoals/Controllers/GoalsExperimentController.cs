@@ -89,20 +89,9 @@ namespace EnduranceGoals.Controllers
             Goals goals = new Goals(SessionProvider.OpenSession());
             var goalList = goals.GetAll();
 
-            var jsonGoals = BuildJsonGoal(goalList);
+            var jsonGoals = JsonBuilder.BuildJsonGoal(goalList);
 
             return Json(new { success = jsonGoals }, JsonRequestBehavior.AllowGet);
-        }
-
-        private static IEnumerable<object> BuildJsonGoal(IEnumerable<Goal> goalList)
-        {
-            return goalList.Select(goal => new
-                                               {
-                                                   Name = goal.Name,
-                                                   Location = string.Format("{0}, {1} - {2}", goal.Venue, goal.Venue.City,
-                                                                            goal.Venue.City.Country),
-                                                   Participants = goal.Participants.Count
-                                               }).Cast<object>();
         }
 
         public ActionResult JsonSport([Bind(Prefix = "id")] string name)
@@ -111,7 +100,7 @@ namespace EnduranceGoals.Controllers
             Sports sports = new Sports(SessionProvider.CurrentSession);
             var goalList = goals.GetAllBySport(sports.GetByName(name));
 
-            var jsonGoals = BuildJsonGoal(goalList);
+            var jsonGoals = JsonBuilder.BuildJsonGoal(goalList);
 
             return Json(new { success = jsonGoals }, JsonRequestBehavior.AllowGet);
         }
@@ -121,7 +110,7 @@ namespace EnduranceGoals.Controllers
             Goals goals = new Goals(SessionProvider.OpenSession());
             var goalList = goals.GetAll();
 
-            var jsonGoals = BuildJsonGoal(goalList);
+            var jsonGoals = JsonBuilder.BuildJsonGoal(goalList);
 
             return Json(new { success = jsonGoals }, JsonRequestBehavior.AllowGet);
         }

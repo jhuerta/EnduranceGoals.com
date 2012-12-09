@@ -77,6 +77,7 @@
     <Reference Include="System.Data.Entity">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions">
@@ -86,6 +87,7 @@
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -98,6 +100,7 @@
   <ItemGroup>
     <Compile Include="AccountControllerTest.cs" />
     <Compile Include="DummyDBBuilder.cs" />
+    <Compile Include="GoalsControllerTest.cs" />
     <Compile Include="GoalValidationRulesTest.cs" />
     <Compile Include="ModelValidatorTester.cs" />
     <Compile Include="MSSQL_DatabaseTest.cs" />

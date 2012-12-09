@@ -24,7 +24,11 @@ namespace EnduranceGoals.Infrastructure
 
         public static ISession CurrentSession
         {
-            get { return SessionFactory.GetCurrentSession(); }
+            get
+            {
+                ISession currentSession = SessionFactory.GetCurrentSession();
+                return currentSession;
+            }
         }
 
         public static ISession CurrentSessionOrNew
@@ -128,10 +132,23 @@ namespace EnduranceGoals.Infrastructure
 
                 Configuration nhconfig = new Configuration().Configure(configFile);
 
-                return Fluently.Configure(nhconfig).Mappings(
-                    m => m.FluentMappings
-                             .AddFromAssemblyOf<Goal>()
-                             .Conventions.Add(ForeignKey.Format((p, t) => t.Name + "Id")));
+                FluentConfiguration configuration;
+
+                try
+                {
+                    configuration = Fluently.Configure(nhconfig).Mappings(
+                        m => m.FluentMappings
+                                 .AddFromAssemblyOf<Goal>()
+                                 .Conventions.Add(ForeignKey.Format((p, t) => t.Name + "Id")));
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                    throw;
+                }
+
+
+                return configuration;
             }
         }
 

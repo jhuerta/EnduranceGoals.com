@@ -16,19 +16,48 @@ namespace EnduranceGoals.Controllers
         
         public ActionResult Index(int? page)
         {
-            var goals = new Goals(SessionProvider.CurrentSession);
-
+            var upcomingGoals = UpcomingGoals();
 
             int pageNumber = page ?? 0;
 
             int pageSize = 10;
 
-            var upcomingGoals = goals.FindUpcomingGoals();
-
             var listOfUpcomingGoals = AutoMapper.Mapper.Map<IEnumerable<Goal>, IEnumerable<GoalViewModel>>(upcomingGoals);
 
 
             return View(new PaginatedList<GoalViewModel>(listOfUpcomingGoals, pageNumber, pageSize));
+        }
+
+        private static IList<Goal> UpcomingGoals()
+        {
+            var goals = new Goals(SessionProvider.CurrentSession);
+            var upcomingGoals = goals.FindUpcomingGoals();
+            return upcomingGoals;
+        }
+
+        public ActionResult RaceList([Bind(Prefix = "id")] int currentPage)
+        {
+            var resultsPerPage = 11;
+
+            var upcomingGoals = UpcomingGoals();
+            var jsonGoals = JsonBuilder.BuildJsonExtendedGoal(upcomingGoals);
+            var numberOfPages = (int) Math.Ceiling(jsonGoals.Count() / (double) resultsPerPage);
+            currentPage = FirstPageIfNonExisting(currentPage, numberOfPages);
+            var list = new List<object>();
+            list.AddRange(jsonGoals.Skip(resultsPerPage * (currentPage-1)).Take(resultsPerPage));
+            return Json(new
+                {
+                    Goals = list,
+                    Pages = numberOfPages,
+                    CurrentPage = currentPage,
+                    HasNext = currentPage < numberOfPages,
+                    HasPrevious = currentPage > 1
+                }, JsonRequestBehavior.AllowGet);
+        }
+
+        private static int FirstPageIfNonExisting(int currentPage, int numberOfPages)
+        {
+            return ( (currentPage > numberOfPages) || (currentPage < 1)) ? 1 : currentPage;
         }
 
         public ActionResult Next()

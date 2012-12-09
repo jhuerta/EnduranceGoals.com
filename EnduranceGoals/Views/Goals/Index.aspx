@@ -7,7 +7,8 @@
 
     <script src="<%= Url.Content("~/Scripts/MicrosoftAjax.js") %>" type="text/javascript" ></script>
     <script src="<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js") %>" type="text/javascript" ></script>
-
+    <script type="text/javascript" src="<%= Url.Content("~/Content/js/Goals.js")%>"></script>
+    
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="Map" runat="server">
@@ -66,4 +67,9 @@
             
         </div>
     </fieldset>
+    
+    <div id="GoalListJson">
+        <a id="AjaxGoals" class="btn btn-micro btn-custom-info">Get Ajax Goals!</a>
+    </div>
+    
 </asp:Content>

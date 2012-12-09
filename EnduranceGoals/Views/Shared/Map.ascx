@@ -24,8 +24,17 @@
         $(document).ready(function() {
             var MadridLatitude = 40.044438;
             var MadridLongitude = -4.746094;
-            var initLongitude = "<%= Model[0].VenueLongitude %>";
-            var initLatitude = "<%= Model[0].VenueLatitude %>";
+            
+            
+            
+            
+            var initLongitude = 0;
+            var initLatitude = 0;
+            <% if(Model.Count > 0) { %>
+            initLatitude = "<%= Model[0].VenueLatitude %>";
+            initLongitude = "<%= Model[0].VenueLongitude %>";
+            <% } %>
+            
             var initZoom = 8;
             var iconSize = 40;
             

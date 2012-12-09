@@ -37,8 +37,8 @@ namespace EnduranceGoals.Tests
 
             var dummyDbSession = SessionProvider.OpenSession();
             var dummyDbBuilder = new DummyDBBuilder(dummyDbSession);
-            dummyDbBuilder.BuildDB();
-            dummyDbSession.Close();
+            //dummyDbBuilder.BuildDB();
+            //dummyDbSession.Close();
 
             session = SessionProvider.CurrentSession;
             users = new Users(session);
